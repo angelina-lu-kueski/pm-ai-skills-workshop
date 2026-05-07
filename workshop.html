@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PM AI Skills Workshop — Kueski</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ── Kueski Design System Tokens ── */
+  :root {
+    /* Font */
+    --font-inter: InterVariable, Inter, sans-serif;
+    --font-feature-body: 'calt' 1, 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv05' 1, 'cv09' 1, 'cv11' 1;
+
+    /* Type scale */
+    --text-headline-1: 2rem;
+    --text-headline-2: 1.5rem;
+    --text-headline-3: 1.25rem;
+    --text-body-1: 1rem;
+    --text-body-2: 0.875rem;
+    --text-meta: 0.75rem;
+    --text-mini: 0.6875rem;
+
+    --leading-headline-1: 2.5rem;
+    --leading-headline-2: 2rem;
+    --leading-headline-3: 1.75rem;
+    --leading-body-1: 1.5rem;
+    --leading-body-2: 1.25rem;
+    --leading-meta: 1rem;
+
+    --tracking-h1: -0.015625rem;
+    --tracking-h2: -0.0075rem;
+    --tracking-none: 0rem;
+
+    --font-weight-regular: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Semantic colors — light theme */
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f4f8fb;
+    --color-background-tertiary: #ecf2f7;
+    --color-background-invert-primary: #141c22;
+    --color-background-invert-secondary: #262f37;
+    --color-background-invert-tertiary: #384550;
+    --color-background-brand: #0069f1;
+    --color-background-brand-subtle: #e7f3ff;
+    --color-background-success: #008246;
+    --color-background-success-subtle: #e8f5ec;
+    --color-background-danger: #d82938;
+    --color-background-danger-subtle: #ffedec;
+    --color-background-upsell: #6e5be6;
+    --color-background-upsell-subtle: #f0f0ff;
+    --color-background-warning: #ab5d00;
+    --color-background-warning-subtle: #fff0da;
+
+    --color-text-primary: #141c22;
+    --color-text-secondary: #384550;
+    --color-text-tertiary: #66727d;
+    --color-text-invert-primary: #ffffff;
+    --color-text-brand: #0069f1;
+    --color-text-brand-on-subtle: #0051cb;
+    --color-text-success: #008246;
+    --color-text-success-on-subtle: #006834;
+    --color-text-danger: #d82938;
+    --color-text-upsell: #6e5be6;
+    --color-text-upsell-on-subtle: #5845c2;
+    --color-text-warning: #ab5d00;
+    --color-text-always-white: #ffffff;
+
+    --color-stroke-primary: #141c22;
+    --color-stroke-secondary: #384550;
+    --color-stroke-tertiary: #66727d;
+    --color-stroke-brand: #0069f1;
+    --color-stroke-success: #008246;
+    --color-stroke-upsell: #6e5be6;
+    --color-stroke-warning: #ab5d00;
+    --color-stroke-error: #d82938;
+
+    /* Border */
+    --border-thin: 0.5px;
+    --border-regular: 1px;
+    --border-thick: 2px;
+
+    /* Radius */
+    --radius-x1: 0.25rem;
+    --radius-x2: 0.5rem;
+    --radius-x3: 0.75rem;
+    --radius-x4: 1rem;
+    --radius-x5: 1.25rem;
+    --radius-x6: 1.5rem;
+    --radius-max: 624.9375rem;
+
+    /* Spacing */
+    --spacing-x1: 0.25rem;
+    --spacing-x2: 0.5rem;
+    --spacing-x3: 0.75rem;
+    --spacing-x4: 1rem;
+    --spacing-x5: 1.25rem;
+    --spacing-x6: 1.5rem;
+    --spacing-x7: 1.75rem;
+    --spacing-x8: 2rem;
+
+    /* Module accent aliases */
+    --m1-bg: var(--color-background-brand);
+    --m1-subtle: var(--color-background-brand-subtle);
+    --m1-text: var(--color-text-brand-on-subtle);
+    --m1-stroke: var(--color-stroke-brand);
+    --m2-bg: var(--color-background-upsell);
+    --m2-subtle: var(--color-background-upsell-subtle);
+    --m2-text: var(--color-text-upsell-on-subtle);
+    --m2-stroke: var(--color-stroke-upsell);
+    --m3-bg: var(--color-background-success);
+    --m3-subtle: var(--color-background-success-subtle);
+    --m3-text: var(--color-text-success-on-subtle);
+    --m3-stroke: var(--color-stroke-success);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    background: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── TOP NAV ── */
+  #topnav {
+    background: var(--color-background-invert-primary);
+    color: var(--color-text-invert-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-x8);
+    height: 52px;
+    flex-shrink: 0;
+  }
+
+  #topnav .logo {
+    display: flex;
+    align-items: center;
+    line-height: 0;
+  }
+
+  #topnav .workshop-title {
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-regular);
+    color: rgba(255,255,255,0.5);
+    letter-spacing: var(--tracking-none);
+  }
+
+  #topnav .nav-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-x2);
+  }
+
+  .slide-counter {
+    font-size: var(--text-mini);
+    font-weight: var(--font-weight-semibold);
+    color: rgba(255,255,255,0.4);
+    min-width: 56px;
+    text-align: center;
+    letter-spacing: var(--tracking-none);
+  }
+
+  .nav-btn {
+    background: rgba(255,255,255,0.08);
+    border: var(--border-regular) solid rgba(255,255,255,0.12);
+    color: var(--color-text-invert-primary);
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-x2);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+    padding: 0;
+    line-height: 0;
+  }
+  .nav-btn svg { width: 18px; height: 18px; }
+  .nav-btn:hover { background: rgba(255,255,255,0.15); }
+  .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  /* ── MODULE TABS ── */
+  #module-tabs {
+    background: var(--color-background-invert-secondary);
+    display: flex;
+    padding: 0 var(--spacing-x8);
+    gap: var(--spacing-x1);
+    flex-shrink: 0;
+  }
+
+  .module-tab {
+    padding: var(--spacing-x2) var(--spacing-x5);
+    font-size: var(--text-mini);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .module-tab:hover { color: rgba(255,255,255,0.75); }
+  .module-tab.active-overview { color: var(--color-text-invert-primary); border-color: var(--color-text-invert-primary); }
+  .module-tab.active-m1 { color: #59a6ff; border-color: #59a6ff; }
+  .module-tab.active-m2 { color: #9f97ff; border-color: #9f97ff; }
+  .module-tab.active-m3 { color: #53b57c; border-color: #53b57c; }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    height: 2px;
+    background: var(--color-background-tertiary);
+    flex-shrink: 0;
+  }
+  #progress-fill {
+    height: 100%;
+    background: var(--color-background-brand);
+    transition: width 0.3s ease;
+  }
+
+  /* ── SLIDE CONTAINER ── */
+  #slide-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: var(--spacing-x8) 60px;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateX(32px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    pointer-events: none;
+    display: none;
+  }
+  .slide.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+  .slide.exit-left {
+    display: block;
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--color-background-tertiary); border-radius: var(--radius-max); }
+
+  /* ── TYPOGRAPHY ── */
+  .typo-headline-1 {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-headline-1);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-headline-1);
+    letter-spacing: var(--tracking-h1);
+    color: var(--color-text-primary);
+  }
+  .typo-headline-2 {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-headline-2);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-headline-2);
+    letter-spacing: var(--tracking-h2);
+    color: var(--color-text-primary);
+  }
+  .typo-headline-3 {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-headline-3);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-headline-3);
+    letter-spacing: var(--tracking-none);
+    color: var(--color-text-primary);
+  }
+  .typo-body-1-strong {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-body-1);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-body-1);
+    letter-spacing: var(--tracking-none);
+  }
+  .typo-body-1-emphasized {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-body-1);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-body-1);
+    letter-spacing: var(--tracking-none);
+  }
+  .typo-body-1 {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-body-1);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-body-1);
+    letter-spacing: var(--tracking-none);
+    color: var(--color-text-secondary);
+  }
+  .typo-body-2-strong {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-body-2);
+    letter-spacing: var(--tracking-none);
+  }
+  .typo-body-2 {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-body-2);
+    letter-spacing: var(--tracking-none);
+    color: var(--color-text-secondary);
+  }
+  .typo-meta-emphasized {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-meta);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-meta);
+    letter-spacing: var(--tracking-none);
+  }
+  .typo-meta {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-meta);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-meta);
+    letter-spacing: var(--tracking-none);
+  }
+  .typo-mini-emphasized {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-mini);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-meta);
+    letter-spacing: var(--tracking-none);
+  }
+  .typo-mini {
+    font-family: var(--font-inter);
+    font-feature-settings: var(--font-feature-body);
+    font-size: var(--text-mini);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-meta);
+    letter-spacing: var(--tracking-none);
+  }
+
+  /* ── SLIDE HEADER ── */
+  .slide-header { margin-bottom: var(--spacing-x8); }
+
+  .module-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-x2);
+    font-size: var(--text-mini);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: var(--spacing-x1) var(--spacing-x3);
+    border-radius: var(--radius-max);
+    margin-bottom: var(--spacing-x3);
+  }
+  .badge-overview { background: var(--color-background-tertiary); color: var(--color-text-secondary); }
+  .badge-m1 { background: var(--m1-subtle); color: var(--m1-text); }
+  .badge-m2 { background: var(--m2-subtle); color: var(--m2-text); }
+  .badge-m3 { background: var(--m3-subtle); color: var(--m3-text); }
+  .badge-activity { background: var(--color-background-warning-subtle); color: var(--color-text-warning); }
+
+  .slide .subtitle {
+    font-family: var(--font-inter);
+    font-size: var(--text-headline-3);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-headline-3);
+    color: var(--color-text-tertiary);
+    margin-top: var(--spacing-x2);
+    letter-spacing: var(--tracking-none);
+  }
+
+  /* ── GOAL BOX ── */
+  .goal-box {
+    border-left: var(--border-thick) solid var(--m1-stroke);
+    background: var(--m1-subtle);
+    padding: var(--spacing-x4) var(--spacing-x5);
+    border-radius: 0 var(--radius-x3) var(--radius-x3) 0;
+    margin-bottom: var(--spacing-x6);
+  }
+  .goal-box.purple { border-color: var(--m2-stroke); background: var(--m2-subtle); }
+  .goal-box.green { border-color: var(--m3-stroke); background: var(--m3-subtle); }
+  .goal-label {
+    font-size: var(--text-mini);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--m1-text);
+    margin-bottom: var(--spacing-x1);
+  }
+  .goal-box.purple .goal-label { color: var(--m2-text); }
+  .goal-box.green .goal-label { color: var(--m3-text); }
+  .goal-box p {
+    font-family: var(--font-inter);
+    font-size: var(--text-body-1);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-body-1);
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  /* ── CARDS GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-x4);
+    margin-bottom: var(--spacing-x5);
+  }
+  .card {
+    background: var(--color-background-primary);
+    border: var(--border-regular) solid var(--color-background-tertiary);
+    border-radius: var(--radius-x4);
+    padding: var(--spacing-x5);
+    transition: box-shadow 0.18s;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(20,28,34,0.08); }
+  .card .card-icon { font-size: 1.75rem; margin-bottom: var(--spacing-x3); }
+  .card .card-title {
+    font-family: var(--font-inter);
+    font-size: var(--text-body-1);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-body-1);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-x2);
+  }
+  .card .card-body {
+    font-family: var(--font-inter);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-body-2);
+    color: var(--color-text-tertiary);
+  }
+  .card.highlight-brand { border-color: var(--m1-stroke); background: var(--m1-subtle); }
+  .card.highlight-upsell { border-color: var(--m2-stroke); background: var(--m2-subtle); }
+  .card.highlight-success { border-color: var(--m3-stroke); background: var(--m3-subtle); }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--radius-x3);
+    overflow: hidden;
+    border: var(--border-regular) solid var(--color-background-tertiary);
+    margin-bottom: var(--spacing-x5);
+  }
+  .data-table th {
+    background: var(--color-background-invert-primary);
+    color: var(--color-text-invert-primary);
+    padding: var(--spacing-x3) var(--spacing-x4);
+    text-align: left;
+    font-family: var(--font-inter);
+    font-size: var(--text-meta);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.04em;
+  }
+  .data-table td {
+    padding: var(--spacing-x3) var(--spacing-x4);
+    border-bottom: var(--border-regular) solid var(--color-background-tertiary);
+    font-family: var(--font-inter);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-body-2);
+    color: var(--color-text-secondary);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: var(--color-background-secondary); }
+  .data-table td strong, .data-table td b { font-weight: var(--font-weight-semibold); color: var(--color-text-primary); }
+  .data-table tr:hover td { background: var(--m1-subtle); }
+
+  /* skills table hover colour */
+  .skills-table tr:hover td { background: var(--m2-subtle); }
+
+  code-label {
+    display: inline-block;
+    font-family: 'SF Mono', 'Roboto Mono', monospace;
+    background: var(--color-background-invert-primary);
+    color: #59a6ff;
+    padding: 2px var(--spacing-x2);
+    border-radius: var(--radius-x1);
+    font-size: var(--text-mini);
+    white-space: nowrap;
+  }
+
+  /* inline code */
+  .ic {
+    font-family: 'SF Mono', 'Roboto Mono', monospace;
+    background: var(--color-background-tertiary);
+    color: var(--color-text-upsell);
+    padding: 1px var(--spacing-x2);
+    border-radius: var(--radius-x1);
+    font-size: 0.8em;
+  }
+  .ic-dark {
+    font-family: 'SF Mono', 'Roboto Mono', monospace;
+    background: var(--color-background-invert-primary);
+    color: #59a6ff;
+    padding: 3px var(--spacing-x2);
+    border-radius: var(--radius-x2);
+    font-size: var(--text-meta);
+    white-space: nowrap;
+  }
+
+  /* ── ANALOGY ── */
+  .analogy {
+    background: var(--color-background-primary);
+    border: var(--border-regular) solid var(--color-background-tertiary);
+    border-radius: var(--radius-x4);
+    padding: var(--spacing-x5) var(--spacing-x6);
+    margin-bottom: var(--spacing-x4);
+  }
+  .analogy-label {
+    font-size: var(--text-mini);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--spacing-x3);
+  }
+  .analogy-row {
+    display: grid;
+    grid-template-columns: 1fr 36px 1fr;
+    align-items: center;
+    gap: var(--spacing-x3);
+    margin-bottom: var(--spacing-x2);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-body-2);
+  }
+  .analogy-row .arrow { text-align: center; color: var(--color-text-tertiary); font-size: 1.1rem; }
+  .analogy-row .gdrive { color: var(--color-text-brand); font-weight: var(--font-weight-semibold); }
+  .analogy-row .github { color: var(--color-text-primary); font-weight: var(--font-weight-semibold); }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: var(--spacing-x3); margin-bottom: var(--spacing-x5); }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-x4);
+    background: var(--color-background-primary);
+    border: var(--border-regular) solid var(--color-background-tertiary);
+    border-radius: var(--radius-x3);
+    padding: var(--spacing-x4) var(--spacing-x5);
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: var(--radius-max);
+    display: flex; align-items: center; justify-content: center;
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
+  }
+  .num-brand { background: var(--color-background-brand); color: var(--color-text-always-white); }
+  .num-upsell { background: var(--color-background-upsell); color: var(--color-text-always-white); }
+  .num-success { background: var(--color-background-success); color: var(--color-text-always-white); }
+  .step-content .step-title {
+    font-size: var(--text-body-1);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-body-1);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-x1);
+  }
+  .step-content .step-desc {
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-body-2);
+    color: var(--color-text-tertiary);
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    display: flex;
+    gap: var(--spacing-x3);
+    align-items: flex-start;
+    padding: var(--spacing-x3) var(--spacing-x4);
+    border-radius: var(--radius-x3);
+    margin-bottom: var(--spacing-x4);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-body-2);
+  }
+  .callout-icon { flex-shrink: 0; line-height: 0; }
+  .callout.info { background: var(--m1-subtle); border: var(--border-regular) solid #bfdbfe; color: var(--color-text-brand); }
+  .callout.warn { background: var(--color-background-warning-subtle); border: var(--border-regular) solid #fbd38d; color: var(--color-text-warning); }
+  .callout.success { background: var(--m3-subtle); border: var(--border-regular) solid #bbf7d0; color: var(--color-text-success-on-subtle); }
+  .callout.upsell { background: var(--m2-subtle); border: var(--border-regular) solid #c4b5fd; color: var(--color-text-upsell-on-subtle); }
+  .callout strong { font-weight: var(--font-weight-semibold); }
+
+  /* ── HERO SLIDE ── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 70vh;
+  }
+  .hero .hero-emoji { font-size: 4rem; margin-bottom: var(--spacing-x5); }
+  .hero .meta-chips { display: flex; gap: var(--spacing-x3); margin-top: var(--spacing-x6); justify-content: center; flex-wrap: wrap; }
+  .meta-chip {
+    padding: var(--spacing-x2) var(--spacing-x4);
+    border-radius: var(--radius-max);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-semibold);
+  }
+  .chip-brand  { background: var(--m1-subtle); color: var(--m1-text); }
+  .chip-upsell { background: var(--m2-subtle); color: var(--m2-text); }
+  .chip-success { background: var(--m3-subtle); color: var(--m3-text); }
+
+  /* ── DAY HEADER ── */
+  .day-header {
+    background: var(--color-background-invert-primary);
+    color: var(--color-text-invert-primary);
+    border-radius: var(--radius-x4);
+    padding: var(--spacing-x5) var(--spacing-x6);
+    margin-bottom: var(--spacing-x6);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .day-label { font-size: var(--text-mini); text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); font-weight: var(--font-weight-semibold); }
+  .day-title { font-size: var(--text-headline-3); font-weight: var(--font-weight-bold); line-height: var(--leading-headline-3); margin-top: var(--spacing-x1); }
+  .day-time { font-size: var(--text-body-2); color: #59a6ff; font-weight: var(--font-weight-semibold); }
+
+  /* ── AGENDA ── */
+  .agenda { list-style: none; padding: 0; margin-bottom: var(--spacing-x5); }
+  .agenda li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-x3);
+    padding: var(--spacing-x3) var(--spacing-x4);
+    background: var(--color-background-primary);
+    border: var(--border-regular) solid var(--color-background-tertiary);
+    border-radius: var(--radius-x2);
+    margin-bottom: var(--spacing-x2);
+  }
+  .agenda .time { font-size: var(--text-meta); font-weight: var(--font-weight-semibold); color: var(--color-text-tertiary); min-width: 80px; }
+  .agenda .topic { font-size: var(--text-body-2); font-weight: var(--font-weight-semibold); color: var(--color-text-primary); flex: 1; }
+  .agenda .duration {
+    font-size: var(--text-mini);
+    padding: var(--spacing-x1) var(--spacing-x2);
+    border-radius: var(--radius-max);
+    font-weight: var(--font-weight-semibold);
+  }
+  .dur-m1 { background: var(--m1-subtle); color: var(--m1-text); }
+  .dur-m2 { background: var(--m2-subtle); color: var(--m2-text); }
+  .dur-m3 { background: var(--m3-subtle); color: var(--m3-text); }
+  .dur-activity { background: var(--color-background-warning-subtle); color: var(--color-text-warning); }
+
+  /* ── TWO COL ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-x5); margin-bottom: var(--spacing-x5); }
+
+  /* ── PIPELINE ── */
+  .pipeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    padding: var(--spacing-x3) 0;
+    margin-bottom: var(--spacing-x5);
+  }
+  .pipeline-step {
+    background: var(--color-background-primary);
+    border: var(--border-thick) solid var(--color-background-tertiary);
+    border-radius: var(--radius-x3);
+    padding: var(--spacing-x3) var(--spacing-x4);
+    text-align: center;
+    min-width: 96px;
+    font-size: var(--text-mini);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .pipeline-step:hover { border-color: var(--m3-stroke); box-shadow: 0 2px 12px rgba(0,130,70,0.12); }
+  .pipeline-step.active-step { border-color: var(--m3-stroke); background: var(--m3-subtle); }
+  .pipeline-step .p-icon { font-size: 1.3rem; margin-bottom: var(--spacing-x1); }
+  .pipeline-step .p-label { font-weight: var(--font-weight-semibold); color: var(--color-text-primary); font-size: var(--text-mini); }
+  .pipeline-arrow { color: var(--color-text-tertiary); font-size: 1rem; padding: 0 var(--spacing-x2); flex-shrink: 0; }
+  .pipeline-detail {
+    background: var(--m3-subtle);
+    border: var(--border-regular) solid var(--m3-stroke);
+    border-radius: var(--radius-x3);
+    padding: var(--spacing-x4) var(--spacing-x5);
+    font-size: var(--text-body-2);
+    line-height: var(--leading-body-2);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-x4);
+    display: none;
+  }
+  .pipeline-detail.visible { display: block; }
+  .pipeline-detail strong { font-weight: var(--font-weight-semibold); color: var(--color-text-primary); }
+
+  /* ── TICKET CARD ── */
+  .ticket-card {
+    background: var(--color-background-primary);
+    border: var(--border-regular) solid var(--color-background-tertiary);
+    border-radius: var(--radius-x4);
+    overflow: hidden;
+    margin-bottom: var(--spacing-x5);
+    box-shadow: 0 1px 4px rgba(20,28,34,0.06);
+  }
+  .ticket-header {
+    background: var(--color-background-invert-primary);
+    padding: var(--spacing-x3) var(--spacing-x5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ticket-id { font-family: 'SF Mono','Roboto Mono',monospace; color: #59a6ff; font-weight: var(--font-weight-bold); font-size: var(--text-body-2); }
+  .ticket-type { font-size: var(--text-mini); background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8); padding: 2px var(--spacing-x2); border-radius: var(--radius-max); font-weight: var(--font-weight-semibold); }
+  .ticket-body { padding: var(--spacing-x5); }
+  .ticket-row { display: grid; grid-template-columns: 110px 1fr; gap: var(--spacing-x2); margin-bottom: var(--spacing-x3); font-size: var(--text-body-2); line-height: var(--leading-body-2); }
+  .ticket-label { color: var(--color-text-tertiary); font-weight: var(--font-weight-semibold); font-size: var(--text-mini); text-transform: uppercase; letter-spacing: 0.06em; padding-top: 2px; }
+  .ticket-value { color: var(--color-text-secondary); }
+  .ticket-copy { background: var(--color-background-secondary); border: var(--border-regular) solid var(--color-background-tertiary); border-radius: var(--radius-x2); padding: var(--spacing-x2) var(--spacing-x3); font-family: 'SF Mono','Roboto Mono',monospace; font-size: var(--text-body-2); color: var(--color-text-primary); }
+  .copy-old { text-decoration: line-through; color: var(--color-text-danger); }
+  .copy-new { color: var(--color-text-success-on-subtle); font-weight: var(--font-weight-semibold); }
+
+  /* ── CODE BLOCK ── */
+  .code-block {
+    background: var(--color-background-invert-primary);
+    border-radius: var(--radius-x3);
+    padding: var(--spacing-x5) var(--spacing-x6);
+    font-family: 'SF Mono','Roboto Mono',monospace;
+    font-size: var(--text-body-2);
+    color: #ecf2f7;
+    line-height: 1.7;
+    margin-bottom: var(--spacing-x5);
+  }
+  .code-comment { color: #59a6ff; }
+  .code-key { color: #fbbf24; }
+
+  /* ── INLINE ICONS ── */
+  .ds-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .callout-icon { line-height: 0; }
+  .callout-icon svg { width: 18px; height: 18px; }
+
+  /* ── KEYBOARD HINT ── */
+  #keyboard-hint {
+    position: fixed;
+    bottom: var(--spacing-x4);
+    right: var(--spacing-x5);
+    font-size: var(--text-mini);
+    color: var(--color-text-tertiary);
+  }
+  kbd {
+    background: var(--color-background-tertiary);
+    border: var(--border-regular) solid #d1d8de;
+    border-radius: var(--radius-x1);
+    padding: 1px var(--spacing-x2);
+    font-family: 'SF Mono',monospace;
+    font-size: var(--text-mini);
+    color: var(--color-text-secondary);
+  }
+
+  /* ── LISTS inside slides ── */
+  .slide ul { padding-left: var(--spacing-x5); margin-bottom: var(--spacing-x3); }
+  .slide li { font-size: var(--text-body-1); line-height: var(--leading-body-1); color: var(--color-text-secondary); margin-bottom: var(--spacing-x2); }
+  .slide li strong { font-weight: var(--font-weight-semibold); color: var(--color-text-primary); }
+  .slide p { font-size: var(--text-body-1); line-height: var(--leading-body-1); color: var(--color-text-secondary); margin-bottom: var(--spacing-x3); }
+  .slide p strong { font-weight: var(--font-weight-semibold); color: var(--color-text-primary); }
+
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav id="topnav">
+  <!-- Kueski Colored Logo from design system -->
+  <span class="logo">
+    <svg width="89" height="21" viewBox="0 0 119 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#knav-clip)">
+        <path d="M119.001 25.6325C119.004 26.0879 118.871 26.534 118.62 26.9141C118.369 27.2942 118.01 27.5913 117.589 27.7676C117.169 27.944 116.705 27.9917 116.258 27.9046C115.81 27.8176 115.398 27.5998 115.074 27.2788C114.751 26.9578 114.53 26.548 114.44 26.1016C114.35 25.6551 114.395 25.192 114.568 24.7709C114.742 24.3498 115.037 23.9898 115.417 23.7364C115.796 23.4831 116.241 23.3478 116.698 23.3478C117 23.3441 117.3 23.4005 117.58 23.5138C117.86 23.6271 118.115 23.795 118.329 24.0077C118.544 24.2204 118.714 24.4736 118.829 24.7526C118.944 25.0316 119.003 25.3307 119.001 25.6325ZM118.577 25.6325C118.576 25.2616 118.465 24.8994 118.258 24.5915C118.051 24.2836 117.757 24.0439 117.413 23.9027C117.07 23.7614 116.692 23.725 116.328 23.7979C115.964 23.8709 115.629 24.05 115.367 24.3125C115.105 24.5751 114.926 24.9094 114.854 25.2733C114.782 25.6371 114.82 26.0141 114.962 26.3566C115.104 26.6991 115.345 26.9919 115.654 27.1978C115.963 27.4037 116.326 27.5137 116.698 27.5137C116.946 27.5175 117.193 27.4714 117.423 27.3782C117.654 27.2851 117.863 27.1467 118.039 26.9712C118.215 26.7958 118.354 26.5869 118.447 26.357C118.541 26.127 118.587 25.8806 118.583 25.6325H118.577ZM116.914 24.4835C117.351 24.4835 117.694 24.7326 117.694 25.1709C117.698 25.3228 117.651 25.4718 117.561 25.594C117.47 25.7162 117.342 25.8046 117.195 25.845L117.76 26.7798H117.241L116.721 25.8799H116.32V26.7798H115.871V24.4835H116.914ZM116.323 25.5495H116.822C117.058 25.5495 117.236 25.4299 117.236 25.1941C117.236 24.9584 117.07 24.8504 116.822 24.8504H116.323V25.5495Z" fill="#0075FF"/>
+        <path d="M111.102 9.26953H108.135C107.679 9.26953 107.309 9.63898 107.309 10.0947V11.2636C107.309 11.7194 107.679 12.0888 108.135 12.0888H111.102C111.558 12.0888 111.928 11.7194 111.928 11.2636V10.0947C111.928 9.63898 111.558 9.26953 111.102 9.26953Z" fill="#0075FF"/>
+        <path d="M54.286 13.2346H51.3396C51.231 13.2334 51.1233 13.2542 51.023 13.2958C50.9227 13.3373 50.8319 13.3987 50.7561 13.4763C50.6802 13.5539 50.6209 13.6461 50.5817 13.7472C50.5426 13.8483 50.5244 13.9563 50.5282 14.0647V22.9085C49.5588 23.8481 48.3383 24.7181 47.0364 24.7181C45.5399 24.7181 44.5106 23.8033 44.5106 21.5637V14.0431C44.5118 13.9359 44.4913 13.8296 44.4505 13.7304C44.4097 13.6313 44.3494 13.5413 44.273 13.4659C44.1967 13.3905 44.106 13.3312 44.0063 13.2914C43.9066 13.2517 43.7999 13.2324 43.6926 13.2346H40.7328C40.6256 13.2321 40.5189 13.2513 40.4193 13.291C40.3197 13.3307 40.2291 13.3901 40.153 13.4656C40.0769 13.5411 40.0169 13.6312 39.9765 13.7304C39.9361 13.8296 39.9163 13.936 39.9181 14.0431V21.567C39.9181 26.0313 42.4205 27.884 45.9539 27.884C47.9492 27.884 49.3061 27.0539 50.5348 26.0362C50.5388 26.1026 50.5388 26.1691 50.5348 26.2355V27.0838C50.531 27.1922 50.5492 27.3002 50.5884 27.4013C50.6276 27.5024 50.6869 27.5946 50.7627 27.6722C50.8386 27.7498 50.9294 27.8112 51.0297 27.8527C51.13 27.8943 51.2377 27.9151 51.3463 27.9139H54.286C54.3941 27.9144 54.5012 27.8931 54.6008 27.8512C54.7005 27.8094 54.7906 27.7478 54.8658 27.6703C54.941 27.5927 54.9997 27.5008 55.0383 27.4C55.077 27.2992 55.0949 27.1917 55.0908 27.0838V14.0597C55.0942 13.9523 55.0758 13.8452 55.0368 13.745C54.9978 13.6448 54.939 13.5535 54.8639 13.4765C54.7888 13.3995 54.6989 13.3384 54.5996 13.2968C54.5004 13.2553 54.3937 13.2341 54.286 13.2346Z" fill="#0075FF"/>
+        <path d="M62.049 21.8336C62.2352 23.9919 63.1947 24.9299 65.3862 24.9299C66.5085 24.9299 67.4962 24.6078 67.9502 24.0433C68.127 23.8175 68.3546 23.6363 68.6146 23.5146C68.8746 23.3929 69.1596 23.334 69.4467 23.3427H71.3938C71.5001 23.3409 71.6058 23.3606 71.7044 23.4006C71.803 23.4405 71.8925 23.5 71.9675 23.5753C72.0425 23.6507 72.1015 23.7404 72.1409 23.8391C72.1803 23.9378 72.1993 24.0434 72.1969 24.1496C72.1969 26.9503 69.3386 27.9165 65.0653 27.9165C60.3098 27.9165 57.4531 25.3333 57.4531 20.464C57.4531 15.5947 60.3397 12.9766 65.0653 12.9766C69.8175 12.9766 72.6741 15.5332 72.6741 20.2714V21.0268C72.677 21.1328 72.6584 21.2384 72.6194 21.3371C72.5803 21.4357 72.5216 21.5255 72.4469 21.6009C72.3721 21.6763 72.2829 21.7358 72.1845 21.7758C72.086 21.8158 71.9805 21.8355 71.8743 21.8336H62.049ZM62.0224 19.0628H68.0848C68.0034 17.0457 67.0423 15.9649 65.0653 15.9649C63.1398 15.9649 62.1288 17.0457 62.0191 19.0628H62.0224Z" fill="#0075FF"/>
+        <path d="M81.5168 27.917C77.2285 27.917 74.5066 26.9491 74.5066 24.1484C74.503 24.0435 74.5207 23.9389 74.5585 23.8409C74.5964 23.7429 74.6537 23.6536 74.727 23.5782C74.8003 23.5029 74.888 23.4431 74.985 23.4024C75.082 23.3618 75.1862 23.3411 75.2914 23.3416H77.2036C77.4856 23.3341 77.7654 23.3938 78.0199 23.5156C78.2743 23.6374 78.496 23.8179 78.6668 24.0422C79.1108 24.6066 80.0802 24.9287 81.2009 24.9287C83.399 24.9287 84.1323 24.419 84.1323 23.6587C84.1323 21.4257 74.4883 22.6626 74.4883 17.2255C74.4883 14.184 77.4397 12.9688 81.1294 12.9688C85.416 12.9688 88.1362 13.94 88.1362 16.7423C88.1396 16.8473 88.1218 16.9519 88.0838 17.0499C88.0459 17.1478 87.9886 17.2372 87.9154 17.3126C87.8422 17.388 87.7545 17.448 87.6576 17.4889C87.5607 17.5298 87.4566 17.5509 87.3514 17.5509H85.4392C85.1573 17.5591 84.8775 17.4998 84.6232 17.3779C84.3689 17.256 84.1475 17.0751 83.9777 16.8503C83.5321 16.2825 82.566 15.9604 81.442 15.9604C79.6379 15.9604 78.9062 16.4701 78.9062 17.2255C78.9062 19.4634 88.5503 18.1701 88.5503 23.6587C88.5486 26.7068 85.5955 27.917 81.5168 27.917Z" fill="#0075FF"/>
+        <path d="M28.1072 19.2582C29.6503 19.2582 30.3919 18.6173 30.9223 17.4884L32.171 14.681C32.3316 14.3211 32.5912 14.014 32.9197 13.7956C33.2482 13.5772 33.6321 13.4565 34.0267 13.4475H36.4626C37.1527 13.4475 37.2358 13.9838 36.9132 14.6794L35.2405 18.3733C34.6885 19.552 33.626 20.4917 32.4853 20.7324C33.5777 21.0528 34.4507 21.8049 35.2405 23.0915L37.4403 26.6841C37.8627 27.3847 37.6798 27.9193 36.9881 27.9193H34.5571C33.7074 27.9193 32.9924 27.3847 32.5701 26.6841L30.9223 23.9747C30.2106 22.7993 29.3028 22.2349 28.1072 22.2349V27.1141C28.1102 27.2194 28.0918 27.3242 28.0532 27.4222C28.0147 27.5202 27.9567 27.6095 27.8828 27.6846C27.809 27.7598 27.7207 27.8193 27.6232 27.8596C27.5258 27.8999 27.4212 27.9202 27.3158 27.9193H24.2929C24.1871 27.9205 24.0822 27.9003 23.9844 27.8602C23.8866 27.82 23.7979 27.7605 23.7236 27.6854C23.6492 27.6103 23.5908 27.521 23.5518 27.4228C23.5128 27.3247 23.4939 27.2197 23.4964 27.1141V10.1803C23.4935 10.0746 23.512 9.9694 23.5509 9.87104C23.5897 9.77269 23.6481 9.6832 23.7225 9.60797C23.7969 9.53274 23.8858 9.47333 23.9838 9.43331C24.0819 9.39329 24.187 9.37348 24.2929 9.37509H27.3158C27.4213 9.37393 27.526 9.39407 27.6235 9.43431C27.7211 9.47455 27.8094 9.53407 27.8834 9.60927C27.9573 9.68448 28.0152 9.77383 28.0537 9.87195C28.0922 9.97007 28.1104 10.075 28.1072 10.1803V19.2582Z" fill="#0075FF"/>
+        <path d="M95.5604 19.2164C97.1034 19.2164 97.845 18.5706 98.3754 17.4367L99.6242 14.6144C99.7838 14.2534 100.043 13.9452 100.372 13.7259C100.7 13.5065 101.085 13.3852 101.48 13.3759H103.916C104.606 13.3759 104.689 13.9155 104.368 14.6144L102.695 18.3266C102.142 19.5103 101.079 20.4549 99.9384 20.6957C101.031 21.0194 101.904 21.7748 102.695 23.0681L104.9 26.674C105.322 27.3779 105.14 27.9158 104.448 27.9158H102.01C101.161 27.9158 100.446 27.3779 100.015 26.674L98.3671 23.9513C97.6554 22.7709 96.7476 22.2031 95.552 22.2031V27.1056C95.5554 27.2112 95.5374 27.3164 95.4991 27.4149C95.4607 27.5134 95.4029 27.6032 95.329 27.6788C95.2551 27.7545 95.1666 27.8145 95.069 27.8552C94.9713 27.8959 94.8664 27.9165 94.7606 27.9158H91.746C91.6399 27.9167 91.5346 27.8963 91.4366 27.8557C91.3386 27.8151 91.2497 27.7552 91.1754 27.6796C91.101 27.604 91.0427 27.5142 91.0039 27.4156C90.9651 27.317 90.9466 27.2115 90.9495 27.1056V10.0921C90.9466 9.9863 90.9651 9.88104 91.004 9.78259C91.0428 9.68415 91.1012 9.59456 91.1756 9.5192C91.2499 9.44384 91.3388 9.38427 91.4368 9.34406C91.5349 9.30385 91.64 9.28384 91.746 9.28522H94.7689C94.8746 9.28405 94.9794 9.30424 95.077 9.34459C95.1747 9.38493 95.2632 9.44459 95.3371 9.51998C95.4111 9.59536 95.469 9.68491 95.5073 9.78323C95.5457 9.88155 95.5637 9.98661 95.5604 10.0921V19.2164Z" fill="#0075FF"/>
+        <path d="M108.136 27.9166C108.026 27.9166 107.917 27.8949 107.816 27.8525C107.714 27.8102 107.622 27.7481 107.545 27.67C107.467 27.5919 107.406 27.4992 107.365 27.3973C107.324 27.2954 107.303 27.1864 107.305 27.0766V14.1488C107.303 14.0389 107.324 13.9299 107.365 13.828C107.406 13.7262 107.467 13.6335 107.545 13.5553C107.622 13.4772 107.714 13.4152 107.816 13.3728C107.917 13.3305 108.026 13.3087 108.136 13.3087H111.151C111.261 13.3069 111.371 13.3274 111.473 13.3691C111.576 13.4108 111.669 13.4728 111.746 13.5513C111.824 13.6298 111.885 13.7232 111.925 13.8259C111.966 13.9286 111.985 14.0384 111.982 14.1488V27.0766C111.985 27.1869 111.966 27.2967 111.925 27.3994C111.885 27.5021 111.824 27.5955 111.746 27.6741C111.669 27.7526 111.576 27.8145 111.473 27.8562C111.371 27.8979 111.261 27.9185 111.151 27.9166H108.136Z" fill="#0075FF"/>
+      </g>
+      <path d="M17.9508 16.2145C17.9508 16.6117 17.1892 23.4965 16.8292 26.8628C16.7242 27.8558 15.7209 27.9204 15.4509 27.9204H3.8583C2.65171 27.9204 2.22174 27.3924 2.10508 26.7619C1.98175 26.0999 1.34179 19.6271 1.02181 17.373L0.910156 16.2525C0.910156 15.6948 1.30346 15.2148 1.85009 15.2148H16.9508C17.0833 15.2148 17.2144 15.2409 17.3366 15.2917C17.4588 15.3424 17.5696 15.4167 17.6626 15.5104C17.7557 15.604 17.829 15.715 17.8785 15.837C17.928 15.959 17.9525 16.0896 17.9508 16.2211V16.2145Z" fill="url(#knav-g0)"/>
+      <path d="M17.9583 9.38037H13.1544C13.1877 8.19719 13.7414 7.84041 14.8704 7.12188L17.5309 5.42095C17.8893 5.20626 18.1883 4.90555 18.4006 4.54618C18.6129 4.1868 18.7317 3.78016 18.7464 3.36325V0.83426C18.7464 0.115723 18.2243 -0.0767724 17.5426 0.362979L14.0141 2.63475C12.752 3.45286 12.0187 4.36389 11.6862 5.48733C11.4617 4.30581 10.5472 3.19896 9.39317 2.61816L5.90129 0.874087C5.21621 0.542199 4.69409 0.625171 4.6891 1.34039L4.68079 3.86938C4.68351 4.27081 4.79739 4.66367 5.00985 5.00455C5.2223 5.34544 5.52506 5.62106 5.88466 5.80096L8.50856 7.09865C9.59104 7.64294 10.2146 7.84871 10.2379 9.37872H0.781517C0.374 9.37872 0 9.71 0 10.152V13.2386C0 13.681 0.374 14.0086 0.781517 14.0086H17.9583C18.3659 14.0086 18.7448 13.681 18.7448 13.2386V10.152C18.7448 9.71 18.3659 9.38037 17.9583 9.38037Z" fill="url(#knav-g1)"/>
+      <defs>
+        <linearGradient id="knav-g0" x1="3.35355" y1="15.2338" x2="12.2736" y2="31.2837" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#25A2FA"/><stop offset="0.48" stop-color="#0075FF"/><stop offset="1" stop-color="#3F58EA"/>
+        </linearGradient>
+        <linearGradient id="knav-g1" x1="17.4017" y1="13.9608" x2="1.83348" y2="-0.522015" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#00BBE9"/><stop offset="0.18" stop-color="#02CDCE"/><stop offset="0.37" stop-color="#1BDD9A"/>
+          <stop offset="0.55" stop-color="#38EF5F"/><stop offset="0.82" stop-color="#69F950"/><stop offset="1" stop-color="#95FF4F"/>
+        </linearGradient>
+        <clipPath id="knav-clip">
+          <rect width="118.972" height="27.9193" fill="white" transform="translate(0.0273438)"/>
+        </clipPath>
+      </defs>
+    </svg>
+  </span>
+  <span class="workshop-title">PM AI Skills Workshop</span>
+  <div class="nav-controls">
+    <button class="nav-btn" id="btn-prev" onclick="prevSlide()" title="Previous (←)">
+      <!-- ChevronLeftIcon -->
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19.7071 8.70711C20.0976 8.31658 20.0976 7.68342 19.7071 7.29289C19.3166 6.90237 18.6834 6.90237 18.2929 7.29289L10.2929 15.2929C9.90237 15.6834 9.90237 16.3166 10.2929 16.7071L18.2929 24.7071C18.6834 25.0976 19.3166 25.0976 19.7071 24.7071C20.0976 24.3166 20.0976 23.6834 19.7071 23.2929L12.4142 16L19.7071 8.70711Z" fill="currentColor"/>
+      </svg>
+    </button>
+    <span class="slide-counter" id="slide-counter">1 / 26</span>
+    <button class="nav-btn" id="btn-next" onclick="nextSlide()" title="Next (→)">
+      <!-- ChevronRightIcon -->
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.2929 8.70711C11.9024 8.31658 11.9024 7.68342 12.2929 7.29289C12.6834 6.90237 13.3166 6.90237 13.7071 7.29289L21.7071 15.2929C22.0976 15.6834 22.0976 16.3166 21.7071 16.7071L13.7071 24.7071C13.3166 25.0976 12.6834 25.0976 12.2929 24.7071C11.9024 24.3166 11.9024 23.6834 12.2929 23.2929L19.5858 16L12.2929 8.70711Z" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- MODULE TABS -->
+<div id="module-tabs">
+  <div class="module-tab" data-module="overview" onclick="jumpToModule('overview')">Overview</div>
+  <div class="module-tab" data-module="m1" onclick="jumpToModule('m1')">Module 1 — AI Landscape</div>
+  <div class="module-tab" data-module="m2" onclick="jumpToModule('m2')">Module 2 — Skills</div>
+  <div class="module-tab" data-module="m3" onclick="jumpToModule('m3')">Module 3 — Code Shipping</div>
+</div>
+
+<!-- PROGRESS -->
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<!-- ════════════════════ SLIDES ════════════════════ -->
+<div id="slide-container">
+
+  <!-- SLIDE 0: HERO -->
+  <div class="slide active" data-module="overview">
+    <div class="hero">
+      <div class="hero-emoji">🤖</div>
+      <h1 class="typo-headline-1">PM AI Skills Workshop</h1>
+      <p class="subtitle">From raw idea to shipped pull request — using Claude Code and the Kueski PM skill suite.</p>
+      <div class="meta-chips">
+        <span class="meta-chip chip-brand">📅 2-Day Workshop</span>
+        <span class="meta-chip chip-upsell">🎯 3 Modules</span>
+        <span class="meta-chip chip-success">🚀 Hands-On</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 1: GOAL -->
+  <div class="slide" data-module="overview">
+    <div class="slide-header">
+      <span class="module-badge badge-overview">Workshop Goal</span>
+      <h1 class="typo-headline-1">What You'll Walk Away With</h1>
+    </div>
+    <div class="goal-box">
+      <div class="goal-label">Ultimate Goal</div>
+      <p>PMs can take an idea from their head to a full product brief and open a real PR.</p>
+    </div>
+    <p style="font-size:var(--text-headline-3);font-weight:var(--font-weight-regular);line-height:var(--leading-headline-3);color:var(--color-text-secondary);margin-bottom:var(--spacing-x6);">This is a hands-on workshop — not a lecture. The goal is <strong>confidence and capability</strong>, not mastery of every tool.</p>
+    <div class="cards-grid">
+      <div class="card"><div class="card-icon">🗺️</div><div class="card-title">Understand the landscape</div><div class="card-body">Know what tool to use when, and why the whole toolkit matters.</div></div>
+      <div class="card"><div class="card-icon">🛠️</div><div class="card-title">Build real artifacts</div><div class="card-body">A full product brief, backed by data, stress-tested by AI review.</div></div>
+      <div class="card"><div class="card-icon">🔀</div><div class="card-title">Open a real PR</div><div class="card-body">Go from a Jira ticket to a pull request on a real codebase.</div></div>
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">💡</span>
+      <span><strong>Approach:</strong> One step at a time. No one needs to master everything — you need to leave knowing what tools exist and confident enough to use them next week.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: AGENDA -->
+  <div class="slide" data-module="overview">
+    <div class="slide-header">
+      <span class="module-badge badge-overview">Schedule</span>
+      <h1 class="typo-headline-1">Workshop Agenda</h1>
+    </div>
+    <div class="day-header">
+      <div><div class="day-label">Day 1 — Monday</div><div class="day-title">AI Landscape, Tools &amp; Skills</div></div>
+      <div class="day-time">3:30 – 6:00 PM</div>
+    </div>
+    <ul class="agenda">
+      <li><span class="time">3:30 PM</span><span class="topic">Module 1: The AI Landscape &amp; Your Toolkit</span><span class="duration dur-m1">45 min</span></li>
+      <li><span class="time">4:15 PM</span><span class="topic">Module 2: PM Skills Suite</span><span class="duration dur-m2">60 min</span></li>
+      <li><span class="time">5:15 PM</span><span class="topic">Activity 1: Setup &amp; First Explore</span><span class="duration dur-activity">Rest of day</span></li>
+    </ul>
+    <div class="day-header">
+      <div><div class="day-label">Day 2 — Tuesday</div><div class="day-title">Brief → Code → PR</div></div>
+      <div class="day-time">8:00 AM – 5:00 PM</div>
+    </div>
+    <ul class="agenda">
+      <li><span class="time">8:00 AM</span><span class="topic">Recap &amp; Unblock</span><span class="duration dur-activity">30 min</span></li>
+      <li><span class="time">8:30 AM</span><span class="topic">Activity: Idea → Full Brief → Prototype</span><span class="duration dur-activity">2.5 hrs</span></li>
+      <li><span class="time">11:00 AM</span><span class="topic">Share-out &amp; Morning Wrap</span><span class="duration dur-activity">90 min</span></li>
+      <li><span class="time">12:00 PM</span><span class="topic">Lunch</span><span class="duration dur-activity">1 hr</span></li>
+      <li><span class="time">1:00 PM</span><span class="topic">Module 3: The Code Shipping Process</span><span class="duration dur-m3">45 min</span></li>
+      <li><span class="time">1:45 PM</span><span class="topic">Module 4: Live PR Demo</span><span class="duration dur-activity">30 min</span></li>
+      <li><span class="time">2:15 PM</span><span class="topic">Activity 2: Your First PR</span><span class="duration dur-activity">Remaining</span></li>
+      <li><span class="time">4:30 PM</span><span class="topic">Share-out &amp; Close</span><span class="duration dur-activity">30 min</span></li>
+    </ul>
+  </div>
+
+  <!-- ════ MODULE 1 ════ -->
+
+  <!-- SLIDE 3: M1 INTRO -->
+  <div class="slide" data-module="m1">
+    <div class="slide-header">
+      <span class="module-badge badge-m1">Module 1 · 45 min</span>
+      <h1 class="typo-headline-1">The AI Landscape &amp; Your Toolkit</h1>
+      <p class="subtitle">Understand what tool to use when — and why knowing all three makes you more effective.</p>
+    </div>
+    <div class="goal-box">
+      <div class="goal-label">Module Goal</div>
+      <p>Everyone understands what tool to use when, and can find their way around Claude Code.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card"><div class="card-icon">🤖</div><div class="card-title">Claude vs. ChatGPT vs. Cursor</div><div class="card-body">How they differ and what each is best at.</div></div>
+      <div class="card"><div class="card-icon">⚙️</div><div class="card-title">Claude Code vs. Project vs. Cowork</div><div class="card-body">When to use which, and how to choose.</div></div>
+      <div class="card"><div class="card-icon">📝</div><div class="card-title">What is Markdown?</div><div class="card-body">Why it's the preferred format for AI workflows.</div></div>
+      <div class="card"><div class="card-icon">🐙</div><div class="card-title">GitHub Basics</div><div class="card-body">One mental model: GitHub = Google Drive for code.</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: AI TOOL COMPARISON -->
+  <div class="slide" data-module="m1">
+    <div class="slide-header">
+      <span class="module-badge badge-m1">Module 1</span>
+      <h1 class="typo-headline-1">Claude vs. ChatGPT vs. Cursor</h1>
+      <p class="subtitle">Not "pick one" — knowing all three makes you more effective.</p>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Tool</th><th>Best At</th><th>When PMs Reach for It</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Claude (claude.ai)</strong></td><td>Long documents, nuanced analysis, structured reasoning, product briefs</td><td>Drafting briefs, synthesizing research, stress-testing ideas</td></tr>
+        <tr><td><strong>ChatGPT / Codex</strong></td><td>Quick Q&amp;A, broad knowledge, flexible prompt iteration</td><td>Fast lookups, brainstorming, second opinions</td></tr>
+        <tr><td><strong>Cursor</strong></td><td>Code editing with AI inline — lives inside your editor</td><td>When you're in a codebase and need suggestions or refactors in-place</td></tr>
+        <tr><td><strong>Claude Code (CLI)</strong></td><td>Agentic multi-step tasks, running skills, working with files &amp; repos</td><td>Running the PM skill suite, going from brief → Jira → PR end-to-end</td></tr>
+      </tbody>
+    </table>
+    <div class="callout success">
+      <span class="callout-icon">✅</span>
+      <span>The goal isn't to master one tool. The goal is to know <strong>which to reach for when</strong>.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: CLAUDE MODES -->
+  <div class="slide" data-module="m1">
+    <div class="slide-header">
+      <span class="module-badge badge-m1">Module 1</span>
+      <h1 class="typo-headline-1">Claude Code vs. Claude Project vs. Cowork</h1>
+    </div>
+    <div class="cards-grid">
+      <div class="card highlight-brand">
+        <div class="card-icon">⌨️</div>
+        <div class="card-title">Claude Code (CLI)</div>
+        <div class="card-body"><strong>Use when:</strong> Running the PM skill suite — problem-definition, data analysis, brief → Jira → PR. It can read files, run commands, and execute multi-step workflows.<br/><br/><em>Think: AI co-pilot that can actually do things, not just talk.</em></div>
+      </div>
+      <div class="card highlight-upsell">
+        <div class="card-icon">💬</div>
+        <div class="card-title">Claude Project (claude.ai)</div>
+        <div class="card-body"><strong>Use when:</strong> Conversational work — drafting, exploring ideas, Q&amp;A with context. Good for brainstorming and iterating on text.<br/><br/><em>Think: a very smart colleague you can chat with and paste things into.</em></div>
+      </div>
+      <div class="card highlight-success">
+        <div class="card-icon">🤝</div>
+        <div class="card-title">Cowork</div>
+        <div class="card-body"><strong>Use when:</strong> You want a guided, pre-built AI experience. Less setup, structured output.<br/><br/><em>Think: curated workflow launcher vs. a general-purpose terminal.</em></div>
+      </div>
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">🔑</span>
+      <span><strong>Key insight:</strong> Claude Code runs <em>skills</em> — the skill suite only works in Claude Code CLI. Set it up once and it unlocks everything.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: MARKDOWN -->
+  <div class="slide" data-module="m1">
+    <div class="slide-header">
+      <span class="module-badge badge-m1">Module 1</span>
+      <h1 class="typo-headline-1">What is a Markdown File?</h1>
+    </div>
+    <div class="two-col">
+      <div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Why Markdown?</h2>
+        <ul>
+          <li>Plain text — no proprietary format</li>
+          <li>Most <strong>accurate</strong> for AI to read and write</li>
+          <li>Most <strong>cost-effective</strong> to pass to models</li>
+          <li>Works everywhere: GitHub, Confluence, editors</li>
+          <li>Version-controlled like code</li>
+        </ul>
+        <div class="callout success" style="margin-top:var(--spacing-x4);">
+          <span class="callout-icon">📁</span>
+          <span>Your briefs and notes should live in <span class="ic">.md</span> files. This is the preferred format for the entire PM skill suite.</span>
+        </div>
+      </div>
+      <div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Basic Syntax</h2>
+        <table class="data-table">
+          <thead><tr><th>You type</th><th>You get</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ic"># Heading</span></td><td>Big title</td></tr>
+            <tr><td><span class="ic">## Sub-heading</span></td><td>Section title</td></tr>
+            <tr><td><span class="ic">**bold**</span></td><td><strong>bold</strong></td></tr>
+            <tr><td><span class="ic">- item</span></td><td>Bullet point</td></tr>
+            <tr><td><span class="ic">1. item</span></td><td>Numbered list</td></tr>
+            <tr><td><span class="ic">[text](url)</span></td><td>Hyperlink</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: GITHUB ANALOGY -->
+  <div class="slide" data-module="m1">
+    <div class="slide-header">
+      <span class="module-badge badge-m1">Module 1</span>
+      <h1 class="typo-headline-1">GitHub: Google Drive for Code</h1>
+      <p class="subtitle">One mental model. You don't need Git commands — just the vocabulary.</p>
+    </div>
+    <div class="analogy">
+      <div class="analogy-label">The Core Analogy</div>
+      <div class="analogy-row"><span class="gdrive">📁 Google Drive Folders</span><span class="arrow">→</span><span class="github">📦 Repositories (Repos)</span></div>
+      <div class="analogy-row"><span class="gdrive">📄 One Canonical Doc</span><span class="arrow">→</span><span class="github">🌿 <span class="ic">main</span> / <span class="ic">master</span> Branch</span></div>
+      <div class="analogy-row"><span class="gdrive">📋 Duplicate to Try Ideas</span><span class="arrow">→</span><span class="github">🌱 Feature Branch</span></div>
+      <div class="analogy-row"><span class="gdrive">✏️ Suggesting Mode Edits</span><span class="arrow">→</span><span class="github">🔀 Pull Request (PR)</span></div>
+      <div class="analogy-row"><span class="gdrive">✅ Owner Accepts Changes</span><span class="arrow">→</span><span class="github">🔒 Approve &amp; Merge</span></div>
+    </div>
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <span><strong>Key difference from Drive:</strong> Small edits can have large effects — a typo in code can break things. That's why <strong>review matters</strong> before merging.</span>
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">🎯</span>
+      <span><strong>PM vocabulary you need:</strong> repo, branch, main/master, pull request, merge, approve. That's enough to follow setup and "where do I put this change?"</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: GITHUB VOCAB -->
+  <div class="slide" data-module="m1">
+    <div class="slide-header">
+      <span class="module-badge badge-m1">Module 1</span>
+      <h1 class="typo-headline-1">GitHub Vocabulary — PM Edition</h1>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num num-brand">1</div><div class="step-content"><div class="step-title">Repository (Repo)</div><div class="step-desc">The top-level "place" for one product or service. Like a shared Drive folder — one box that holds that project's files, history, and collaboration rules.</div></div></div>
+      <div class="step"><div class="step-num num-brand">2</div><div class="step-content"><div class="step-title">Branch</div><div class="step-desc"><strong>main</strong> (or <strong>master</strong>) is the current agreed-upon version. A feature branch is a safe sandbox — changes don't affect main until reviewed and ready.</div></div></div>
+      <div class="step"><div class="step-num num-brand">3</div><div class="step-content"><div class="step-title">Commit</div><div class="step-desc">A saved snapshot: "here is exactly what changed at this moment." Like Cmd-S, but it also records who changed what and why.</div></div></div>
+      <div class="step"><div class="step-num num-brand">4</div><div class="step-content"><div class="step-title">Pull Request (PR)</div><div class="step-desc">"Please pull my branch's commits into main." Shows a diff, discussion, approvals, and automated check results — Suggesting Mode at repo scale.</div></div></div>
+      <div class="step"><div class="step-num num-brand">5</div><div class="step-content"><div class="step-title">Merge</div><div class="step-desc">When the PR is accepted, commits become part of main. A human approves before it lands.</div></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: ACTIVITY 1 -->
+  <div class="slide" data-module="m1">
+    <div class="slide-header">
+      <span class="module-badge badge-activity">Activity 1 — Rest of Day 1</span>
+      <h1 class="typo-headline-1">Setup &amp; First Explore</h1>
+    </div>
+    <div class="goal-box">
+      <div class="goal-label">Activity Goal</div>
+      <p>Everyone is fully set up and those who move fast get a head start on Day 2.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num num-brand">1</div><div class="step-content"><div class="step-title">Run <span class="ic">/pm-setup</span></div><div class="step-desc">Configure your profile so all other skills personalize their output to you.</div></div></div>
+      <div class="step"><div class="step-num num-brand">2</div><div class="step-content"><div class="step-title">Set up connections</div><div class="step-desc">Atlassian (Jira/Confluence), Databricks, Google Drive — these unlock the full power of the skill suite.</div></div></div>
+      <div class="step"><div class="step-num num-brand">3</div><div class="step-content"><div class="step-title">For fast finishers: start <span class="ic">/problem-definition</span></div><div class="step-desc">Pick your real initiative idea and start iterating. No pressure — getting set up cleanly is the win for today.</div></div></div>
+    </div>
+    <div class="callout warn">
+      <span class="callout-icon">🎯</span>
+      <span><strong>Come prepared for Day 2:</strong> Think of a real initiative idea you want to develop. You'll use it tomorrow to go from raw idea to full product brief.</span>
+    </div>
+  </div>
+
+  <!-- ════ MODULE 2 ════ -->
+
+  <!-- SLIDE 10: M2 INTRO -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-m2">Module 2 · 60 min</span>
+      <h1 class="typo-headline-1">Skills</h1>
+      <p class="subtitle">Build the mental model for skills and develop judgment for when to use AI vs. human thinking.</p>
+    </div>
+    <div class="goal-box purple">
+      <div class="goal-label">Module Goal</div>
+      <p>Build the mental model for skills and develop judgment for when to use AI vs. human thinking.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card"><div class="card-icon">🧩</div><div class="card-title">What skills are</div><div class="card-body">How they're triggered, how to list them, how to read what a skill does.</div></div>
+      <div class="card"><div class="card-icon">🗂️</div><div class="card-title">The PM Skill Suite</div><div class="card-body">Walk through each skill — what it does and when to reach for it.</div></div>
+      <div class="card"><div class="card-icon">🧠</div><div class="card-title">Human Judgment vs. AI</div><div class="card-body">Where AI excels, where it falls short, how to stay in the driver's seat.</div></div>
+    </div>
+    <div class="callout upsell">
+      <span class="callout-icon">🔗</span>
+      <span>Skill suite lives at: <strong>github.com/kueski-dev/claude_agent_skills</strong></span>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: WHAT ARE SKILLS -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-m2">Module 2</span>
+      <h1 class="typo-headline-1">What Are Skills?</h1>
+    </div>
+    <div class="two-col">
+      <div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">The Mental Model</h2>
+        <p>Skills are <strong>pre-built AI workflows</strong> that run inside Claude Code. They're triggered by typing <span class="ic">/skill-name</span> in your terminal.</p>
+        <p>Think of them as <strong>smart macros</strong> — they know the right prompts, the right sequence of steps, and how to use your connected tools (Jira, Confluence, Databricks) together.</p>
+        <div class="callout success" style="margin-top:var(--spacing-x4);">
+          <span class="callout-icon">💡</span>
+          <span>You don't need to write the prompt. You just need to know which skill to invoke — and feed it the right context.</span>
+        </div>
+      </div>
+      <div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">How to Use Them</h2>
+        <div class="steps">
+          <div class="step"><div class="step-num num-upsell">1</div><div class="step-content"><div class="step-title">Open Claude Code (terminal)</div></div></div>
+          <div class="step"><div class="step-num num-upsell">2</div><div class="step-content"><div class="step-title">Type <span class="ic">/skill-name</span></div><div class="step-desc">e.g. <span class="ic">/problem-definition</span></div></div></div>
+          <div class="step"><div class="step-num num-upsell">3</div><div class="step-content"><div class="step-title">Follow the guided flow</div><div class="step-desc">The skill asks you what it needs. You provide context; it does the work.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: SKILLS TABLE -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-m2">Module 2</span>
+      <h1 class="typo-headline-1">The Kueski PM Skill Suite</h1>
+    </div>
+    <table class="data-table skills-table">
+      <thead><tr><th>Skill</th><th>When to Use</th></tr></thead>
+      <tbody>
+        <tr><td><span class="ic-dark">/pm-setup</span></td><td>First-time setup — builds your profile so other skills personalize output</td></tr>
+        <tr><td><span class="ic-dark">/problem-definition</span></td><td>Kicking off a new initiative, writing a crisp problem statement</td></tr>
+        <tr><td><span class="ic-dark">/solution-brainstorm</span></td><td>Before you scope — explore approaches, expand ambition</td></tr>
+        <tr><td><span class="ic-dark">/data-analysis</span></td><td>Back your problem statement with real Kueski data (KCash/Kpay metrics)</td></tr>
+        <tr><td><span class="ic-dark">/product-director-review</span></td><td>Stress-test your brief before sharing with leadership</td></tr>
+        <tr><td><span class="ic-dark">/brief-jira-breakdown</span></td><td>Convert a brief's requirements into Jira epics/stories</td></tr>
+        <tr><td><span class="ic-dark">/brief-sync-confluence</span></td><td>Keep your Confluence brief in sync with local edits</td></tr>
+        <tr><td><span class="ic-dark">/eng-review</span></td><td>Pressure-test technical feasibility before committing scope</td></tr>
+        <tr><td><span class="ic-dark">/jira-ticket-to-pr</span></td><td>Take a tagged front-end ticket → working prototype PR</td></tr>
+      </tbody>
+    </table>
+    <div class="callout info">
+      <span class="callout-icon">🎯</span>
+      <span>Start with <strong>/pm-setup → /problem-definition → /data-analysis</strong> — that's your Day 1 path.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 13: PM WORKFLOW MAP -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-m2">Module 2</span>
+      <h1 class="typo-headline-1">Skills in the PM Workflow</h1>
+      <p class="subtitle">Each skill maps to a stage of the product development process.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num num-upsell">1</div><div class="step-content"><div class="step-title">🎯 Define the Problem → <span class="ic">/problem-definition</span></div><div class="step-desc">Crisp problem statement, framed for your domain. The foundation everything else builds on.</div></div></div>
+      <div class="step"><div class="step-num num-upsell">2</div><div class="step-content"><div class="step-title">📊 Validate with Data → <span class="ic">/data-analysis</span></div><div class="step-desc">Query Databricks, pull KCash/Kpay metrics. Numbers that back your narrative.</div></div></div>
+      <div class="step"><div class="step-num num-upsell">3</div><div class="step-content"><div class="step-title">💡 Explore Solutions → <span class="ic">/solution-brainstorm</span></div><div class="step-desc">Expand the solution space before narrowing. Don't anchor too early.</div></div></div>
+      <div class="step"><div class="step-num num-upsell">4</div><div class="step-content"><div class="step-title">🔬 Stress-Test → <span class="ic">/product-director-review</span> + <span class="ic">/eng-review</span></div><div class="step-desc">Simulated leadership review + technical feasibility check before you commit.</div></div></div>
+      <div class="step"><div class="step-num num-upsell">5</div><div class="step-content"><div class="step-title">🎫 Execute → <span class="ic">/brief-jira-breakdown</span> + <span class="ic">/jira-ticket-to-pr</span></div><div class="step-desc">Brief becomes Jira epics/stories. A ticket becomes a real PR.</div></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 14: HUMAN JUDGMENT -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-m2">Module 2</span>
+      <h1 class="typo-headline-1">Human Judgment vs. AI</h1>
+      <p class="subtitle">AI is cheap execution. Human judgment is the scarce resource.</p>
+    </div>
+    <div class="two-col">
+      <div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">AI is genuinely good at</h2>
+        <ul>
+          <li>Structuring and formatting output at scale</li>
+          <li>Synthesizing large amounts of text fast</li>
+          <li>Generating a first draft quickly</li>
+          <li>Running checklists without fatigue</li>
+          <li>Finding patterns in data</li>
+          <li>Simulating reviewers / stress-testing logic</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Where AI falls short</h2>
+        <ul>
+          <li>Knowing the organizational context</li>
+          <li>Understanding unwritten constraints</li>
+          <li>Navigating stakeholder dynamics</li>
+          <li>Knowing what customers <em>actually</em> mean</li>
+          <li>Deciding what matters this quarter</li>
+          <li>Anything requiring real-world accountability</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout warn">
+      <span class="callout-icon">🧠</span>
+      <span><strong>The shift:</strong> Because execution is now cheaper, human judgment is <em>more</em> important than ever. AI can generate the brief — but you decide if it's solving the right problem.</span>
+    </div>
+    <div class="callout upsell">
+      <span class="callout-icon">🎯</span>
+      <span><strong>Your role:</strong> Stay in the driver's seat. Use AI to think faster, not to replace thinking.</span>
+    </div>
+  </div>
+
+  <!-- ════ MODULE 3 ════ -->
+
+  <!-- SLIDE 15: M3 INTRO -->
+  <div class="slide" data-module="m3">
+    <div class="slide-header">
+      <span class="module-badge badge-m3">Module 3 · 45 min</span>
+      <h1 class="typo-headline-1">The Code Shipping Process</h1>
+      <p class="subtitle">How code goes from idea to production — and where PMs fit in.</p>
+    </div>
+    <div class="goal-box green">
+      <div class="goal-label">Module Goal</div>
+      <p>PMs understand how code goes from idea to production and where they fit in.</p>
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">📦</span>
+      <span><strong>Example repo:</strong> <span class="ic">kueskipay-frontend</span> — the Kueski Pay consumer web app (also called Aurora). Same ideas apply to any repo; this one is concrete.</span>
+    </div>
+    <div class="cards-grid">
+      <div class="card"><div class="card-icon">🌿</div><div class="card-title">Branches, Commits, PRs</div><div class="card-body">The shipping angle of vocabulary from Module 1.</div></div>
+      <div class="card"><div class="card-icon">🤖</div><div class="card-title">CI/CD in Plain Language</div><div class="card-body">What happens automatically when you open or merge a PR.</div></div>
+      <div class="card"><div class="card-icon">✏️</div><div class="card-title">The Ideal First PR</div><div class="card-body">Why a copy change ticket is perfect for learning the process.</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 16: BRIEF TO PROD -->
+  <div class="slide" data-module="m3">
+    <div class="slide-header">
+      <span class="module-badge badge-m3">Module 3</span>
+      <h1 class="typo-headline-1">Brief → Production: The Journey</h1>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num num-success">1</div><div class="step-content"><div class="step-title">📋 Brief / Ticket</div><div class="step-desc">Problem, scope, acceptance criteria. Your job: write it clearly enough that the change is unambiguous.</div></div></div>
+      <div class="step"><div class="step-num num-success">2</div><div class="step-content"><div class="step-title">🔧 Design / Eng Breakdown</div><div class="step-desc">What actually ships in which PRs. Engineers (and AI) break the brief into concrete diffs.</div></div></div>
+      <div class="step"><div class="step-num num-success">3</div><div class="step-content"><div class="step-title">🔀 Implementation + PRs</div><div class="step-desc">Branches, CI, review, merge to <span class="ic">master</span>.</div></div></div>
+      <div class="step"><div class="step-num num-success">4</div><div class="step-content"><div class="step-title">🔍 Staging Validation</div><div class="step-desc">Product, QA, or you try it at <strong>kueskipay-aurora.kueski.codes</strong>. Your recurring seat at the table.</div></div></div>
+      <div class="step"><div class="step-num num-success">5</div><div class="step-content"><div class="step-title">🚀 Release Decision</div><div class="step-desc">Manual release workflow to <strong>prod.kueskipay.com</strong>. Merging to master does <em>not</em> automatically mean customers see it.</div></div></div>
+      <div class="step"><div class="step-num num-success">6</div><div class="step-content"><div class="step-title">📊 Monitor</div><div class="step-desc">Errors, metrics, support. Same as any launch.</div></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 17: CICD -->
+  <div class="slide" data-module="m3">
+    <div class="slide-header">
+      <span class="module-badge badge-m3">Module 3</span>
+      <h1 class="typo-headline-1">CI/CD in Plain Language</h1>
+    </div>
+    <div class="two-col">
+      <div class="card highlight-brand">
+        <div class="card-icon">🔁</div>
+        <div class="card-title">CI — Continuous Integration</div>
+        <div class="card-body">When you open or update a PR, <strong>robots run in the background</strong>: build the app, run tests, run style/security checks.<br/><br/>You don't run these by hand. GitHub Actions does it and posts <span style="color:var(--color-text-success);font-weight:var(--font-weight-semibold);">green</span> or <span style="color:var(--color-text-danger);font-weight:var(--font-weight-semibold);">red</span> on the PR.<br/><br/><em>Think: "automatic proof the change still works."</em></div>
+      </div>
+      <div class="card highlight-success">
+        <div class="card-icon">🚀</div>
+        <div class="card-title">CD — Continuous Delivery</div>
+        <div class="card-body">After the change is trusted and merged, <strong>pipelines deploy</strong> built files to environments — staging first, production when ready.<br/><br/>Staging URL: <strong>kueskipay-aurora.kueski.codes</strong><br/><br/><em>Think: "automatic copying of the built app to the right server."</em></div>
+      </div>
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">📌</span>
+      <span><strong>For PMs:</strong> You don't run CI/CD. You read its results (green/red on the PR) and validate on the staging URL after merge. That's your recurring seat.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 18: PR PIPELINE -->
+  <div class="slide" data-module="m3">
+    <div class="slide-header">
+      <span class="module-badge badge-m3">Module 3</span>
+      <h1 class="typo-headline-1">What Happens When You Open a PR?</h1>
+      <p class="subtitle">Click each step to learn more. (<span class="ic">kueskipay-frontend</span> / <span class="ic">pull_request.yml</span>)</p>
+    </div>
+    <div class="pipeline">
+      <div class="pipeline-step" onclick="showPipelineDetail('gov',this)"><div class="p-icon">🏛️</div><div class="p-label">Governance</div></div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step" onclick="showPipelineDetail('tests',this)"><div class="p-icon">🧪</div><div class="p-label">Unit Tests</div></div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step" onclick="showPipelineDetail('build',this)"><div class="p-icon">🔨</div><div class="p-label">Build</div></div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step" onclick="showPipelineDetail('lint',this)"><div class="p-icon">🔍</div><div class="p-label">Lint</div></div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step" onclick="showPipelineDetail('quality',this)"><div class="p-icon">🛡️</div><div class="p-label">Quality / Security</div></div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step" onclick="showPipelineDetail('review',this)"><div class="p-icon">👥</div><div class="p-label">Code Review</div></div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step" onclick="showPipelineDetail('merge',this)"><div class="p-icon">✅</div><div class="p-label">Merge</div></div>
+    </div>
+    <div class="pipeline-detail" id="detail-gov"><strong>🏛️ Governance Checks</strong> — Change management, Backstage, and CODEOWNERS-style validation run first. Ensures the right people and catalog metadata are in place. For a small copy change, these usually pass without you thinking about them.</div>
+    <div class="pipeline-detail" id="detail-tests"><strong>🧪 Unit Tests</strong> — Automated tests run with coverage expectations. Red = "something that used to work might be broken." Same category as "the spreadsheet formula broke" — but for the app.</div>
+    <div class="pipeline-detail" id="detail-build"><strong>🔨 Build</strong> — The app is built the way we ship it (production-style, including bundle analysis). Confirms the code actually compiles into deployable assets.</div>
+    <div class="pipeline-detail" id="detail-lint"><strong>🔍 Lint</strong> — Style and static checks: naming, patterns, TypeScript/ESLint rules. Often the fastest feedback on small mistakes.</div>
+    <div class="pipeline-detail" id="detail-quality"><strong>🛡️ Quality / Security</strong> — <strong>SonarQube</strong> runs for quality signals; <strong>Snyk</strong> runs for dependency and security scanning. Second opinions before humans spend deep time.</div>
+    <div class="pipeline-detail" id="detail-review"><strong>👥 Code Review</strong> — Humans (and sometimes tools) read the change, comment, request edits, or <strong>approve</strong>. Treat approval as the gate — same instinct as not accepting every Google Doc suggestion without reading it.</div>
+    <div class="pipeline-detail" id="detail-merge"><strong>✅ Merge</strong> — PR accepted; commits become part of <span class="ic">master</span>. The merge triggers <span class="ic">merge_branch.yml</span> — which runs tests again, builds, and <strong>deploys to staging automatically</strong>.</div>
+    <div class="callout warn" style="margin-top:var(--spacing-x2);">
+      <span class="callout-icon">⚠️</span>
+      <span>A normal PM PR does <em>not</em> deploy to staging from the PR itself. The PR workflow is mostly <strong>"prove the change is safe."</strong> Staging deploy happens <strong>after merge</strong>.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 19: AFTER MERGE -->
+  <div class="slide" data-module="m3">
+    <div class="slide-header">
+      <span class="module-badge badge-m3">Module 3</span>
+      <h1 class="typo-headline-1">After Merge: Staging → Production</h1>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="card highlight-brand" style="margin-bottom:var(--spacing-x4);">
+          <div class="card-icon">🔬</div>
+          <div class="card-title">Staging (automatic)</div>
+          <div class="card-body">Merge to <span class="ic">master</span> → triggers <span class="ic">merge_branch.yml</span> → lint + tests + build + Snyk + <strong>deploy to staging</strong>.<br/><br/>Staging URL: <strong>kueskipay-aurora.kueski.codes</strong><br/><br/>QA and stakeholders can try the change before it reaches customers.</div>
+        </div>
+        <div class="card highlight-success">
+          <div class="card-icon">🌐</div>
+          <div class="card-title">Production (deliberate)</div>
+          <div class="card-body"><span class="ic">release.yml</span> is triggered <strong>manually</strong>. Someone chooses a commit, creates a GitHub Release, and deploys to prod.<br/><br/>Prod URL: <strong>prod.kueskipay.com</strong><br/><br/><em>Merging to master ≠ customers see it tomorrow.</em></div>
+        </div>
+      </div>
+      <div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">The Google Drive Analogy — Final Act</h2>
+        <p>Users don't clone GitHub. They open a <strong>URL</strong>. That URL fetches the <strong>current published bundle</strong>.</p>
+        <p>The "save" was <strong>merge + deploy</strong>, not Cmd-S in a doc — but the mental model is the same: everyone always sees the latest published version.</p>
+        <div class="callout warn">
+          <span class="callout-icon">⚠️</span>
+          <span><strong>Flows differ by repo.</strong> Branch names, what triggers staging, how production is promoted — all live in that repo's CI config. When in doubt, read <span class="ic">.github/workflows/</span> or ask AI.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 20: COPY TICKET -->
+  <div class="slide" data-module="m3">
+    <div class="slide-header">
+      <span class="module-badge badge-m3">Module 3</span>
+      <h1 class="typo-headline-1">Your Ideal First PR: The Copy Change</h1>
+      <p class="subtitle">Copy changes touch real user-facing language but avoid deep logic — perfect for learning the PR path.</p>
+    </div>
+    <div class="ticket-card">
+      <div class="ticket-header">
+        <span class="ticket-id">PRODU-75709</span>
+        <span class="ticket-type">Copy Change</span>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span class="ticket-label">Product</span><span class="ticket-value">Kueski Pay Web</span></div>
+        <div class="ticket-row"><span class="ticket-label">Route / URL</span><span class="ticket-value"><span class="ic">/pay/aplicar</span></span></div>
+        <div class="ticket-row">
+          <span class="ticket-label">Change</span>
+          <div>
+            <div class="ticket-copy copy-old">"Primero, te pediremos algunos datos personales"</div>
+            <div style="margin:var(--spacing-x2) 0;font-size:var(--text-body-2);color:var(--color-text-tertiary);">→</div>
+            <div class="ticket-copy copy-new">"Primero, necesitamos algunos datos personales."</div>
+          </div>
+        </div>
+        <div class="ticket-row"><span class="ticket-label">Acceptance</span><span class="ticket-value" style="font-size:var(--text-body-2);">Text reads the new copy on /pay/aplicar. No layout regression on mobile.</span></div>
+      </div>
+    </div>
+    <div class="callout success">
+      <span class="callout-icon">🤖</span>
+      <span>Running <span class="ic">/jira-ticket-to-pr PRODU-75709</span> read this ticket, targeted <span class="ic">kueskipay-frontend</span>, and produced a concrete code change — PR <strong>#1331</strong>.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 21: GOOD TICKET -->
+  <div class="slide" data-module="m3">
+    <div class="slide-header">
+      <span class="module-badge badge-m3">Module 3</span>
+      <h1 class="typo-headline-1">What Makes a Good Copy Ticket</h1>
+    </div>
+    <div class="two-col">
+      <div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">On Web</h2>
+        <div class="steps">
+          <div class="step"><div class="step-num num-success">✓</div><div class="step-content"><div class="step-title">Exact copy — before and after</div><div class="step-desc">Quote verbatim. Not "make it friendlier" — quote both strings.</div></div></div>
+          <div class="step"><div class="step-num num-success">✓</div><div class="step-content"><div class="step-title">Route or URL</div><div class="step-desc">e.g. <span class="ic">/pay/aplicar</span> — same precision as "open this link on staging."</div></div></div>
+          <div class="step"><div class="step-num num-success">✓</div><div class="step-content"><div class="step-title">Staging link after merge</div><div class="step-desc">So anyone can verify in under a minute.</div></div></div>
+        </div>
+      </div>
+      <div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">On Mobile</h2>
+        <div class="steps">
+          <div class="step"><div class="step-num num-success">✓</div><div class="step-content"><div class="step-title">Tap-by-tap navigation path</div><div class="step-desc">From app open. No URL bar on mobile.</div></div></div>
+          <div class="step"><div class="step-num num-success">✓</div><div class="step-content"><div class="step-title">Platform: iOS / Android / both</div></div></div>
+          <div class="step"><div class="step-num num-success">✓</div><div class="step-content"><div class="step-title">Deep link if available</div><div class="step-desc">+ screen name from design if it helps.</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="callout upsell">
+      <span class="callout-icon">🤖</span>
+      <span><strong>Why this helps AI:</strong> Exact copy lets search and i18n lookup land on one or a few files instead of guessing. Vague tickets force the model to invent scope; specific what + where keep the PR small and reviewable.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 22: AI PROMPT -->
+  <div class="slide" data-module="m3">
+    <div class="slide-header">
+      <span class="module-badge badge-m3">Module 3</span>
+      <h1 class="typo-headline-1">Understanding Any Repo's CI/CD</h1>
+    </div>
+    <p style="font-size:var(--text-body-1);line-height:var(--leading-body-1);color:var(--color-text-secondary);margin-bottom:var(--spacing-x5);">Staging and production paths are <strong>not identical across repos</strong>. When you need the truth for a codebase, use this prompt:</p>
+    <div class="code-block">
+      <span class="code-comment"># Paste this into your AI with the repo context attached:</span><br/><br/>
+      Explain in plain language (no jargon) how this repo gets to staging and production.<br/>
+      Use exactly two bullets:<br/><br/>
+      <span class="code-key">Staging</span> — one or two short sentences on what happens and who/what triggers it.<br/>
+      <span class="code-key">Production</span> — same for production.<br/><br/>
+      Keep the whole answer brief enough to skim in under a minute.
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">📁</span>
+      <span>Ask it to cite the workflow file names if you want to double-check against GitHub's Actions tab. Look in <span class="ic">.github/workflows/</span> of any repo.</span>
+    </div>
+    <div class="callout success">
+      <span class="callout-icon">✅</span>
+      <span><strong>For <span class="ic">kueskipay-frontend</span>:</strong> PR opens → CI checks → review → merge → auto-deploy to staging → manual release to prod.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 23: MODULE 4 PREVIEW -->
+  <div class="slide" data-module="m3">
+    <div class="slide-header">
+      <span class="module-badge badge-activity">Module 4 · 30 min · Live Demo</span>
+      <h1 class="typo-headline-1">Live PR Demo</h1>
+    </div>
+    <div class="goal-box green">
+      <div class="goal-label">Module Goal</div>
+      <p>See the full PR process end-to-end — from a real copy ticket to an open pull request.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num num-success">1</div><div class="step-content"><div class="step-title">Facilitator takes a pre-seeded copy ticket</div><div class="step-desc">Same shape as PRODU-75709 — exact copy, route, before/after.</div></div></div>
+      <div class="step"><div class="step-num num-success">2</div><div class="step-content"><div class="step-title">Runs <span class="ic">/jira-ticket-to-pr</span> live</div><div class="step-desc">Everyone watches the skill fetch the ticket, find the file, make the change, and open the PR.</div></div></div>
+      <div class="step"><div class="step-num num-success">3</div><div class="step-content"><div class="step-title">Walk through what reviewers see</div><div class="step-desc">The diff, approval flow, CI results, what happens after merge.</div></div></div>
+      <div class="step"><div class="step-num num-success">4</div><div class="step-content"><div class="step-title">Q&amp;A before Activity 2</div><div class="step-desc">Unblock questions before everyone goes hands-on.</div></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 24: ACTIVITY 2 -->
+  <div class="slide" data-module="m3">
+    <div class="slide-header">
+      <span class="module-badge badge-activity">Activity 2 — Afternoon Day 2</span>
+      <h1 class="typo-headline-1">Your First PR</h1>
+    </div>
+    <div class="goal-box green">
+      <div class="goal-label">Activity Goal</div>
+      <p>Open a real pull request on a Kueski codebase.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num num-success">1</div><div class="step-content"><div class="step-title">Find a copy change ticket in your domain's repo</div><div class="step-desc">Or use the one provided by the facilitator. Must have: exact copy before/after + route/URL.</div></div></div>
+      <div class="step"><div class="step-num num-success">2</div><div class="step-content"><div class="step-title">Run <span class="ic">/jira-ticket-to-pr &lt;TICKET-ID&gt;</span></div><div class="step-desc">Watch the skill work. Ask it to explain what it's doing if you're curious.</div></div></div>
+      <div class="step"><div class="step-num num-success">3</div><div class="step-content"><div class="step-title">Review the resulting PR</div><div class="step-desc">Check the diff. Does it match what the ticket asked for? Read the CI results.</div></div></div>
+      <div class="step"><div class="step-num num-success">4</div><div class="step-content"><div class="step-title">Wait for review / watch CI run</div><div class="step-desc">You've opened a real PR on a real codebase. That's the goal.</div></div></div>
+    </div>
+    <div class="callout success">
+      <span class="callout-icon">🎉</span>
+      <span>Getting the PR open and understanding what you see is a complete win. You don't need to get it merged today.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 25: CLOSE -->
+  <div class="slide" data-module="overview">
+    <div class="slide-header">
+      <span class="module-badge badge-activity">Share-out &amp; Close · 30 min</span>
+      <h1 class="typo-headline-1">Workshop Close</h1>
+    </div>
+    <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Share-out Questions</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">Who got their PR open? Who got merged?</div></div></div>
+      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">What felt different about this vs. regular PM work?</div></div></div>
+      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">Where did you use human judgment? Where did AI surprise you?</div></div></div>
+      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">What will you use next week?</div></div></div>
+    </div>
+    <div class="callout success">
+      <span class="callout-icon">🚀</span>
+      <span><strong>The takeaway:</strong> You have the tools. You know the skills. The judgment is yours. Use it this week — on a real initiative, with real data, on a real codebase.</span>
+    </div>
+    <div class="callout upsell" style="margin-top:var(--spacing-x3);">
+      <span class="callout-icon">📚</span>
+      <span>Skill suite: <strong>github.com/kueski-dev/claude_agent_skills</strong> — available to revisit, extend, and share.</span>
+    </div>
+  </div>
+
+</div><!-- /slide-container -->
+
+<div id="keyboard-hint">
+  <kbd>←</kbd> <kbd>→</kbd> to navigate &nbsp;|&nbsp; <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> to jump to module
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const moduleFirstSlide = { overview: 0, m1: 3, m2: 10, m3: 15 };
+  let current = 0;
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= slides.length) return;
+    const prev = slides[current];
+    const next = slides[idx];
+    prev.classList.remove('active');
+    prev.classList.add('exit-left');
+    setTimeout(() => prev.classList.remove('exit-left'), 280);
+    next.style.display = 'block';
+    requestAnimationFrame(() => next.classList.add('active'));
+    current = idx;
+    updateUI();
+  }
+
+  function nextSlide() { goTo(current + 1); }
+  function prevSlide() { goTo(current - 1); }
+  function jumpToModule(mod) { const idx = moduleFirstSlide[mod]; if (idx !== undefined) goTo(idx); }
+
+  function updateUI() {
+    document.getElementById('slide-counter').textContent = `${current + 1} / ${slides.length}`;
+    document.getElementById('progress-fill').style.width = (current / (slides.length - 1) * 100) + '%';
+    document.getElementById('btn-prev').disabled = current === 0;
+    document.getElementById('btn-next').disabled = current === slides.length - 1;
+    const mod = slides[current].dataset.module;
+    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active-m1','active-m2','active-m3','active-overview'));
+    const tab = document.querySelector(`.module-tab[data-module="${mod}"]`);
+    if (tab) tab.classList.add(`active-${mod}`);
+  }
+
+  let activePipelineId = null;
+  function showPipelineDetail(id, el) {
+    const detail = document.getElementById('detail-' + id);
+    if (!detail) return;
+    if (activePipelineId === id) {
+      detail.classList.remove('visible');
+      document.querySelectorAll('.pipeline-step').forEach(s => s.classList.remove('active-step'));
+      activePipelineId = null;
+      return;
+    }
+    document.querySelectorAll('.pipeline-detail').forEach(d => d.classList.remove('visible'));
+    document.querySelectorAll('.pipeline-step').forEach(s => s.classList.remove('active-step'));
+    detail.classList.add('visible');
+    el.classList.add('active-step');
+    activePipelineId = id;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); nextSlide(); }
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); prevSlide(); }
+    if (e.key === '1') jumpToModule('m1');
+    if (e.key === '2') jumpToModule('m2');
+    if (e.key === '3') jumpToModule('m3');
+    if (e.key === '0') jumpToModule('overview');
+  });
+
+  updateUI();
+
+  // ── Inject design-system icons into callouts ──
+  const DS_ICONS = {
+    // InfoCircleIcon
+    info: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15.75 12C15.387 12 15.0879 11.8836 14.8528 11.6508C14.6176 11.4127 14.5 11.1138 14.5 10.754C14.5 10.3889 14.6176 10.0899 14.8528 9.85714C15.0879 9.61905 15.387 9.5 15.75 9.5C16.113 9.5 16.4121 9.61905 16.6472 9.85714C16.8824 10.0899 17 10.3889 17 10.754C17 11.1138 16.8824 11.4127 16.6472 11.6508C16.4121 11.8836 16.113 12 15.75 12Z" fill="currentColor"/>
+      <path d="M14 13C13.4477 13 13 13.4477 13 14C13 14.5523 13.4477 15 14 15H15.5V20H13.5C12.9477 20 12.5 20.4477 12.5 21C12.5 21.5523 12.9477 22 13.5 22H19.5C20.0523 22 20.5 21.5523 20.5 21C20.5 20.4477 20.0523 20 19.5 20H17.5V14C17.5 13.4477 17.0523 13 16.5 13H14Z" fill="currentColor"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28ZM16 26C21.5229 26 26 21.5229 26 16C26 10.4772 21.5229 6 16 6C10.4772 6 6 10.4772 6 16C6 21.5229 10.4772 26 16 26Z" fill="currentColor"/>
+    </svg>`,
+    // WarningFilledIcon
+    warn: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M14.7844 3.22642C15.5583 2.88351 16.441 2.88351 17.215 3.22642C17.7608 3.46829 18.1508 3.90874 18.4821 4.37324C18.8099 4.83283 19.1697 5.44972 19.603 6.19249L28.0809 20.726C28.5202 21.4791 28.8847 22.1038 29.1261 22.6212C29.3696 23.1431 29.5632 23.7052 29.5021 24.3042C29.4157 25.1519 28.9729 25.9229 28.2842 26.4247C27.7976 26.7792 27.2145 26.8952 26.6409 26.9478C26.0724 27 25.3491 27 24.4772 27H7.5221C6.65018 27 5.9269 27 5.35839 26.9478C4.78479 26.8952 4.20174 26.7792 3.71512 26.4247C3.02643 25.9229 2.58362 25.1519 2.4972 24.3042C2.43614 23.7052 2.62971 23.1431 2.87327 22.6212C3.11468 22.1038 3.47914 21.479 3.9185 20.7259L12.3963 6.19248C12.8296 5.44972 13.1894 4.83283 13.5172 4.37324C13.8485 3.90874 14.2385 3.46829 14.7844 3.22642ZM15.9904 18.0902C15.4464 18.0902 15.0028 17.6544 14.9931 17.1105L14.8871 11.126C14.8762 10.5074 15.3746 10 15.9934 10C16.6125 10 17.1112 10.5081 17.0996 11.1271L16.9877 17.1115C16.9775 17.655 16.534 18.0902 15.9904 18.0902ZM15.9979 22C15.621 22 15.3104 21.8832 15.0662 21.6496C14.822 21.4107 14.7 21.1108 14.7 20.7498C14.7 20.3835 14.822 20.0836 15.0662 19.85C15.3104 19.6111 15.621 19.4917 15.9979 19.4917C16.3748 19.4917 16.6854 19.6111 16.9295 19.85C17.1737 20.0836 17.2958 20.3835 17.2958 20.7498C17.2958 21.1108 17.1737 21.4107 16.9295 21.6496C16.6854 21.8832 16.3748 22 15.9979 22Z" fill="currentColor"/>
+    </svg>`,
+    // CheckmarkCircleFilledIcon
+    success: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28ZM21.2071 13.7071C21.5976 13.3166 21.5976 12.6834 21.2071 12.2929C20.8166 11.9024 20.1834 11.9024 19.7929 12.2929L14.5 17.5858L12.2071 15.2929C11.8166 14.9024 11.1834 14.9024 10.7929 15.2929C10.4024 15.6834 10.4024 16.3166 10.7929 16.7071L13.7929 19.7071C14.1834 20.0976 14.8166 20.0976 15.2071 19.7071L21.2071 13.7071Z" fill="currentColor"/>
+    </svg>`,
+    // InfoCircleIcon (upsell reuses info icon)
+    upsell: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15.75 12C15.387 12 15.0879 11.8836 14.8528 11.6508C14.6176 11.4127 14.5 11.1138 14.5 10.754C14.5 10.3889 14.6176 10.0899 14.8528 9.85714C15.0879 9.61905 15.387 9.5 15.75 9.5C16.113 9.5 16.4121 9.61905 16.6472 9.85714C16.8824 10.0899 17 10.3889 17 10.754C17 11.1138 16.8824 11.4127 16.6472 11.6508C16.4121 11.8836 16.113 12 15.75 12Z" fill="currentColor"/>
+      <path d="M14 13C13.4477 13 13 13.4477 13 14C13 14.5523 13.4477 15 14 15H15.5V20H13.5C12.9477 20 12.5 20.4477 12.5 21C12.5 21.5523 12.9477 22 13.5 22H19.5C20.0523 22 20.5 21.5523 20.5 21C20.5 20.4477 20.0523 20 19.5 20H17.5V14C17.5 13.4477 17.0523 13 16.5 13H14Z" fill="currentColor"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28ZM16 26C21.5229 26 26 21.5229 26 16C26 10.4772 21.5229 6 16 6C10.4772 6 6 10.4772 6 16C6 21.5229 10.4772 26 16 26Z" fill="currentColor"/>
+    </svg>`
+  };
+
+  document.querySelectorAll('.callout').forEach(callout => {
+    const iconEl = callout.querySelector('.callout-icon');
+    if (!iconEl) return;
+    const type = ['info','warn','success','upsell'].find(c => callout.classList.contains(c)) || 'info';
+    iconEl.innerHTML = DS_ICONS[type];
+  });
+</script>
+</body>
+</html>
