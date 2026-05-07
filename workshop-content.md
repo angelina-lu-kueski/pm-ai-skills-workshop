@@ -51,7 +51,21 @@ A hands-on workshop walking Kueski PMs through the full AI-assisted product work
     - "Flag my Jira tickets with no updates this week every Friday"
     - Everything Cowork can do, Code can also do — it's just a different interface
 
-* **Claude vs. ChatGPT vs. Cursor (within Code)** — how they differ
+* **Claude vs. ChatGPT vs. Cursor — Different doors, same destination**
+
+  **Claude** *(Anthropic)*
+  - **Web / App** → claude.ai — this is the Chat version, browser or desktop app
+  - **Claude Code** → lives in your terminal. You open it by typing `claude` in your command line. This is the Code version.
+
+  **ChatGPT / Codex** *(OpenAI)*
+  - **Web / App** → chatgpt.com — the Chat version
+  - **Codex** → accessible as a VS Code extension or via the OpenAI API. Sits inside your editor.
+
+  **Cursor**
+  - **Desktop app only** → cursor.com. Looks like VS Code but with AI baked in everywhere — you pick which model powers it (Claude, GPT-4, etc.).
+
+  **For this workshop:**
+  Pick the one you already have open. Claude Code, Codex, and Cursor all run the Kueski skill suite the same way. If you're not sure which to use, default to Claude Code — we'll move on now and you can always switch later.
 * **What is a markdown file** — why markdown is the preferred format for working with AI (most accurate, cheapest), how to read and write basic markdown, why your briefs and notes should live in `.md` files
 * **GitHub basics** — one mental model only: think of it as Google Drive for code. Repos, branches, files — just enough to not be lost during setup
   * Same idea, different object: Google Drive holds documents you collaborate on. GitHub holds code the team builds and ships. The habits feel familiar; the "documents" are mostly text files written in programming languages instead of natural language.
