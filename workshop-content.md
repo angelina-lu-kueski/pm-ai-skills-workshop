@@ -2,11 +2,9 @@
 
 ## Overview
 
-A hands-on workshop walking Kueski PMs through the full AI-assisted product workflow — from problem definition to a shipped pull request — using Claude Code and the Kueski PM skill suite.
+A hands-on workshop walking Kueski PMs through the full AI-assisted product workflow — from problem definition to a shipped pull request — using AI tools and the Kueski PM skill suite.
 
-**Ultimate goal:** PMs can take an idea from their head to a full product brief and open a real PR.
-
-**Approach:** Provide information one step at a time. No one needs to master everything — they need to leave knowing what tools exist and confident enough to use them next week.
+**Ultimate goal:** PMs can take an idea from their head to a full brief, prototype and develpment.
 
 **PM Pre-req**:
 
@@ -26,9 +24,34 @@ A hands-on workshop walking Kueski PMs through the full AI-assisted product work
 
 #### Topics
 
-* **Claude vs. ChatGPT codex vs. Cursor** — how they differ
-* **Claude Code vs. Claude project vs. Cowork** — when to use which, and choose your preferred AI
-  * leverage AI to solve issues, learn etc.
+* **The AI Landscape: Chat vs. Code vs. Cowork** — what's the difference, and when to use what.
+
+  **💬 Chat** *(Claude.ai, ChatGPT)*
+  - Conversational, one-off, no setup
+  - Lives in your browser — paste in, get answer, done
+  - **Use when:** you want something quick and disposable
+    - Drafting a Slack message or email
+    - Improving your writing
+    - Asking a quick question or explaining a concept
+    - Brainstorming before you've committed to anything
+
+  **⌨️ Code** *(Claude Code, Cursor, Codex)*
+  - The most powerful mode — Claude with hands
+  - Reads files, runs commands, connects to tools (Jira, GitHub, Databricks)
+  - **Use when:** you want to go end-to-end on something real
+    - Idea → brief → Jira tickets → prototype → PR
+    - Running the Kueski PM skill suite ← **this is what we're using this week**
+  - Pick whichever you have set up: Claude Code, Cursor, or Codex — the skills work the same across all three
+
+  **🤝 Cowork**
+  - A structured UI built on top of Code — same engine, friendlier interface
+  - Best for repeatable, scheduled workflows
+  - **Use when:** you have a routine you want to automate
+    - "Summarize my unread emails every morning at 8am"
+    - "Flag my Jira tickets with no updates this week every Friday"
+    - Everything Cowork can do, Code can also do — it's just a different interface
+
+* **Claude vs. ChatGPT vs. Cursor (within Code)** — how they differ
 * **What is a markdown file** — why markdown is the preferred format for working with AI (most accurate, cheapest), how to read and write basic markdown, why your briefs and notes should live in `.md` files
 * **GitHub basics** — one mental model only: think of it as Google Drive for code. Repos, branches, files — just enough to not be lost during setup
   * Same idea, different object: Google Drive holds documents you collaborate on. GitHub holds code the team builds and ships. The habits feel familiar; the "documents" are mostly text files written in programming languages instead of natural language.
