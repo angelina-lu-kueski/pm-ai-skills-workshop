@@ -156,7 +156,7 @@ A hands-on workshop walking Kueski PMs through the full AI-assisted product work
 
 **Goal:** Build the mental model for skills and develop judgment for when to use AI vs. human thinking.
 
-[https://github.com/kueski-dev/claude_agent_skills](https://github.com/kueski-dev/claude_agent_skills)#### Topics
+[https://github.com/kueski-dev/AI_agent_skills](https://github.com/kueski-dev/AI_agent_skills)#### Topics
 
 * What skills are and how they're triggered (`/skill-name`)
 * How to list available skills and read what a skill does
