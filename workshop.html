@@ -116,6 +116,9 @@
     --m3-subtle: var(--color-background-success-subtle);
     --m3-text: var(--color-text-success-on-subtle);
     --m3-stroke: var(--color-stroke-success);
+    --m4-subtle: rgba(251, 191, 36, 0.12);
+    --m4-text: #fbbf24;
+    --m4-stroke: rgba(251, 191, 36, 0.35);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -215,6 +218,7 @@
   .module-tab.active-m1 { color: #59a6ff; border-color: #59a6ff; }
   .module-tab.active-m2 { color: #9f97ff; border-color: #9f97ff; }
   .module-tab.active-m3 { color: #53b57c; border-color: #53b57c; }
+  .module-tab.active-m4 { color: #fbbf24; border-color: #fbbf24; }
 
   /* ── PROGRESS BAR ── */
   #progress-bar {
@@ -385,6 +389,7 @@
   .badge-m1 { background: var(--m1-subtle); color: var(--m1-text); }
   .badge-m2 { background: var(--m2-subtle); color: var(--m2-text); }
   .badge-m3 { background: var(--m3-subtle); color: var(--m3-text); }
+  .badge-m4 { background: var(--m4-subtle); color: var(--m4-text); }
   .badge-activity { background: var(--color-background-warning-subtle); color: var(--color-text-warning); }
 
   .slide .subtitle {
@@ -518,6 +523,11 @@
     padding: 1px var(--spacing-x2);
     border-radius: var(--radius-x1);
     font-size: 0.8em;
+  }
+  .prereq {
+    font-size: 0.8em;
+    color: var(--color-text-secondary);
+    font-style: italic;
   }
   .ic-dark {
     font-family: 'SF Mono', 'Roboto Mono', monospace;
@@ -787,6 +797,52 @@
   .slide p { font-size: var(--text-body-1); line-height: var(--leading-body-1); color: var(--color-text-secondary); margin-bottom: var(--spacing-x3); }
   .slide p strong { font-weight: var(--font-weight-semibold); color: var(--color-text-primary); }
 
+  /* ── EXPAND BLOCKS ── */
+  .expand-grid { display: grid; gap: var(--spacing-x3); margin-bottom: var(--spacing-x5); }
+  .expand-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+  .xblock {
+    background: var(--color-background-primary);
+    border: var(--border-regular) solid var(--color-background-tertiary);
+    border-radius: var(--radius-x4);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    user-select: none;
+  }
+  .xblock:hover { border-color: var(--color-stroke-brand); }
+  .xblock.open { border-color: var(--color-stroke-brand); box-shadow: 0 0 0 3px var(--m1-subtle); }
+
+  .xblock-head {
+    padding: var(--spacing-x4) var(--spacing-x5);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-x3);
+  }
+  .xblock-icon { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
+  .xblock-label { flex: 1; }
+  .xbl-title { font-size: var(--text-body-1); font-weight: var(--font-weight-bold); color: var(--color-text-primary); line-height: var(--leading-body-1); }
+  .xbl-sub { font-size: var(--text-body-2); color: var(--color-text-tertiary); margin-top: 1px; }
+  .xblock-chevron { width: 16px; height: 16px; color: var(--color-text-tertiary); transition: transform 0.2s; flex-shrink: 0; }
+  .xblock.open .xblock-chevron { transform: rotate(180deg); }
+
+  .xblock-body {
+    display: none;
+    padding: var(--spacing-x4) var(--spacing-x5) var(--spacing-x5);
+    border-top: var(--border-regular) solid var(--color-background-tertiary);
+  }
+  .xblock.open .xblock-body { display: block; }
+  .xblock-body ul { padding-left: var(--spacing-x5); margin: 0 0 var(--spacing-x3); }
+  .xblock-body li { font-size: var(--text-body-2); line-height: var(--leading-body-2); color: var(--color-text-secondary); margin-bottom: var(--spacing-x2); }
+  .xblock-body li strong { color: var(--color-text-primary); font-weight: var(--font-weight-semibold); }
+  .xblock-body p { font-size: var(--text-body-2); line-height: var(--leading-body-2); color: var(--color-text-secondary); margin-bottom: var(--spacing-x2); }
+  .xblock-body p:last-child { margin-bottom: 0; }
+  .xblock-body p strong { color: var(--color-text-primary); font-weight: var(--font-weight-semibold); }
+
+  /* clickable topic card */
+  .card.topic-card { cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s; }
+  .card.topic-card:hover { border-color: var(--m1-stroke); box-shadow: 0 4px 16px rgba(0,105,241,0.10); transform: translateY(-2px); }
+
 </style>
 </head>
 <body>
@@ -846,6 +902,7 @@
   <div class="module-tab" data-module="m1" onclick="jumpToModule('m1')">Module 1 — AI Landscape</div>
   <div class="module-tab" data-module="m2" onclick="jumpToModule('m2')">Module 2 — Skills</div>
   <div class="module-tab" data-module="m3" onclick="jumpToModule('m3')">Module 3 — Code Shipping</div>
+  <div class="module-tab" data-module="m4" onclick="jumpToModule('m4')">Module 4 — Share Out</div>
 </div>
 
 <!-- PROGRESS -->
@@ -876,18 +933,15 @@
     </div>
     <div class="goal-box">
       <div class="goal-label">Ultimate Goal</div>
-      <p>PMs can take an idea from their head to a full product brief and open a real PR.</p>
+      <p>PMs can take an idea from their head to a full product brief, prototype and implement.</p>
     </div>
-    <p style="font-size:var(--text-headline-3);font-weight:var(--font-weight-regular);line-height:var(--leading-headline-3);color:var(--color-text-secondary);margin-bottom:var(--spacing-x6);">This is a hands-on workshop — not a lecture. The goal is <strong>confidence and capability</strong>, not mastery of every tool.</p>
+    <p style="font-size:var(--text-headline-3);font-weight:var(--font-weight-regular);line-height:var(--leading-headline-3);color:var(--color-text-secondary);margin-bottom:var(--spacing-x6);">This is a hands-on workshop — not a lecture. Feel free to ask questions, experiment and explore.</p>
     <div class="cards-grid">
       <div class="card"><div class="card-icon">🗺️</div><div class="card-title">Understand the landscape</div><div class="card-body">Know what tool to use when, and why the whole toolkit matters.</div></div>
       <div class="card"><div class="card-icon">🛠️</div><div class="card-title">Build real artifacts</div><div class="card-body">A full product brief, backed by data, stress-tested by AI review.</div></div>
-      <div class="card"><div class="card-icon">🔀</div><div class="card-title">Open a real PR</div><div class="card-body">Go from a Jira ticket to a pull request on a real codebase.</div></div>
+      <div class="card"><div class="card-icon">🔀</div><div class="card-title">Understand the PR process</div><div class="card-body">Go from a Jira ticket to a pull request on a real codebase.</div></div>
     </div>
-    <div class="callout info">
-      <span class="callout-icon">💡</span>
-      <span><strong>Approach:</strong> One step at a time. No one needs to master everything — you need to leave knowing what tools exist and confident enough to use them next week.</span>
-    </div>
+    
   </div>
 
   <!-- SLIDE 2: AGENDA -->
@@ -912,11 +966,9 @@
     <ul class="agenda">
       <li><span class="time">8:00 AM</span><span class="topic">Recap &amp; Unblock</span><span class="duration dur-activity">30 min</span></li>
       <li><span class="time">8:30 AM</span><span class="topic">Activity: Idea → Full Brief → Prototype</span><span class="duration dur-activity">2.5 hrs</span></li>
-      <li><span class="time">11:00 AM</span><span class="topic">Share-out &amp; Morning Wrap</span><span class="duration dur-activity">90 min</span></li>
       <li><span class="time">12:00 PM</span><span class="topic">Lunch</span><span class="duration dur-activity">1 hr</span></li>
       <li><span class="time">1:00 PM</span><span class="topic">Module 3: The Code Shipping Process</span><span class="duration dur-m3">45 min</span></li>
       <li><span class="time">1:45 PM</span><span class="topic">Module 4: Live PR Demo</span><span class="duration dur-activity">30 min</span></li>
-      <li><span class="time">2:15 PM</span><span class="topic">Activity 2: Your First PR</span><span class="duration dur-activity">Remaining</span></li>
       <li><span class="time">4:30 PM</span><span class="topic">Share-out &amp; Close</span><span class="duration dur-activity">30 min</span></li>
     </ul>
   </div>
@@ -928,168 +980,354 @@
     <div class="slide-header">
       <span class="module-badge badge-m1">Module 1 · 45 min</span>
       <h1 class="typo-headline-1">The AI Landscape &amp; Your Toolkit</h1>
-      <p class="subtitle">Understand what tool to use when — and why knowing all three makes you more effective.</p>
+      <p class="subtitle">What tool to use when — and how to set yourself up for the rest of the workshop.</p>
     </div>
     <div class="goal-box">
       <div class="goal-label">Module Goal</div>
       <p>Everyone understands what tool to use when, and can find their way around Claude Code.</p>
     </div>
-    <div class="cards-grid">
-      <div class="card"><div class="card-icon">🤖</div><div class="card-title">Claude vs. ChatGPT vs. Cursor</div><div class="card-body">How they differ and what each is best at.</div></div>
-      <div class="card"><div class="card-icon">⚙️</div><div class="card-title">Claude Code vs. Project vs. Cowork</div><div class="card-body">When to use which, and how to choose.</div></div>
-      <div class="card"><div class="card-icon">📝</div><div class="card-title">What is Markdown?</div><div class="card-body">Why it's the preferred format for AI workflows.</div></div>
-      <div class="card"><div class="card-icon">🐙</div><div class="card-title">GitHub Basics</div><div class="card-body">One mental model: GitHub = Google Drive for code.</div></div>
+    <div class="cards-grid" style="grid-template-columns: repeat(3,1fr);">
+      <div class="card topic-card" onclick="goTo(4)"><div class="card-icon">💬</div><div class="card-title">Chat vs. Code vs. Cowork</div><div class="card-body">Three modes, different power levels. What's the difference?</div></div>
+      <div class="card topic-card" onclick="goTo(5)"><div class="card-icon">🚪</div><div class="card-title">Which Tool Should I choose?</div><div class="card-body">Claude, Codex, Cursor — which interface to use.</div></div>
+      <div class="card topic-card" onclick="goTo(6)"><div class="card-icon">⚙️</div><div class="card-title">How Claude Code Works</div><div class="card-body">Folder → file → chat. The 3-step orientation.</div></div>
+      <div class="card topic-card" onclick="goTo(7)"><div class="card-icon">📝</div><div class="card-title">What is Markdown?</div><div class="card-body">Why <span class="ic">.md</span> is the preferred format for AI.</div></div>
+      <div class="card topic-card" onclick="goTo(8)"><div class="card-icon">🐙</div><div class="card-title">GitHub Basics</div><div class="card-body">Google Drive for code — one mental model.</div></div>
+      <div class="card topic-card" onclick="goTo(9)"><div class="card-icon">🔌</div><div class="card-title">Connections</div><div class="card-body">Databricks, Slack, Drive — live data sources.</div></div>
     </div>
   </div>
 
-  <!-- SLIDE 4: AI TOOL COMPARISON -->
+  <!-- SLIDE 4: CHAT VS CODE VS COWORK -->
   <div class="slide" data-module="m1">
     <div class="slide-header">
       <span class="module-badge badge-m1">Module 1</span>
-      <h1 class="typo-headline-1">Claude vs. ChatGPT vs. Cursor</h1>
-      <p class="subtitle">Not "pick one" — knowing all three makes you more effective.</p>
+      <h1 class="typo-headline-1">Chat vs. Code vs. Cowork</h1>
+      <p class="subtitle">Three modes. Different power levels. Click each to explore.</p>
     </div>
-    <table class="data-table">
-      <thead><tr><th>Tool</th><th>Best At</th><th>When PMs Reach for It</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Claude (claude.ai)</strong></td><td>Long documents, nuanced analysis, structured reasoning, product briefs</td><td>Drafting briefs, synthesizing research, stress-testing ideas</td></tr>
-        <tr><td><strong>ChatGPT / Codex</strong></td><td>Quick Q&amp;A, broad knowledge, flexible prompt iteration</td><td>Fast lookups, brainstorming, second opinions</td></tr>
-        <tr><td><strong>Cursor</strong></td><td>Code editing with AI inline — lives inside your editor</td><td>When you're in a codebase and need suggestions or refactors in-place</td></tr>
-        <tr><td><strong>Claude Code (CLI)</strong></td><td>Agentic multi-step tasks, running skills, working with files &amp; repos</td><td>Running the PM skill suite, going from brief → Jira → PR end-to-end</td></tr>
-      </tbody>
-    </table>
-    <div class="callout success">
-      <span class="callout-icon">✅</span>
-      <span>The goal isn't to master one tool. The goal is to know <strong>which to reach for when</strong>.</span>
+    <div class="expand-grid expand-grid-3">
+      <div class="xblock open" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">💬</span>
+          <div class="xblock-label">
+            <div class="xbl-title">Chat</div>
+            <div class="xbl-sub">Claude.ai · ChatGPT</div>
+          </div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body">
+          <p><strong>Quick, one-off, no setup.</strong> Lives in your browser — paste in, get answer, done.</p>
+          <ul>
+            <li>Drafting a Slack message or email</li>
+            <li>Improving your writing</li>
+            <li>Quick questions &amp; brainstorming</li>
+            <li>Exploring ideas before you've committed to anything</li>
+          </ul>
+        </div>
+      </div>
+      <div class="xblock open" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">⌨️</span>
+          <div class="xblock-label">
+            <div class="xbl-title">Code</div>
+            <div class="xbl-sub">Claude Code · Cursor · Codex</div>
+          </div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body">
+          <p><strong>The most powerful mode — Claude with hands.</strong> Reads files, runs commands, connects to tools.</p>
+          <ul>
+            <li>Idea → brief → Jira tickets → prototype → PR</li>
+            <li>Running the Kueski PM skill suite</li>
+            <li>Anything that needs to go end-to-end on something real</li>
+          </ul>
+          <div class="callout info" style="margin-top:var(--spacing-x3);margin-bottom:0;">
+            <span class="callout-icon">🔑</span>
+            <span>The PM skill suite only works in Code mode. <strong>This is our focus this week.</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="xblock open" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">🤝</span>
+          <div class="xblock-label">
+            <div class="xbl-title">Cowork</div>
+            <div class="xbl-sub">Structured workflows</div>
+          </div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body">
+          <p><strong>Same engine as Code, friendlier interface.</strong> Best for repeatable, scheduled routines.</p>
+          <ul>
+            <li>"Summarize my unread emails every morning at 8am"</li>
+            <li>"Flag my Jira tickets with no updates this week every Friday"</li>
+            <li>Everything Cowork can do, Code can also do — different interface</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- SLIDE 5: CLAUDE MODES -->
+  <!-- SLIDE 5: DIFFERENT TOOLS, SAME DESTINATION -->
   <div class="slide" data-module="m1">
     <div class="slide-header">
       <span class="module-badge badge-m1">Module 1</span>
-      <h1 class="typo-headline-1">Claude Code vs. Claude Project vs. Cowork</h1>
+      <h1 class="typo-headline-1">Different Doors, Same Destination</h1>
+    
     </div>
-    <div class="cards-grid">
-      <div class="card highlight-brand">
-        <div class="card-icon">⌨️</div>
-        <div class="card-title">Claude Code (CLI)</div>
-        <div class="card-body"><strong>Use when:</strong> Running the PM skill suite — problem-definition, data analysis, brief → Jira → PR. It can read files, run commands, and execute multi-step workflows.<br/><br/><em>Think: AI co-pilot that can actually do things, not just talk.</em></div>
+    <div class="expand-grid expand-grid-3">
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">🧠</span>
+          <div class="xblock-label">
+            <div class="xbl-title">Claude</div>
+            <div class="xbl-sub">Anthropic</div>
+          </div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body">
+          <p><strong>Chat:</strong> claude.ai — browser or desktop app</p>
+          <p><strong>Code:</strong> Type <span class="ic">claude</span> in your terminal → Claude Code launches.</p>
+        </div>
       </div>
-      <div class="card highlight-upsell">
-        <div class="card-icon">💬</div>
-        <div class="card-title">Claude Project (claude.ai)</div>
-        <div class="card-body"><strong>Use when:</strong> Conversational work — drafting, exploring ideas, Q&amp;A with context. Good for brainstorming and iterating on text.<br/><br/><em>Think: a very smart colleague you can chat with and paste things into.</em></div>
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">💡</span>
+          <div class="xblock-label">
+            <div class="xbl-title">ChatGPT / Codex</div>
+            <div class="xbl-sub">OpenAI</div>
+          </div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body">
+          <p><strong>Chat:</strong> chatgpt.com — the browser version</p>
+          <p><strong>Code:</strong> Codex — VS Code extension or terminal. Sits inside your editor.</p>
+        </div>
       </div>
-      <div class="card highlight-success">
-        <div class="card-icon">🤝</div>
-        <div class="card-title">Cowork</div>
-        <div class="card-body"><strong>Use when:</strong> You want a guided, pre-built AI experience. Less setup, structured output.<br/><br/><em>Think: curated workflow launcher vs. a general-purpose terminal.</em></div>
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">🖥️</span>
+          <div class="xblock-label">
+            <div class="xbl-title">Cursor</div>
+            <div class="xbl-sub">cursor.com</div>
+          </div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body">
+          <p>Desktop app only — looks like VS Code with AI baked in everywhere. You pick which model powers it (Claude, GPT-4, etc.).</p>
+         
+        </div>
       </div>
     </div>
     <div class="callout info">
-      <span class="callout-icon">🔑</span>
-      <span><strong>Key insight:</strong> Claude Code runs <em>skills</em> — the skill suite only works in Claude Code CLI. Set it up once and it unlocks everything.</span>
+      <span class="callout-icon">🎯</span>
+      <span><strong>For this workshop:</strong> Use whichever you already have open. If unsure, default to <strong>Claude Code</strong> — we'll move on and you can always switch later.</span>
     </div>
   </div>
 
-  <!-- SLIDE 6: MARKDOWN -->
+  <!-- SLIDE 6: HOW CLAUDE CODE WORKS -->
+  <div class="slide" data-module="m1">
+    <div class="slide-header">
+      <span class="module-badge badge-m1">Module 1</span>
+      <h1 class="typo-headline-1">How Claude Code Works</h1>
+    </div>
+    <div class="callout info" style="margin-bottom:var(--spacing-x5);">
+      <span class="callout-icon">💡</span>
+      <span><strong>Mental model:</strong> Treat it exactly like Claude Chat — you type, it responds. The only difference: Claude Code has access to your files. That one difference is what makes it powerful.</span>
+    </div>
+    <div class="expand-grid" style="grid-template-columns:1fr;">
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">📁</span>
+          <div class="xblock-label">
+            <div class="xbl-title">Step 1 — Select a folder</div>
+            <div class="xbl-sub">Claude's world is bounded by what you point it to</div>
+          </div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body">
+          <p>Claude can read, edit, and create files — but only within that folder. Nothing outside is visible or touchable.</p>
+          <p><strong>This matters:</strong> If your brief isn't in the folder, Claude can't see it. Put your work where Claude can reach it.</p>
+          <div class="callout warn" style="margin-top:var(--spacing-x3);margin-bottom:0;"><span class="callout-icon">📺</span><span><strong>DEMO</strong> — show folder structure</span></div>
+        </div>
+      </div>
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">💬</span>
+          <div class="xblock-label">
+            <div class="xbl-title">Step 2 — Open a file and start chatting</div>
+            <div class="xbl-sub">Same as Claude.ai, just with file context</div>
+          </div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body">
+          <ul>
+            <li>Open a file to give Claude context — "here's what I'm working on"</li>
+            <li>Type in the chat panel just like claude.ai</li>
+          
+          </ul>
+          <div class="callout warn" style="margin-top:var(--spacing-x3);margin-bottom:0;"><span class="callout-icon">📺</span><span><strong>DEMO</strong> — open a file + start a chat</span></div>
+        </div>
+      </div>
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">🧠</span>
+          <div class="xblock-label">
+            <div class="xbl-title">Step 3 — Your files become Claude's knowledge base</div>
+            <div class="xbl-sub">The more context in your folder, the better Claude performs</div>
+          </div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body">
+          <ul>
+            <li><strong>Your product brief</strong> → Claude understands the problem before you explain it</li>
+            <li><strong>Your knowledge base docs</strong> → Claude knows your system, flows, terminology</li>
+            <li><strong>Previous tickets or specs</strong> → Claude drafts consistent with what already exists</li>
+          </ul>
+          <p style="margin-top:var(--spacing-x3);font-weight:var(--font-weight-semibold);color:var(--color-text-primary);">A well-organized folder is literally a better AI.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: MARKDOWN -->
   <div class="slide" data-module="m1">
     <div class="slide-header">
       <span class="module-badge badge-m1">Module 1</span>
       <h1 class="typo-headline-1">What is a Markdown File?</h1>
+      <p class="subtitle">A plain text file with a <span class="ic">.md</span> extension. No Word, no Google Docs, no hidden formatting — just text with simple symbols.</p>
     </div>
-    <div class="two-col">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-x4);margin-bottom:var(--spacing-x4);">
       <div>
-        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Why Markdown?</h2>
+        <p style="font-weight:600;margin-bottom:var(--spacing-x2);">Why AI prefers markdown</p>
         <ul>
-          <li>Plain text — no proprietary format</li>
-          <li>Most <strong>accurate</strong> for AI to read and write</li>
-          <li>Most <strong>cost-effective</strong> to pass to models</li>
-          <li>Works everywhere: GitHub, Confluence, editors</li>
-          <li>Version-controlled like code</li>
+          <li><strong>Structure survives</strong> — Word docs get stripped silently when pasted into AI. Markdown keeps structure intact because the structure <em>is</em> the text.</li>
+          <li><strong>Efficient</strong> — clean plain text = fewer tokens = faster, cheaper responses. No hidden XML or metadata bloat.</li>
+          <li><strong>Direct reference</strong> — point to the file and the AI reads it in full, structure and all. No copy-pasting.</li>
+          <li><strong>Universal</strong> — Claude, ChatGPT, Cursor — all handle it the same way.</li>
         </ul>
-        <div class="callout success" style="margin-top:var(--spacing-x4);">
-          <span class="callout-icon">📁</span>
-          <span>Your briefs and notes should live in <span class="ic">.md</span> files. This is the preferred format for the entire PM skill suite.</span>
-        </div>
       </div>
       <div>
-        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Basic Syntax</h2>
-        <table class="data-table">
-          <thead><tr><th>You type</th><th>You get</th></tr></thead>
-          <tbody>
-            <tr><td><span class="ic"># Heading</span></td><td>Big title</td></tr>
-            <tr><td><span class="ic">## Sub-heading</span></td><td>Section title</td></tr>
-            <tr><td><span class="ic">**bold**</span></td><td><strong>bold</strong></td></tr>
-            <tr><td><span class="ic">- item</span></td><td>Bullet point</td></tr>
-            <tr><td><span class="ic">1. item</span></td><td>Numbered list</td></tr>
-            <tr><td><span class="ic">[text](url)</span></td><td>Hyperlink</td></tr>
-          </tbody>
-        </table>
+        <p style="font-weight:600;margin-bottom:var(--spacing-x2);">Why your briefs &amp; notes should live in <span class="ic">.md</span></p>
+        <ul>
+          <li>The AI can read them directly — no copy-paste, no lost context</li>
+          <li>They live alongside your code and tickets in GitHub — one place, always in sync</li>
+          <li>Version-controlled: "who changed the brief on Tuesday?" is a two-second answer</li>
+          <li>Work offline, never corrupt, never need a login</li>
+          <li>Upload to Confluence when ready — but the <span class="ic">.md</span> file stays as your source of truth</li>
+        </ul>
       </div>
+    </div>
+
+    <div class="callout success" style="margin-top:var(--spacing-x3);">
+      <span class="callout-icon">💡</span>
+      <span>This whole workshop started in a markdown file.</span>
     </div>
   </div>
 
-  <!-- SLIDE 7: GITHUB ANALOGY -->
+  <!-- SLIDE 8: GITHUB BASICS -->
   <div class="slide" data-module="m1">
     <div class="slide-header">
       <span class="module-badge badge-m1">Module 1</span>
       <h1 class="typo-headline-1">GitHub: Google Drive for Code</h1>
       <p class="subtitle">One mental model. You don't need Git commands — just the vocabulary.</p>
     </div>
-    <div class="analogy">
+    <div class="analogy" style="margin-bottom:var(--spacing-x4);">
       <div class="analogy-label">The Core Analogy</div>
       <div class="analogy-row"><span class="gdrive">📁 Google Drive Folders</span><span class="arrow">→</span><span class="github">📦 Repositories (Repos)</span></div>
-      <div class="analogy-row"><span class="gdrive">📄 One Canonical Doc</span><span class="arrow">→</span><span class="github">🌿 <span class="ic">main</span> / <span class="ic">master</span> Branch</span></div>
+      <div class="analogy-row"><span class="gdrive">📄 One Canonical Doc</span><span class="arrow">→</span><span class="github">🌿 <span class="ic">main</span> Branch</span></div>
       <div class="analogy-row"><span class="gdrive">📋 Duplicate to Try Ideas</span><span class="arrow">→</span><span class="github">🌱 Feature Branch</span></div>
-      <div class="analogy-row"><span class="gdrive">✏️ Suggesting Mode Edits</span><span class="arrow">→</span><span class="github">🔀 Pull Request (PR)</span></div>
-      <div class="analogy-row"><span class="gdrive">✅ Owner Accepts Changes</span><span class="arrow">→</span><span class="github">🔒 Approve &amp; Merge</span></div>
+      <div class="analogy-row"><span class="gdrive">✏️ Suggesting Mode</span><span class="arrow">→</span><span class="github">🔀 Pull Request (PR)</span></div>
+      <div class="analogy-row"><span class="gdrive">✅ Owner Accepts</span><span class="arrow">→</span><span class="github">🔒 Approve &amp; Merge</span></div>
     </div>
-    <div class="callout warn">
-      <span class="callout-icon">⚠️</span>
-      <span><strong>Key difference from Drive:</strong> Small edits can have large effects — a typo in code can break things. That's why <strong>review matters</strong> before merging.</span>
+    <div class="expand-grid expand-grid-3">
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">📦</span>
+          <div class="xblock-label"><div class="xbl-title">Repository</div><div class="xbl-sub">The project box</div></div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body"><p>One repo = one product or service. Holds all files, history, and collaboration rules. Like a shared Drive folder with superpowers.</p></div>
+      </div>
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">🌱</span>
+          <div class="xblock-label"><div class="xbl-title">Branch</div><div class="xbl-sub">Safe sandbox</div></div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body"><p><span class="ic">main</span> = current agreed truth. Feature branches let you make changes safely — <span class="ic">main</span> stays stable until you're ready to merge.</p></div>
+      </div>
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">🔀</span>
+          <div class="xblock-label"><div class="xbl-title">Pull Request</div><div class="xbl-sub">Suggesting mode at repo scale</div></div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body"><p>"Here's my proposed change." Shows the diff, collects comments, gathers approvals. A human merges when it's good to go.</p></div>
+      </div>
     </div>
     <div class="callout info">
       <span class="callout-icon">🎯</span>
-      <span><strong>PM vocabulary you need:</strong> repo, branch, main/master, pull request, merge, approve. That's enough to follow setup and "where do I put this change?"</span>
+      <span><strong>Vocabulary you need:</strong> repo · branch · main · pull request · merge · approve. That's it.</span>
     </div>
   </div>
 
-  <!-- SLIDE 8: GITHUB VOCAB -->
+  <!-- SLIDE 9: CONNECTIONS -->
   <div class="slide" data-module="m1">
     <div class="slide-header">
       <span class="module-badge badge-m1">Module 1</span>
-      <h1 class="typo-headline-1">GitHub Vocabulary — PM Edition</h1>
+      <h1 class="typo-headline-1">Connections — Live Data Sources</h1>
+      <p class="subtitle">Beyond local files, Claude can connect directly to the tools you already use. Click each to see what unlocks.</p>
     </div>
-    <div class="steps">
-      <div class="step"><div class="step-num num-brand">1</div><div class="step-content"><div class="step-title">Repository (Repo)</div><div class="step-desc">The top-level "place" for one product or service. Like a shared Drive folder — one box that holds that project's files, history, and collaboration rules.</div></div></div>
-      <div class="step"><div class="step-num num-brand">2</div><div class="step-content"><div class="step-title">Branch</div><div class="step-desc"><strong>main</strong> (or <strong>master</strong>) is the current agreed-upon version. A feature branch is a safe sandbox — changes don't affect main until reviewed and ready.</div></div></div>
-      <div class="step"><div class="step-num num-brand">3</div><div class="step-content"><div class="step-title">Commit</div><div class="step-desc">A saved snapshot: "here is exactly what changed at this moment." Like Cmd-S, but it also records who changed what and why.</div></div></div>
-      <div class="step"><div class="step-num num-brand">4</div><div class="step-content"><div class="step-title">Pull Request (PR)</div><div class="step-desc">"Please pull my branch's commits into main." Shows a diff, discussion, approvals, and automated check results — Suggesting Mode at repo scale.</div></div></div>
-      <div class="step"><div class="step-num num-brand">5</div><div class="step-content"><div class="step-title">Merge</div><div class="step-desc">When the PR is accepted, commits become part of main. A human approves before it lands.</div></div></div>
+    <div class="expand-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">📊</span>
+          <div class="xblock-label"><div class="xbl-title">Databricks</div><div class="xbl-sub">Data warehouse</div></div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body"><p>Claude writes the SQL, runs it, interprets the result. No more CSV exports or copy-pasting query output.</p></div>
+      </div>
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">💬</span>
+          <div class="xblock-label"><div class="xbl-title">Slack</div><div class="xbl-sub">Team communication</div></div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body"><p>Read channel history, summarize decisions, find the thread from 3 months ago nobody bookmarked.</p></div>
+      </div>
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">📂</span>
+          <div class="xblock-label"><div class="xbl-title">Google Drive</div><div class="xbl-sub">Docs &amp; specs</div></div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body"><p>Pull in specs, research docs, past briefs directly — no copy-pasting a 10-page doc into the chat window.</p></div>
+      </div>
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">🎫</span>
+          <div class="xblock-label"><div class="xbl-title">Jira</div><div class="xbl-sub">Tickets &amp; planning</div></div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body"><p>Read tickets, create new ones, update fields, move statuses. Used heavily in Module 2.</p></div>
+      </div>
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">🐙</span>
+          <div class="xblock-label"><div class="xbl-title">GitHub</div><div class="xbl-sub">Codebase</div></div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body"><p>Read the codebase, open PRs, review diffs. The engineering half of the end-to-end workflow.</p></div>
+      </div>
+      <div class="xblock" onclick="toggleBlock(this)">
+        <div class="xblock-head">
+          <span class="xblock-icon">📖</span>
+          <div class="xblock-label"><div class="xbl-title">Confluence</div><div class="xbl-sub">Knowledge base</div></div>
+          <svg class="xblock-chevron" viewBox="0 0 16 16" fill="none"><path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="xblock-body"><p>Read existing pages for context, sync briefs back once they're ready. One source of truth.</p></div>
+      </div>
     </div>
-  </div>
-
-  <!-- SLIDE 9: ACTIVITY 1 -->
-  <div class="slide" data-module="m1">
-    <div class="slide-header">
-      <span class="module-badge badge-activity">Activity 1 — Rest of Day 1</span>
-      <h1 class="typo-headline-1">Setup &amp; First Explore</h1>
-    </div>
-    <div class="goal-box">
-      <div class="goal-label">Activity Goal</div>
-      <p>Everyone is fully set up and those who move fast get a head start on Day 2.</p>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-num num-brand">1</div><div class="step-content"><div class="step-title">Run <span class="ic">/pm-setup</span></div><div class="step-desc">Configure your profile so all other skills personalize their output to you.</div></div></div>
-      <div class="step"><div class="step-num num-brand">2</div><div class="step-content"><div class="step-title">Set up connections</div><div class="step-desc">Atlassian (Jira/Confluence), Databricks, Google Drive — these unlock the full power of the skill suite.</div></div></div>
-      <div class="step"><div class="step-num num-brand">3</div><div class="step-content"><div class="step-title">For fast finishers: start <span class="ic">/problem-definition</span></div><div class="step-desc">Pick your real initiative idea and start iterating. No pressure — getting set up cleanly is the win for today.</div></div></div>
-    </div>
-    <div class="callout warn">
-      <span class="callout-icon">🎯</span>
-      <span><strong>Come prepared for Day 2:</strong> Think of a real initiative idea you want to develop. You'll use it tomorrow to go from raw idea to full product brief.</span>
-    </div>
+    
   </div>
 
   <!-- ════ MODULE 2 ════ -->
@@ -1125,51 +1363,26 @@
     <div class="two-col">
       <div>
         <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">The Mental Model</h2>
-        <p>Skills are <strong>pre-built AI workflows</strong> that run inside Claude Code. They're triggered by typing <span class="ic">/skill-name</span> in your terminal.</p>
+        <p>Skills are <strong>pre-built AI workflows</strong> that run inside Claude Code. They can be triggered automatically based on the context of your conversation with AI, or by typing <span class="ic">/skill-name</span> in your terminal.</p>
         <p>Think of them as <strong>smart macros</strong> — they know the right prompts, the right sequence of steps, and how to use your connected tools (Jira, Confluence, Databricks) together.</p>
         <div class="callout success" style="margin-top:var(--spacing-x4);">
-          <span class="callout-icon">💡</span>
-          <span>You don't need to write the prompt. You just need to know which skill to invoke — and feed it the right context.</span>
+          <span class="callout-icon">🔗</span>
+          <span>All Kueski PM skills live at <span class="ic">github.com/kueski-dev/claude_agent_skills</span></span>
         </div>
       </div>
       <div>
-        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">How to Use Them</h2>
-        <div class="steps">
-          <div class="step"><div class="step-num num-upsell">1</div><div class="step-content"><div class="step-title">Open Claude Code (terminal)</div></div></div>
-          <div class="step"><div class="step-num num-upsell">2</div><div class="step-content"><div class="step-title">Type <span class="ic">/skill-name</span></div><div class="step-desc">e.g. <span class="ic">/problem-definition</span></div></div></div>
-          <div class="step"><div class="step-num num-upsell">3</div><div class="step-content"><div class="step-title">Follow the guided flow</div><div class="step-desc">The skill asks you what it needs. You provide context; it does the work.</div></div></div>
-        </div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">How to use them</h2>
+        <ul>
+          <li><strong>Trigger by name</strong> — type <span class="ic">/skill-name</span> in Claude Code to run it</li>
+          <li><strong>Auto-triggered</strong> — some skills activate based on context (e.g. you share a Jira ticket)</li>
+          <li><strong>Discover skills</strong> — type <span class="ic">/help</span> to list all available skills</li>
+          <li><strong>Understand a skill</strong> — ask Claude "what does /problem-definition do?" before running it</li>
+        </ul>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 12: SKILLS TABLE -->
-  <div class="slide" data-module="m2">
-    <div class="slide-header">
-      <span class="module-badge badge-m2">Module 2</span>
-      <h1 class="typo-headline-1">The Kueski PM Skill Suite</h1>
-    </div>
-    <table class="data-table skills-table">
-      <thead><tr><th>Skill</th><th>When to Use</th></tr></thead>
-      <tbody>
-        <tr><td><span class="ic-dark">/pm-setup</span></td><td>First-time setup — builds your profile so other skills personalize output</td></tr>
-        <tr><td><span class="ic-dark">/problem-definition</span></td><td>Kicking off a new initiative, writing a crisp problem statement</td></tr>
-        <tr><td><span class="ic-dark">/solution-brainstorm</span></td><td>Before you scope — explore approaches, expand ambition</td></tr>
-        <tr><td><span class="ic-dark">/data-analysis</span></td><td>Back your problem statement with real Kueski data (KCash/Kpay metrics)</td></tr>
-        <tr><td><span class="ic-dark">/product-director-review</span></td><td>Stress-test your brief before sharing with leadership</td></tr>
-        <tr><td><span class="ic-dark">/brief-jira-breakdown</span></td><td>Convert a brief's requirements into Jira epics/stories</td></tr>
-        <tr><td><span class="ic-dark">/brief-sync-confluence</span></td><td>Keep your Confluence brief in sync with local edits</td></tr>
-        <tr><td><span class="ic-dark">/eng-review</span></td><td>Pressure-test technical feasibility before committing scope</td></tr>
-        <tr><td><span class="ic-dark">/jira-ticket-to-pr</span></td><td>Take a tagged front-end ticket → working prototype PR</td></tr>
-      </tbody>
-    </table>
-    <div class="callout info">
-      <span class="callout-icon">🎯</span>
-      <span>Start with <strong>/pm-setup → /problem-definition → /data-analysis</strong> — that's your Day 1 path.</span>
-    </div>
-  </div>
-
-  <!-- SLIDE 13: PM WORKFLOW MAP -->
+  <!-- SLIDE 12: PM WORKFLOW MAP -->
   <div class="slide" data-module="m2">
     <div class="slide-header">
       <span class="module-badge badge-m2">Module 2</span>
@@ -1177,11 +1390,17 @@
       <p class="subtitle">Each skill maps to a stage of the product development process.</p>
     </div>
     <div class="steps">
-      <div class="step"><div class="step-num num-upsell">1</div><div class="step-content"><div class="step-title">🎯 Define the Problem → <span class="ic">/problem-definition</span></div><div class="step-desc">Crisp problem statement, framed for your domain. The foundation everything else builds on.</div></div></div>
-      <div class="step"><div class="step-num num-upsell">2</div><div class="step-content"><div class="step-title">📊 Validate with Data → <span class="ic">/data-analysis</span></div><div class="step-desc">Query Databricks, pull KCash/Kpay metrics. Numbers that back your narrative.</div></div></div>
-      <div class="step"><div class="step-num num-upsell">3</div><div class="step-content"><div class="step-title">💡 Explore Solutions → <span class="ic">/solution-brainstorm</span></div><div class="step-desc">Expand the solution space before narrowing. Don't anchor too early.</div></div></div>
-      <div class="step"><div class="step-num num-upsell">4</div><div class="step-content"><div class="step-title">🔬 Stress-Test → <span class="ic">/product-director-review</span> + <span class="ic">/eng-review</span></div><div class="step-desc">Simulated leadership review + technical feasibility check before you commit.</div></div></div>
-      <div class="step"><div class="step-num num-upsell">5</div><div class="step-content"><div class="step-title">🎫 Execute → <span class="ic">/brief-jira-breakdown</span> + <span class="ic">/jira-ticket-to-pr</span></div><div class="step-desc">Brief becomes Jira epics/stories. A ticket becomes a real PR.</div></div></div>
+      <div class="step"><div class="step-num num-upsell">1</div><div class="step-content"><div class="step-title">🎯 Define the Problem</div><div class="step-desc"><div><span class="ic">/problem-definition</span> — structured PM interview to define and stress-test a problem before designing a solution. Outputs the Problem, Overview, and Audience sections of a brief.</div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">2</div><div class="step-content"><div class="step-title">📊 Validate with Data</div><div class="step-desc"><div><span class="ic">/data-analysis</span> — investigate a data question using Databricks — frames the question, writes SQL, interprets results, and suggests next steps. <span class="prereq">Pre-req: Databricks connection</span></div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">3</div><div class="step-content"><div class="step-title">💡 Explore Solutions</div><div class="step-desc"><div><span class="ic">/solution-brainstorm</span> — four modes: end-state vision, scope expansion, scope reduction, and milestone breakdown.</div><div style="margin-top:var(--spacing-x2)"><span class="ic">/eng-review</span> — technical feasibility, architecture understanding, and detailed tech design. <span class="prereq">Pre-req: access to your team's GitHub repo</span></div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">4</div><div class="step-content"><div class="step-title">🔬 Stress-Test</div><div class="step-desc"><div><span class="ic">/product-director-review</span> — simulates a product director review: problem evidence, metrics, solution design, scope, milestone rigor, and risks. Catch gaps before leadership does.</div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">5</div><div class="step-content"><div class="step-title">🎨 Prototype</div><div class="step-desc"><div><span class="ic">/user-story-generator</span> — three outputs from a brief: capability stories written back into the brief, screen-by-screen journey maps for prototyping, and granular Jira-ready stories.</div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">6</div><div class="step-content"><div class="step-title">🎫 Execute</div><div class="step-desc"><div><span class="ic">/brief-jira-breakdown</span> — draft a Jira Epic + child Stories from the brief's requirements. Review markdown before importing.</div><div style="margin-top:var(--spacing-x2)"><span class="ic">/jira-ticket-to-pr</span> — take a tagged ticket end-to-end: fetches ticket, builds an implementation plan, implements, pushes, and opens the PR.</div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">7</div><div class="step-content"><div class="step-title">📈 Track</div><div class="step-desc"><div><span class="ic">/observability</span> — implement <span class="ic">@kueski-dev/web-observability</span> correctly: generate, review, debug, and audit event tracking so you can measure what shipped.</div></div></div></div>
+    </div>
+    <div class="callout info" style="margin-top:var(--spacing-x4);">
+      <span class="callout-icon">🔗</span>
+      <div><strong>Other: </strong><span class="ic">/confluence</span> — read, summarize, or sync Confluence pages. Pull content into local briefs or publish local changes back. <span class="prereq">Pre-req: Confluence connection</span></div>
     </div>
   </div>
 
@@ -1223,6 +1442,56 @@
     <div class="callout upsell">
       <span class="callout-icon">🎯</span>
       <span><strong>Your role:</strong> Stay in the driver's seat. Use AI to think faster, not to replace thinking.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE: ACTIVITY 1 -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-activity">Activity 1 — Rest of Day 1</span>
+      <h1 class="typo-headline-1">Setup &amp; First Explore</h1>
+    </div>
+    <div class="goal-box">
+      <div class="goal-label">Activity Goal</div>
+      <p>Everyone is fully set up and those who move fast get a head start on Day 2.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num num-brand">1</div><div class="step-content"><div class="step-title">Run <span class="ic">/pm-setup</span></div><div class="step-desc">Configure your profile so all other skills personalize their output to you.</div></div></div>
+      <div class="step"><div class="step-num num-brand">2</div><div class="step-content"><div class="step-title">Set up connections</div><div class="step-desc">Atlassian (Jira/Confluence), Databricks, Google Drive — these unlock the full power of the skill suite.</div></div></div>
+      <div class="step"><div class="step-num num-brand">3</div><div class="step-content"><div class="step-title">For fast finishers: start <span class="ic">/problem-definition</span></div><div class="step-desc">Pick your real initiative idea and start iterating. No pressure — getting set up cleanly is the win for today.</div></div></div>
+    </div>
+    <div class="callout warn">
+      <span class="callout-icon">🎯</span>
+      <span><strong>Come prepared for Day 2:</strong> Think of a real initiative idea you want to develop. You'll use it tomorrow to go from raw idea to full product brief and prototype.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE: DAY 2 RECAP & TIPS -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-activity">Day 2 — Recap &amp; Tips</span>
+      <h1 class="typo-headline-1">Working on Your Initiative</h1>
+      <p class="subtitle">A few things to help you go further before you dive in.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num num-brand">💡</div><div class="step-content"><div class="step-title">Make <span class="ic">/eng-review</span> more accurate: harness engineering</div><div class="step-desc">
+        <p>Engineering review is only as good as the context it has. <strong>Repo-level documentation</strong> (an <span class="ic">AGENTS.md</span> or <span class="ic">CLAUDE.md</span> file in the repo) tells the AI what the service does, how it's structured, and what constraints matter — turning a generic review into a precise one.</p>
+        <p style="margin-top:var(--spacing-x2);"><strong>What to ask your team:</strong></p>
+        <ul>
+          <li>Add an <span class="ic">documentation files</span> to the repo root describing the app's purpose, key flows, and architecture decisions</li>
+          <li>List the main entry points, notable dependencies, and any "don't touch without asking" areas</li>
+          <li>Include the test and deploy commands so the AI can reason about CI impact</li>
+          <li>Even a 20-line file makes a meaningful difference — it doesn't need to be exhaustive</li>
+        </ul>
+      </div></div></div>
+      <div class="step"><div class="step-num num-brand">🎨</div><div class="step-content"><div class="step-title">For Prototype: leverage KDS + <span class="ic">/user-story-generator</span></div><div class="step-desc">
+        <p>Run <span class="ic">/user-story-generator</span> on your brief to get screen-by-screen journey maps, then feed the detailed user stories directly into an AI prototyping tool alongside the <strong>Kueski Design System (KDS) repo</strong>.</p>
+        <ul>
+          <li>Point the AI at the KDS repo so it uses real Kueski components, tokens, and patterns</li>
+          <li>The more granular your user story (from the skill), the more accurate the prototype</li>
+          <li>Iterate: tweak the story → regenerate → compare against KDS components</li>
+        </ul>
+      </div></div></div>
     </div>
   </div>
 
@@ -1461,60 +1730,51 @@
     </div>
   </div>
 
-  <!-- SLIDE 24: ACTIVITY 2 -->
-  <div class="slide" data-module="m3">
-    <div class="slide-header">
-      <span class="module-badge badge-activity">Activity 2 — Afternoon Day 2</span>
-      <h1 class="typo-headline-1">Your First PR</h1>
-    </div>
-    <div class="goal-box green">
-      <div class="goal-label">Activity Goal</div>
-      <p>Open a real pull request on a Kueski codebase.</p>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-num num-success">1</div><div class="step-content"><div class="step-title">Find a copy change ticket in your domain's repo</div><div class="step-desc">Or use the one provided by the facilitator. Must have: exact copy before/after + route/URL.</div></div></div>
-      <div class="step"><div class="step-num num-success">2</div><div class="step-content"><div class="step-title">Run <span class="ic">/jira-ticket-to-pr &lt;TICKET-ID&gt;</span></div><div class="step-desc">Watch the skill work. Ask it to explain what it's doing if you're curious.</div></div></div>
-      <div class="step"><div class="step-num num-success">3</div><div class="step-content"><div class="step-title">Review the resulting PR</div><div class="step-desc">Check the diff. Does it match what the ticket asked for? Read the CI results.</div></div></div>
-      <div class="step"><div class="step-num num-success">4</div><div class="step-content"><div class="step-title">Wait for review / watch CI run</div><div class="step-desc">You've opened a real PR on a real codebase. That's the goal.</div></div></div>
-    </div>
-    <div class="callout success">
-      <span class="callout-icon">🎉</span>
-      <span>Getting the PR open and understanding what you see is a complete win. You don't need to get it merged today.</span>
-    </div>
-  </div>
 
-  <!-- SLIDE 25: CLOSE -->
-  <div class="slide" data-module="overview">
+  <!-- SLIDE: MODULE 4 — SHARE OUT -->
+  <div class="slide" data-module="m4">
     <div class="slide-header">
-      <span class="module-badge badge-activity">Share-out &amp; Close · 30 min</span>
-      <h1 class="typo-headline-1">Workshop Close</h1>
+      <span class="module-badge badge-m4">Module 4 · Share Out</span>
+      <h1 class="typo-headline-1" style="font-size:clamp(2rem,5vw,3.5rem);">You built something real. 🎉</h1>
+      <p class="subtitle" style="font-size:1.1em;">Now let's hear about it.</p>
     </div>
-    <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Share-out Questions</h2>
-    <div class="steps">
-      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">Who got their PR open? Who got merged?</div></div></div>
-      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">What felt different about this vs. regular PM work?</div></div></div>
-      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">Where did you use human judgment? Where did AI surprise you?</div></div></div>
-      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">What will you use next week?</div></div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--spacing-x4);margin-bottom:var(--spacing-x5);">
+      <div class="card" style="text-align:center;padding:var(--spacing-x5) var(--spacing-x4);border-color:var(--m4-stroke);background:var(--m4-subtle);">
+        <div style="font-size:2.5rem;margin-bottom:var(--spacing-x3);">📄</div>
+        <div class="card-title" style="color:var(--m4-text);">Share your brief</div>
+        <div class="card-body">Walk us through the initiative you defined. What's the problem? What's the solution?</div>
+      </div>
+      <div class="card" style="text-align:center;padding:var(--spacing-x5) var(--spacing-x4);border-color:var(--m4-stroke);background:var(--m4-subtle);">
+        <div style="font-size:2.5rem;margin-bottom:var(--spacing-x3);">🎨</div>
+        <div class="card-title" style="color:var(--m4-text);">Show your prototype</div>
+        <div class="card-body">Did you get to a screen or flow? Show the room. Every iteration counts.</div>
+      </div>
+      <div class="card" style="text-align:center;padding:var(--spacing-x5) var(--spacing-x4);border-color:var(--m4-stroke);background:var(--m4-subtle);">
+        <div style="font-size:2.5rem;margin-bottom:var(--spacing-x3);">💬</div>
+        <div class="card-title" style="color:var(--m4-text);">Share your experience</div>
+        <div class="card-body">What surprised you? Where did AI help? Where did you have to step in?</div>
+      </div>
     </div>
-    <div class="callout success">
-      <span class="callout-icon">🚀</span>
-      <span><strong>The takeaway:</strong> You have the tools. You know the skills. The judgment is yours. Use it this week — on a real initiative, with real data, on a real codebase.</span>
-    </div>
-    <div class="callout upsell" style="margin-top:var(--spacing-x3);">
-      <span class="callout-icon">📚</span>
-      <span>Skill suite: <strong>github.com/kueski-dev/claude_agent_skills</strong> — available to revisit, extend, and share.</span>
+    
+    <div style="text-align:center;margin-top:var(--spacing-x4);">
+      <p style="color:var(--color-text-secondary);font-size:0.9em;">Any questions? 👋</p>
+      <p style="color:var(--color-text-secondary);font-size:0.85em;margin-top:var(--spacing-x2);">Skill suite: <span class="ic">github.com/kueski-dev/claude_agent_skills</span></p>
     </div>
   </div>
 
 </div><!-- /slide-container -->
 
 <div id="keyboard-hint">
-  <kbd>←</kbd> <kbd>→</kbd> to navigate &nbsp;|&nbsp; <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> to jump to module
+  <kbd>←</kbd> <kbd>→</kbd> to navigate &nbsp;|&nbsp; <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> to jump to module
 </div>
 
 <script>
   const slides = Array.from(document.querySelectorAll('.slide'));
-  const moduleFirstSlide = { overview: 0, m1: 3, m2: 10, m3: 15 };
+  const moduleFirstSlide = { overview: 0, m1: 3, m2: 11, m3: 16, m4: slides.length - 1 };
+
+  function toggleBlock(el) {
+    el.closest('.xblock').classList.toggle('open');
+  }
   let current = 0;
 
   function goTo(idx) {
@@ -1540,7 +1800,7 @@
     document.getElementById('btn-prev').disabled = current === 0;
     document.getElementById('btn-next').disabled = current === slides.length - 1;
     const mod = slides[current].dataset.module;
-    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active-m1','active-m2','active-m3','active-overview'));
+    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active-m1','active-m2','active-m3','active-m4','active-overview'));
     const tab = document.querySelector(`.module-tab[data-module="${mod}"]`);
     if (tab) tab.classList.add(`active-${mod}`);
   }
@@ -1569,6 +1829,7 @@
     if (e.key === '1') jumpToModule('m1');
     if (e.key === '2') jumpToModule('m2');
     if (e.key === '3') jumpToModule('m3');
+    if (e.key === '4') jumpToModule('m4');
     if (e.key === '0') jumpToModule('overview');
   });
 
