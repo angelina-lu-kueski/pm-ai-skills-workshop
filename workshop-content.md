@@ -51,22 +51,74 @@ A hands-on workshop walking Kueski PMs through the full AI-assisted product work
     - "Flag my Jira tickets with no updates this week every Friday"
     - Everything Cowork can do, Code can also do — it's just a different interface
 
-* **Claude vs. ChatGPT vs. Cursor — Different doors, same destination**
+* **Claude Code vs. Codex vs. Cursor — Different doors, same destination**
 
   **Claude** *(Anthropic)*
-  - **Web / App** → claude.ai — this is the Chat version, browser or desktop app
-  - **Claude Code** → lives in your terminal. You open it by typing `claude` in your command line. This is the Code version.
+  - **Web / App**, CLI extension
 
-  **ChatGPT / Codex** *(OpenAI)*
-  - **Web / App** → chatgpt.com — the Chat version
-  - **Codex** → accessible as a VS Code extension or via the OpenAI API. Sits inside your editor.
+  **Codex** *(OpenAI)*
+  - App, CLI extension
 
   **Cursor**
-  - **Desktop app only** → cursor.com. Looks like VS Code but with AI baked in everywhere — you pick which model powers it (Claude, GPT-4, etc.).
+  - **Desktop app only** 
 
   **For this workshop:**
-  Pick the one you already have open. Claude Code, Codex, and Cursor all run the Kueski skill suite the same way. If you're not sure which to use, default to Claude Code — we'll move on now and you can always switch later.
-* **What is a markdown file** — why markdown is the preferred format for working with AI (most accurate, cheapest), how to read and write basic markdown, why your briefs and notes should live in `.md` files
+  Pick the one you already have access to. Claude Code, Codex, and Cursor all run the Kueski skill suite the same way. If you're not sure which to use, default to Claude Code — we'll move on now and you can always switch later.
+
+* **How Claude Code actually works — a quick orientation**
+
+  **Mental model first:** Treat it exactly like Claude Chat — you type, it responds. The only difference is that Claude Code has access to your files. That one difference is what makes it powerful.
+
+  **Step 1 — Select a folder (your workspace)**
+
+  When you open Claude Code, the first thing it asks is: *which folder should I work in?*
+
+  > 📁 **[DEMO — show folder structure]**
+
+  Whatever folder you point it to becomes its world. Claude can read every file inside, edit them, create new ones, run commands — but only within that boundary. Nothing outside the folder is visible or touchable.
+
+  This matters: if your brief isn't in the folder, Claude can't see it. If your knowledge base isn't in the folder, Claude can't use it. **Put your work where Claude can reach it.**
+
+  **Step 2 — Open a file and start a chat**
+
+  You can do both at the same time or either on its own:
+  - Open a file to give Claude context — "here's what I'm working on"
+  - Type in the chat panel just like you would in Claude.ai
+
+  > 💻 **[DEMO — show opening a file + starting a chat]**
+
+  **Step 3 — Your files become Claude's knowledge base**
+
+  This is the unlock. Because Claude can read your files:
+  - Your product brief → Claude understands the problem before you explain it
+  - Your knowledge base docs → Claude knows your system, your flows, your terminology
+  - Your previous tickets or specs → Claude can draft consistent with what already exists
+
+  The more context lives in your folder, the better Claude performs. A well-organized folder is literally a better AI.
+
+* **What is a markdown file — and why your AI works better with one**
+
+  A markdown file is just a plain text file with a `.md` extension. No Word, no Google Docs, no hidden formatting underneath. Just text, with a few simple symbols that tell readers (human or AI) what's a heading, what's bold, what's a list.
+
+  **Why Claude prefers markdown:**
+  - When you paste a Word doc or Google Doc into any AI tool, it silently strips the formatting — headings become plain lines, tables become mush. Markdown keeps the structure intact because the structure *is* the text.
+  - It's cheaper. AI models bill by tokens. A `.docx` converted to plain text bloats in size. A `.md` file is already clean — no wasted tokens on hidden XML or metadata.
+  - Claude reads it directly. Instead of copy-pasting, you just reference the file: `@brief.md` and Claude reads it in full, with all the structure you intended.
+
+
+  That's it. You can write this in VS Code, Cursor, any text editor — even Notepad. It will always look the same.
+
+  > 📝 **[DEMO — open workshop-content.md in editor and show raw vs. rendered view]**
+
+  **Why your briefs and notes should live in `.md` files:**
+  - Claude can read them directly inside your workspace folder — no copy-paste, no context lost
+  - They live in GitHub alongside the work they describe → one place, always in sync with the code
+  - They're version-controlled: "who changed the brief on Tuesday?" is a two-second answer
+  - They work offline, never corrupt, and never need a login
+  You can choose to uploda them to confluence once they are ready
+
+ I started building this whole workshop in a markdown file. 
+
 * **GitHub basics** — one mental model only: think of it as Google Drive for code. Repos, branches, files — just enough to not be lost during setup
   * Same idea, different object: Google Drive holds documents you collaborate on. GitHub holds code the team builds and ships. The habits feel familiar; the "documents" are mostly text files written in programming languages instead of natural language.
   * Folders → repositories (repos): In Drive you organize work in folders (and shared drives). In GitHub the top-level "place" for one product or service is usually a repository — one box that holds that project's files, history, and collaboration rules.
@@ -75,6 +127,30 @@ A hands-on workshop walking Kueski PMs through the full AI-assisted product work
   * Suggesting mode → pull requests (PRs): In Drive, Suggesting lets you propose edits; the owner accepts or rejects them and can discuss inline. In GitHub a pull request is the same pattern at repo scale: "here is my proposed set of changes," with comments, requested changes, and approve when it's good enough to merge into the target branch (often main).
   * How that shows up for PMs at Kueski (today vs. later): When you propose a change to a file in our codebase, the workflow can include AI-assisted review (catch issues, suggest improvements), but a human still approves before it lands. Over time, as confidence in automation grows, we may rely more on AI review — but the PR idea stays the same: propose, discuss, approve, then merge.
   * Why this slide exists: You do not need to be fluent in Git commands. You need enough vocabulary — repo, branch, main, pull request, merge, approve — to follow setup, links, and "where do I put this change?" without getting lost.
+
+* **Connections — plugging Claude into your live data sources**
+
+  So far we've talked about Claude reading files in your local folder. But Claude can also connect directly to the tools and data sources you already use every day — and when it does, the results get dramatically better.
+
+  Think of it as expanding the knowledge base beyond your laptop.
+
+  **What you can connect:**
+
+  - **Databricks** — Claude can query your data warehouse directly. Instead of pulling a CSV and pasting it in, you ask a question and Claude writes the SQL, runs it, and interprets the result. Useful for ad-hoc analysis, funnel checks, cohort lookups.
+  - **Slack** — Claude can read channel history, threads, decisions. Useful for catching up on a project, summarizing a week of discussion, or finding that decision that was made three months ago in a thread nobody bookmarked.
+  - **Google Drive / Docs** — Claude can pull in your specs, research docs, or past briefs directly. No more copy-pasting a 10-page doc into the chat window.
+  - **Jira** — Claude can read your tickets, create new ones, update fields, move statuses. We'll use this heavily in Module 2.
+  - **GitHub** — Claude can read your codebase, open PRs, review diffs. The engineering half of the workflow.
+
+  > 🔌 **[DEMO — show Connections folder, open one connection config, show how it's referenced in a skill]**
+
+  **The mental model:**
+  Files in your folder = static knowledge base.
+  Connections = live knowledge base.
+
+  The more sources Claude can reach, the less time you spend being the copy-paste layer between your tools — and the more it can act as a genuine collaborator who already knows the context.
+
+  > **This is what separates "AI as a chatbot" from "AI as a teammate."**
 
 ---
 
