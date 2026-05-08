@@ -116,6 +116,9 @@
     --m3-subtle: var(--color-background-success-subtle);
     --m3-text: var(--color-text-success-on-subtle);
     --m3-stroke: var(--color-stroke-success);
+    --m4-subtle: rgba(251, 191, 36, 0.12);
+    --m4-text: #fbbf24;
+    --m4-stroke: rgba(251, 191, 36, 0.35);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -215,6 +218,7 @@
   .module-tab.active-m1 { color: #59a6ff; border-color: #59a6ff; }
   .module-tab.active-m2 { color: #9f97ff; border-color: #9f97ff; }
   .module-tab.active-m3 { color: #53b57c; border-color: #53b57c; }
+  .module-tab.active-m4 { color: #fbbf24; border-color: #fbbf24; }
 
   /* ── PROGRESS BAR ── */
   #progress-bar {
@@ -385,6 +389,7 @@
   .badge-m1 { background: var(--m1-subtle); color: var(--m1-text); }
   .badge-m2 { background: var(--m2-subtle); color: var(--m2-text); }
   .badge-m3 { background: var(--m3-subtle); color: var(--m3-text); }
+  .badge-m4 { background: var(--m4-subtle); color: var(--m4-text); }
   .badge-activity { background: var(--color-background-warning-subtle); color: var(--color-text-warning); }
 
   .slide .subtitle {
@@ -518,6 +523,11 @@
     padding: 1px var(--spacing-x2);
     border-radius: var(--radius-x1);
     font-size: 0.8em;
+  }
+  .prereq {
+    font-size: 0.8em;
+    color: var(--color-text-secondary);
+    font-style: italic;
   }
   .ic-dark {
     font-family: 'SF Mono', 'Roboto Mono', monospace;
@@ -892,6 +902,7 @@
   <div class="module-tab" data-module="m1" onclick="jumpToModule('m1')">Module 1 — AI Landscape</div>
   <div class="module-tab" data-module="m2" onclick="jumpToModule('m2')">Module 2 — Skills</div>
   <div class="module-tab" data-module="m3" onclick="jumpToModule('m3')">Module 3 — Code Shipping</div>
+  <div class="module-tab" data-module="m4" onclick="jumpToModule('m4')">Module 4 — Share Out</div>
 </div>
 
 <!-- PROGRESS -->
@@ -922,18 +933,15 @@
     </div>
     <div class="goal-box">
       <div class="goal-label">Ultimate Goal</div>
-      <p>PMs can take an idea from their head to a full product brief and open a real PR.</p>
+      <p>PMs can take an idea from their head to a full product brief, prototype and implement.</p>
     </div>
-    <p style="font-size:var(--text-headline-3);font-weight:var(--font-weight-regular);line-height:var(--leading-headline-3);color:var(--color-text-secondary);margin-bottom:var(--spacing-x6);">This is a hands-on workshop — not a lecture. The goal is <strong>confidence and capability</strong>, not mastery of every tool.</p>
+    <p style="font-size:var(--text-headline-3);font-weight:var(--font-weight-regular);line-height:var(--leading-headline-3);color:var(--color-text-secondary);margin-bottom:var(--spacing-x6);">This is a hands-on workshop — not a lecture. Feel free to ask questions, experiment and explore.</p>
     <div class="cards-grid">
       <div class="card"><div class="card-icon">🗺️</div><div class="card-title">Understand the landscape</div><div class="card-body">Know what tool to use when, and why the whole toolkit matters.</div></div>
       <div class="card"><div class="card-icon">🛠️</div><div class="card-title">Build real artifacts</div><div class="card-body">A full product brief, backed by data, stress-tested by AI review.</div></div>
-      <div class="card"><div class="card-icon">🔀</div><div class="card-title">Open a real PR</div><div class="card-body">Go from a Jira ticket to a pull request on a real codebase.</div></div>
+      <div class="card"><div class="card-icon">🔀</div><div class="card-title">Understand the PR process</div><div class="card-body">Go from a Jira ticket to a pull request on a real codebase.</div></div>
     </div>
-    <div class="callout info">
-      <span class="callout-icon">💡</span>
-      <span><strong>Approach:</strong> One step at a time. No one needs to master everything — you need to leave knowing what tools exist and confident enough to use them next week.</span>
-    </div>
+    
   </div>
 
   <!-- SLIDE 2: AGENDA -->
@@ -958,11 +966,9 @@
     <ul class="agenda">
       <li><span class="time">8:00 AM</span><span class="topic">Recap &amp; Unblock</span><span class="duration dur-activity">30 min</span></li>
       <li><span class="time">8:30 AM</span><span class="topic">Activity: Idea → Full Brief → Prototype</span><span class="duration dur-activity">2.5 hrs</span></li>
-      <li><span class="time">11:00 AM</span><span class="topic">Share-out &amp; Morning Wrap</span><span class="duration dur-activity">90 min</span></li>
       <li><span class="time">12:00 PM</span><span class="topic">Lunch</span><span class="duration dur-activity">1 hr</span></li>
       <li><span class="time">1:00 PM</span><span class="topic">Module 3: The Code Shipping Process</span><span class="duration dur-m3">45 min</span></li>
       <li><span class="time">1:45 PM</span><span class="topic">Module 4: Live PR Demo</span><span class="duration dur-activity">30 min</span></li>
-      <li><span class="time">2:15 PM</span><span class="topic">Activity 2: Your First PR</span><span class="duration dur-activity">Remaining</span></li>
       <li><span class="time">4:30 PM</span><span class="topic">Share-out &amp; Close</span><span class="duration dur-activity">30 min</span></li>
     </ul>
   </div>
@@ -982,7 +988,7 @@
     </div>
     <div class="cards-grid" style="grid-template-columns: repeat(3,1fr);">
       <div class="card topic-card" onclick="goTo(4)"><div class="card-icon">💬</div><div class="card-title">Chat vs. Code vs. Cowork</div><div class="card-body">Three modes, different power levels. What's the difference?</div></div>
-      <div class="card topic-card" onclick="goTo(5)"><div class="card-icon">🚪</div><div class="card-title">Different Doors, Same Destination</div><div class="card-body">Claude, Codex, Cursor — which interface to use.</div></div>
+      <div class="card topic-card" onclick="goTo(5)"><div class="card-icon">🚪</div><div class="card-title">Which Tool Should I choose?</div><div class="card-body">Claude, Codex, Cursor — which interface to use.</div></div>
       <div class="card topic-card" onclick="goTo(6)"><div class="card-icon">⚙️</div><div class="card-title">How Claude Code Works</div><div class="card-body">Folder → file → chat. The 3-step orientation.</div></div>
       <div class="card topic-card" onclick="goTo(7)"><div class="card-icon">📝</div><div class="card-title">What is Markdown?</div><div class="card-body">Why <span class="ic">.md</span> is the preferred format for AI.</div></div>
       <div class="card topic-card" onclick="goTo(8)"><div class="card-icon">🐙</div><div class="card-title">GitHub Basics</div><div class="card-body">Google Drive for code — one mental model.</div></div>
@@ -998,7 +1004,7 @@
       <p class="subtitle">Three modes. Different power levels. Click each to explore.</p>
     </div>
     <div class="expand-grid expand-grid-3">
-      <div class="xblock" onclick="toggleBlock(this)">
+      <div class="xblock open" onclick="toggleBlock(this)">
         <div class="xblock-head">
           <span class="xblock-icon">💬</span>
           <div class="xblock-label">
@@ -1039,7 +1045,7 @@
           </div>
         </div>
       </div>
-      <div class="xblock" onclick="toggleBlock(this)">
+      <div class="xblock open" onclick="toggleBlock(this)">
         <div class="xblock-head">
           <span class="xblock-icon">🤝</span>
           <div class="xblock-label">
@@ -1065,7 +1071,7 @@
     <div class="slide-header">
       <span class="module-badge badge-m1">Module 1</span>
       <h1 class="typo-headline-1">Different Doors, Same Destination</h1>
-      <p class="subtitle">Claude, Codex, Cursor — all run the Kueski skill suite identically.</p>
+    
     </div>
     <div class="expand-grid expand-grid-3">
       <div class="xblock" onclick="toggleBlock(this)">
@@ -1107,7 +1113,7 @@
         </div>
         <div class="xblock-body">
           <p>Desktop app only — looks like VS Code with AI baked in everywhere. You pick which model powers it (Claude, GPT-4, etc.).</p>
-          <p>Code mode only. No separate chat interface.</p>
+         
         </div>
       </div>
     </div>
@@ -1156,7 +1162,7 @@
           <ul>
             <li>Open a file to give Claude context — "here's what I'm working on"</li>
             <li>Type in the chat panel just like claude.ai</li>
-            <li>Both at once, or either on its own</li>
+          
           </ul>
           <div class="callout warn" style="margin-top:var(--spacing-x3);margin-bottom:0;"><span class="callout-icon">📺</span><span><strong>DEMO</strong> — open a file + start a chat</span></div>
         </div>
@@ -1187,42 +1193,33 @@
     <div class="slide-header">
       <span class="module-badge badge-m1">Module 1</span>
       <h1 class="typo-headline-1">What is a Markdown File?</h1>
-      <p class="subtitle">Plain text with simple hints. The format AI reads best.</p>
+      <p class="subtitle">A plain text file with a <span class="ic">.md</span> extension. No Word, no Google Docs, no hidden formatting — just text with simple symbols.</p>
     </div>
-    <div class="two-col">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-x4);margin-bottom:var(--spacing-x4);">
       <div>
-        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Why <span class="ic">.md</span>?</h2>
+        <p style="font-weight:600;margin-bottom:var(--spacing-x2);">Why AI prefers markdown</p>
         <ul>
-          <li><strong>Structure survives</strong> — headings, tables, lists stay intact. Word docs get stripped when pasted into AI.</li>
-          <li><strong>Cheaper</strong> — no hidden XML or metadata, no wasted tokens.</li>
-          <li><strong>Direct reference</strong> — type <span class="ic">@brief.md</span> and Claude reads it in full.</li>
-          <li><strong>Version-controlled</strong> — lives in GitHub alongside the work it describes.</li>
-          <li><strong>Never corrupts</strong> — works offline, no login, no Google Docs outage.</li>
+          <li><strong>Structure survives</strong> — Word docs get stripped silently when pasted into AI. Markdown keeps structure intact because the structure <em>is</em> the text.</li>
+          <li><strong>Efficient</strong> — clean plain text = fewer tokens = faster, cheaper responses. No hidden XML or metadata bloat.</li>
+          <li><strong>Direct reference</strong> — point to the file and the AI reads it in full, structure and all. No copy-pasting.</li>
+          <li><strong>Universal</strong> — Claude, ChatGPT, Cursor — all handle it the same way.</li>
         </ul>
-        <div class="callout warn" style="margin-top:var(--spacing-x4);">
-          <span class="callout-icon">📺</span>
-          <span><strong>DEMO</strong> — open <span class="ic">workshop-content.md</span>, show raw vs. rendered</span>
-        </div>
-        <div class="callout success" style="margin-top:var(--spacing-x3);">
-          <span class="callout-icon">💡</span>
-          <span>This whole workshop was built in a <span class="ic">.md</span> file. You've been looking at one this whole time.</span>
-        </div>
       </div>
       <div>
-        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Syntax you'll actually use</h2>
-        <table class="data-table">
-          <thead><tr><th>You type</th><th>You get</th></tr></thead>
-          <tbody>
-            <tr><td><span class="ic"># Heading</span></td><td>Big title</td></tr>
-            <tr><td><span class="ic">## Sub-heading</span></td><td>Section title</td></tr>
-            <tr><td><span class="ic">**bold**</span></td><td><strong>bold</strong></td></tr>
-            <tr><td><span class="ic">- item</span></td><td>Bullet list</td></tr>
-            <tr><td><span class="ic">1. item</span></td><td>Numbered list</td></tr>
-            <tr><td><span class="ic">`code`</span></td><td><span class="ic">inline code</span></td></tr>
-            <tr><td><span class="ic">&gt; note</span></td><td>Block quote</td></tr>
-          </tbody>
-        </table>
+        <p style="font-weight:600;margin-bottom:var(--spacing-x2);">Why your briefs &amp; notes should live in <span class="ic">.md</span></p>
+        <ul>
+          <li>The AI can read them directly — no copy-paste, no lost context</li>
+          <li>They live alongside your code and tickets in GitHub — one place, always in sync</li>
+          <li>Version-controlled: "who changed the brief on Tuesday?" is a two-second answer</li>
+          <li>Work offline, never corrupt, never need a login</li>
+          <li>Upload to Confluence when ready — but the <span class="ic">.md</span> file stays as your source of truth</li>
+        </ul>
       </div>
+    </div>
+
+    <div class="callout success" style="margin-top:var(--spacing-x3);">
+      <span class="callout-icon">💡</span>
+      <span>This whole workshop started in a markdown file.</span>
     </div>
   </div>
 
@@ -1330,31 +1327,7 @@
         <div class="xblock-body"><p>Read existing pages for context, sync briefs back once they're ready. One source of truth.</p></div>
       </div>
     </div>
-    <div class="callout upsell">
-      <span class="callout-icon">🎯</span>
-      <span>Files in your folder = <strong>static knowledge base.</strong> &nbsp;Connections = <strong>live knowledge base.</strong> &nbsp;This is what separates "AI as chatbot" from "AI as teammate."</span>
-    </div>
-  </div>
-
-  <!-- SLIDE 10: ACTIVITY 1 -->
-  <div class="slide" data-module="m1">
-    <div class="slide-header">
-      <span class="module-badge badge-activity">Activity 1 — Rest of Day 1</span>
-      <h1 class="typo-headline-1">Setup &amp; First Explore</h1>
-    </div>
-    <div class="goal-box">
-      <div class="goal-label">Activity Goal</div>
-      <p>Everyone is fully set up and those who move fast get a head start on Day 2.</p>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-num num-brand">1</div><div class="step-content"><div class="step-title">Run <span class="ic">/pm-setup</span></div><div class="step-desc">Configure your profile so all other skills personalize their output to you.</div></div></div>
-      <div class="step"><div class="step-num num-brand">2</div><div class="step-content"><div class="step-title">Set up connections</div><div class="step-desc">Atlassian (Jira/Confluence), Databricks, Google Drive — these unlock the full power of the skill suite.</div></div></div>
-      <div class="step"><div class="step-num num-brand">3</div><div class="step-content"><div class="step-title">For fast finishers: start <span class="ic">/problem-definition</span></div><div class="step-desc">Pick your real initiative idea and start iterating. No pressure — getting set up cleanly is the win for today.</div></div></div>
-    </div>
-    <div class="callout warn">
-      <span class="callout-icon">🎯</span>
-      <span><strong>Come prepared for Day 2:</strong> Think of a real initiative idea you want to develop. You'll use it tomorrow to go from raw idea to full product brief.</span>
-    </div>
+    
   </div>
 
   <!-- ════ MODULE 2 ════ -->
@@ -1390,51 +1363,26 @@
     <div class="two-col">
       <div>
         <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">The Mental Model</h2>
-        <p>Skills are <strong>pre-built AI workflows</strong> that run inside Claude Code. They're triggered by typing <span class="ic">/skill-name</span> in your terminal.</p>
+        <p>Skills are <strong>pre-built AI workflows</strong> that run inside Claude Code. They can be triggered automatically based on the context of your conversation with AI, or by typing <span class="ic">/skill-name</span> in your terminal.</p>
         <p>Think of them as <strong>smart macros</strong> — they know the right prompts, the right sequence of steps, and how to use your connected tools (Jira, Confluence, Databricks) together.</p>
         <div class="callout success" style="margin-top:var(--spacing-x4);">
-          <span class="callout-icon">💡</span>
-          <span>You don't need to write the prompt. You just need to know which skill to invoke — and feed it the right context.</span>
+          <span class="callout-icon">🔗</span>
+          <span>All Kueski PM skills live at <span class="ic">github.com/kueski-dev/claude_agent_skills</span></span>
         </div>
       </div>
       <div>
-        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">How to Use Them</h2>
-        <div class="steps">
-          <div class="step"><div class="step-num num-upsell">1</div><div class="step-content"><div class="step-title">Open Claude Code (terminal)</div></div></div>
-          <div class="step"><div class="step-num num-upsell">2</div><div class="step-content"><div class="step-title">Type <span class="ic">/skill-name</span></div><div class="step-desc">e.g. <span class="ic">/problem-definition</span></div></div></div>
-          <div class="step"><div class="step-num num-upsell">3</div><div class="step-content"><div class="step-title">Follow the guided flow</div><div class="step-desc">The skill asks you what it needs. You provide context; it does the work.</div></div></div>
-        </div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">How to use them</h2>
+        <ul>
+          <li><strong>Trigger by name</strong> — type <span class="ic">/skill-name</span> in Claude Code to run it</li>
+          <li><strong>Auto-triggered</strong> — some skills activate based on context (e.g. you share a Jira ticket)</li>
+          <li><strong>Discover skills</strong> — type <span class="ic">/help</span> to list all available skills</li>
+          <li><strong>Understand a skill</strong> — ask Claude "what does /problem-definition do?" before running it</li>
+        </ul>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 12: SKILLS TABLE -->
-  <div class="slide" data-module="m2">
-    <div class="slide-header">
-      <span class="module-badge badge-m2">Module 2</span>
-      <h1 class="typo-headline-1">The Kueski PM Skill Suite</h1>
-    </div>
-    <table class="data-table skills-table">
-      <thead><tr><th>Skill</th><th>When to Use</th></tr></thead>
-      <tbody>
-        <tr><td><span class="ic-dark">/pm-setup</span></td><td>First-time setup — builds your profile so other skills personalize output</td></tr>
-        <tr><td><span class="ic-dark">/problem-definition</span></td><td>Kicking off a new initiative, writing a crisp problem statement</td></tr>
-        <tr><td><span class="ic-dark">/solution-brainstorm</span></td><td>Before you scope — explore approaches, expand ambition</td></tr>
-        <tr><td><span class="ic-dark">/data-analysis</span></td><td>Back your problem statement with real Kueski data (KCash/Kpay metrics)</td></tr>
-        <tr><td><span class="ic-dark">/product-director-review</span></td><td>Stress-test your brief before sharing with leadership</td></tr>
-        <tr><td><span class="ic-dark">/brief-jira-breakdown</span></td><td>Convert a brief's requirements into Jira epics/stories</td></tr>
-        <tr><td><span class="ic-dark">/brief-sync-confluence</span></td><td>Keep your Confluence brief in sync with local edits</td></tr>
-        <tr><td><span class="ic-dark">/eng-review</span></td><td>Pressure-test technical feasibility before committing scope</td></tr>
-        <tr><td><span class="ic-dark">/jira-ticket-to-pr</span></td><td>Take a tagged front-end ticket → working prototype PR</td></tr>
-      </tbody>
-    </table>
-    <div class="callout info">
-      <span class="callout-icon">🎯</span>
-      <span>Start with <strong>/pm-setup → /problem-definition → /data-analysis</strong> — that's your Day 1 path.</span>
-    </div>
-  </div>
-
-  <!-- SLIDE 13: PM WORKFLOW MAP -->
+  <!-- SLIDE 12: PM WORKFLOW MAP -->
   <div class="slide" data-module="m2">
     <div class="slide-header">
       <span class="module-badge badge-m2">Module 2</span>
@@ -1442,11 +1390,17 @@
       <p class="subtitle">Each skill maps to a stage of the product development process.</p>
     </div>
     <div class="steps">
-      <div class="step"><div class="step-num num-upsell">1</div><div class="step-content"><div class="step-title">🎯 Define the Problem → <span class="ic">/problem-definition</span></div><div class="step-desc">Crisp problem statement, framed for your domain. The foundation everything else builds on.</div></div></div>
-      <div class="step"><div class="step-num num-upsell">2</div><div class="step-content"><div class="step-title">📊 Validate with Data → <span class="ic">/data-analysis</span></div><div class="step-desc">Query Databricks, pull KCash/Kpay metrics. Numbers that back your narrative.</div></div></div>
-      <div class="step"><div class="step-num num-upsell">3</div><div class="step-content"><div class="step-title">💡 Explore Solutions → <span class="ic">/solution-brainstorm</span></div><div class="step-desc">Expand the solution space before narrowing. Don't anchor too early.</div></div></div>
-      <div class="step"><div class="step-num num-upsell">4</div><div class="step-content"><div class="step-title">🔬 Stress-Test → <span class="ic">/product-director-review</span> + <span class="ic">/eng-review</span></div><div class="step-desc">Simulated leadership review + technical feasibility check before you commit.</div></div></div>
-      <div class="step"><div class="step-num num-upsell">5</div><div class="step-content"><div class="step-title">🎫 Execute → <span class="ic">/brief-jira-breakdown</span> + <span class="ic">/jira-ticket-to-pr</span></div><div class="step-desc">Brief becomes Jira epics/stories. A ticket becomes a real PR.</div></div></div>
+      <div class="step"><div class="step-num num-upsell">1</div><div class="step-content"><div class="step-title">🎯 Define the Problem</div><div class="step-desc"><div><span class="ic">/problem-definition</span> — structured PM interview to define and stress-test a problem before designing a solution. Outputs the Problem, Overview, and Audience sections of a brief.</div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">2</div><div class="step-content"><div class="step-title">📊 Validate with Data</div><div class="step-desc"><div><span class="ic">/data-analysis</span> — investigate a data question using Databricks — frames the question, writes SQL, interprets results, and suggests next steps. <span class="prereq">Pre-req: Databricks connection</span></div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">3</div><div class="step-content"><div class="step-title">💡 Explore Solutions</div><div class="step-desc"><div><span class="ic">/solution-brainstorm</span> — four modes: end-state vision, scope expansion, scope reduction, and milestone breakdown.</div><div style="margin-top:var(--spacing-x2)"><span class="ic">/eng-review</span> — technical feasibility, architecture understanding, and detailed tech design. <span class="prereq">Pre-req: access to your team's GitHub repo</span></div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">4</div><div class="step-content"><div class="step-title">🔬 Stress-Test</div><div class="step-desc"><div><span class="ic">/product-director-review</span> — simulates a product director review: problem evidence, metrics, solution design, scope, milestone rigor, and risks. Catch gaps before leadership does.</div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">5</div><div class="step-content"><div class="step-title">🎨 Prototype</div><div class="step-desc"><div><span class="ic">/user-story-generator</span> — three outputs from a brief: capability stories written back into the brief, screen-by-screen journey maps for prototyping, and granular Jira-ready stories.</div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">6</div><div class="step-content"><div class="step-title">🎫 Execute</div><div class="step-desc"><div><span class="ic">/brief-jira-breakdown</span> — draft a Jira Epic + child Stories from the brief's requirements. Review markdown before importing.</div><div style="margin-top:var(--spacing-x2)"><span class="ic">/jira-ticket-to-pr</span> — take a tagged ticket end-to-end: fetches ticket, builds an implementation plan, implements, pushes, and opens the PR.</div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">7</div><div class="step-content"><div class="step-title">📈 Track</div><div class="step-desc"><div><span class="ic">/observability</span> — implement <span class="ic">@kueski-dev/web-observability</span> correctly: generate, review, debug, and audit event tracking so you can measure what shipped.</div></div></div></div>
+    </div>
+    <div class="callout info" style="margin-top:var(--spacing-x4);">
+      <span class="callout-icon">🔗</span>
+      <div><strong>Other: </strong><span class="ic">/confluence</span> — read, summarize, or sync Confluence pages. Pull content into local briefs or publish local changes back. <span class="prereq">Pre-req: Confluence connection</span></div>
     </div>
   </div>
 
@@ -1488,6 +1442,56 @@
     <div class="callout upsell">
       <span class="callout-icon">🎯</span>
       <span><strong>Your role:</strong> Stay in the driver's seat. Use AI to think faster, not to replace thinking.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE: ACTIVITY 1 -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-activity">Activity 1 — Rest of Day 1</span>
+      <h1 class="typo-headline-1">Setup &amp; First Explore</h1>
+    </div>
+    <div class="goal-box">
+      <div class="goal-label">Activity Goal</div>
+      <p>Everyone is fully set up and those who move fast get a head start on Day 2.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num num-brand">1</div><div class="step-content"><div class="step-title">Run <span class="ic">/pm-setup</span></div><div class="step-desc">Configure your profile so all other skills personalize their output to you.</div></div></div>
+      <div class="step"><div class="step-num num-brand">2</div><div class="step-content"><div class="step-title">Set up connections</div><div class="step-desc">Atlassian (Jira/Confluence), Databricks, Google Drive — these unlock the full power of the skill suite.</div></div></div>
+      <div class="step"><div class="step-num num-brand">3</div><div class="step-content"><div class="step-title">For fast finishers: start <span class="ic">/problem-definition</span></div><div class="step-desc">Pick your real initiative idea and start iterating. No pressure — getting set up cleanly is the win for today.</div></div></div>
+    </div>
+    <div class="callout warn">
+      <span class="callout-icon">🎯</span>
+      <span><strong>Come prepared for Day 2:</strong> Think of a real initiative idea you want to develop. You'll use it tomorrow to go from raw idea to full product brief and prototype.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE: DAY 2 RECAP & TIPS -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-activity">Day 2 — Recap &amp; Tips</span>
+      <h1 class="typo-headline-1">Working on Your Initiative</h1>
+      <p class="subtitle">A few things to help you go further before you dive in.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num num-brand">💡</div><div class="step-content"><div class="step-title">Make <span class="ic">/eng-review</span> more accurate: harness engineering</div><div class="step-desc">
+        <p>Engineering review is only as good as the context it has. <strong>Repo-level documentation</strong> (an <span class="ic">AGENTS.md</span> or <span class="ic">CLAUDE.md</span> file in the repo) tells the AI what the service does, how it's structured, and what constraints matter — turning a generic review into a precise one.</p>
+        <p style="margin-top:var(--spacing-x2);"><strong>What to ask your team:</strong></p>
+        <ul>
+          <li>Add an <span class="ic">documentation files</span> to the repo root describing the app's purpose, key flows, and architecture decisions</li>
+          <li>List the main entry points, notable dependencies, and any "don't touch without asking" areas</li>
+          <li>Include the test and deploy commands so the AI can reason about CI impact</li>
+          <li>Even a 20-line file makes a meaningful difference — it doesn't need to be exhaustive</li>
+        </ul>
+      </div></div></div>
+      <div class="step"><div class="step-num num-brand">🎨</div><div class="step-content"><div class="step-title">For Prototype: leverage KDS + <span class="ic">/user-story-generator</span></div><div class="step-desc">
+        <p>Run <span class="ic">/user-story-generator</span> on your brief to get screen-by-screen journey maps, then feed the detailed user stories directly into an AI prototyping tool alongside the <strong>Kueski Design System (KDS) repo</strong>.</p>
+        <ul>
+          <li>Point the AI at the KDS repo so it uses real Kueski components, tokens, and patterns</li>
+          <li>The more granular your user story (from the skill), the more accurate the prototype</li>
+          <li>Iterate: tweak the story → regenerate → compare against KDS components</li>
+        </ul>
+      </div></div></div>
     </div>
   </div>
 
@@ -1726,60 +1730,47 @@
     </div>
   </div>
 
-  <!-- SLIDE 24: ACTIVITY 2 -->
-  <div class="slide" data-module="m3">
-    <div class="slide-header">
-      <span class="module-badge badge-activity">Activity 2 — Afternoon Day 2</span>
-      <h1 class="typo-headline-1">Your First PR</h1>
-    </div>
-    <div class="goal-box green">
-      <div class="goal-label">Activity Goal</div>
-      <p>Open a real pull request on a Kueski codebase.</p>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-num num-success">1</div><div class="step-content"><div class="step-title">Find a copy change ticket in your domain's repo</div><div class="step-desc">Or use the one provided by the facilitator. Must have: exact copy before/after + route/URL.</div></div></div>
-      <div class="step"><div class="step-num num-success">2</div><div class="step-content"><div class="step-title">Run <span class="ic">/jira-ticket-to-pr &lt;TICKET-ID&gt;</span></div><div class="step-desc">Watch the skill work. Ask it to explain what it's doing if you're curious.</div></div></div>
-      <div class="step"><div class="step-num num-success">3</div><div class="step-content"><div class="step-title">Review the resulting PR</div><div class="step-desc">Check the diff. Does it match what the ticket asked for? Read the CI results.</div></div></div>
-      <div class="step"><div class="step-num num-success">4</div><div class="step-content"><div class="step-title">Wait for review / watch CI run</div><div class="step-desc">You've opened a real PR on a real codebase. That's the goal.</div></div></div>
-    </div>
-    <div class="callout success">
-      <span class="callout-icon">🎉</span>
-      <span>Getting the PR open and understanding what you see is a complete win. You don't need to get it merged today.</span>
-    </div>
-  </div>
 
-  <!-- SLIDE 25: CLOSE -->
-  <div class="slide" data-module="overview">
+  <!-- SLIDE: MODULE 4 — SHARE OUT -->
+  <div class="slide" data-module="m4">
     <div class="slide-header">
-      <span class="module-badge badge-activity">Share-out &amp; Close · 30 min</span>
-      <h1 class="typo-headline-1">Workshop Close</h1>
+      <span class="module-badge badge-m4">Module 4 · Share Out</span>
+      <h1 class="typo-headline-1" style="font-size:clamp(2rem,5vw,3.5rem);">You built something real. 🎉</h1>
+      <p class="subtitle" style="font-size:1.1em;">Now let's hear about it.</p>
     </div>
-    <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Share-out Questions</h2>
-    <div class="steps">
-      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">Who got their PR open? Who got merged?</div></div></div>
-      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">What felt different about this vs. regular PM work?</div></div></div>
-      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">Where did you use human judgment? Where did AI surprise you?</div></div></div>
-      <div class="step"><div class="step-num num-brand">?</div><div class="step-content"><div class="step-title">What will you use next week?</div></div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--spacing-x4);margin-bottom:var(--spacing-x5);">
+      <div class="card" style="text-align:center;padding:var(--spacing-x5) var(--spacing-x4);border-color:var(--m4-stroke);background:var(--m4-subtle);">
+        <div style="font-size:2.5rem;margin-bottom:var(--spacing-x3);">📄</div>
+        <div class="card-title" style="color:var(--m4-text);">Share your brief</div>
+        <div class="card-body">Walk us through the initiative you defined. What's the problem? What's the solution?</div>
+      </div>
+      <div class="card" style="text-align:center;padding:var(--spacing-x5) var(--spacing-x4);border-color:var(--m4-stroke);background:var(--m4-subtle);">
+        <div style="font-size:2.5rem;margin-bottom:var(--spacing-x3);">🎨</div>
+        <div class="card-title" style="color:var(--m4-text);">Show your prototype</div>
+        <div class="card-body">Did you get to a screen or flow? Show the room. Every iteration counts.</div>
+      </div>
+      <div class="card" style="text-align:center;padding:var(--spacing-x5) var(--spacing-x4);border-color:var(--m4-stroke);background:var(--m4-subtle);">
+        <div style="font-size:2.5rem;margin-bottom:var(--spacing-x3);">💬</div>
+        <div class="card-title" style="color:var(--m4-text);">Share your experience</div>
+        <div class="card-body">What surprised you? Where did AI help? Where did you have to step in?</div>
+      </div>
     </div>
-    <div class="callout success">
-      <span class="callout-icon">🚀</span>
-      <span><strong>The takeaway:</strong> You have the tools. You know the skills. The judgment is yours. Use it this week — on a real initiative, with real data, on a real codebase.</span>
-    </div>
-    <div class="callout upsell" style="margin-top:var(--spacing-x3);">
-      <span class="callout-icon">📚</span>
-      <span>Skill suite: <strong>github.com/kueski-dev/claude_agent_skills</strong> — available to revisit, extend, and share.</span>
+    
+    <div style="text-align:center;margin-top:var(--spacing-x4);">
+      <p style="color:var(--color-text-secondary);font-size:0.9em;">Any questions? 👋</p>
+      <p style="color:var(--color-text-secondary);font-size:0.85em;margin-top:var(--spacing-x2);">Skill suite: <span class="ic">github.com/kueski-dev/claude_agent_skills</span></p>
     </div>
   </div>
 
 </div><!-- /slide-container -->
 
 <div id="keyboard-hint">
-  <kbd>←</kbd> <kbd>→</kbd> to navigate &nbsp;|&nbsp; <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> to jump to module
+  <kbd>←</kbd> <kbd>→</kbd> to navigate &nbsp;|&nbsp; <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> to jump to module
 </div>
 
 <script>
   const slides = Array.from(document.querySelectorAll('.slide'));
-  const moduleFirstSlide = { overview: 0, m1: 3, m2: 11, m3: 16 };
+  const moduleFirstSlide = { overview: 0, m1: 3, m2: 11, m3: 16, m4: slides.length - 1 };
 
   function toggleBlock(el) {
     el.closest('.xblock').classList.toggle('open');
@@ -1809,7 +1800,7 @@
     document.getElementById('btn-prev').disabled = current === 0;
     document.getElementById('btn-next').disabled = current === slides.length - 1;
     const mod = slides[current].dataset.module;
-    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active-m1','active-m2','active-m3','active-overview'));
+    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active-m1','active-m2','active-m3','active-m4','active-overview'));
     const tab = document.querySelector(`.module-tab[data-module="${mod}"]`);
     if (tab) tab.classList.add(`active-${mod}`);
   }
@@ -1838,6 +1829,7 @@
     if (e.key === '1') jumpToModule('m1');
     if (e.key === '2') jumpToModule('m2');
     if (e.key === '3') jumpToModule('m3');
+    if (e.key === '4') jumpToModule('m4');
     if (e.key === '0') jumpToModule('overview');
   });
 

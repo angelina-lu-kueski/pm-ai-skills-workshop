@@ -96,28 +96,26 @@ A hands-on workshop walking Kueski PMs through the full AI-assisted product work
 
   The more context lives in your folder, the better Claude performs. A well-organized folder is literally a better AI.
 
-* **What is a markdown file — and why your AI works better with one**
+* **What is a markdown file — and why AI works better with one**
 
-  A markdown file is just a plain text file with a `.md` extension. No Word, no Google Docs, no hidden formatting underneath. Just text, with a few simple symbols that tell readers (human or AI) what's a heading, what's bold, what's a list.
+  A markdown file is just a plain text file with a `.md` extension. No Word, no Google Docs, no hidden formatting. Just text with a few simple symbols — `#` for headings, `**` for bold, `-` for bullets.
 
-  **Why Claude prefers markdown:**
-  - When you paste a Word doc or Google Doc into any AI tool, it silently strips the formatting — headings become plain lines, tables become mush. Markdown keeps the structure intact because the structure *is* the text.
-  - It's cheaper. AI models bill by tokens. A `.docx` converted to plain text bloats in size. A `.md` file is already clean — no wasted tokens on hidden XML or metadata.
-  - Claude reads it directly. Instead of copy-pasting, you just reference the file: `@brief.md` and Claude reads it in full, with all the structure you intended.
-
-
-  That's it. You can write this in VS Code, Cursor, any text editor — even Notepad. It will always look the same.
+  **Why AI prefers markdown:**
+  - AI models read plain text. When you hand them a Word doc or Google Doc, the formatting gets stripped silently — structure disappears. Markdown keeps the structure intact, because the structure *is* the text.
+  - It's efficient. Clean plain text = fewer tokens = faster, cheaper responses. No hidden XML, no metadata bloat.
+  - You can reference it directly. Instead of copy-pasting, just point to the file — and the AI reads it in full, structure and all.
+  - Any AI tool understands it. Markdown is a universal format — Claude, ChatGPT, Cursor, all of them handle it the same way.
 
   > 📝 **[DEMO — open workshop-content.md in editor and show raw vs. rendered view]**
 
   **Why your briefs and notes should live in `.md` files:**
-  - Claude can read them directly inside your workspace folder — no copy-paste, no context lost
-  - They live in GitHub alongside the work they describe → one place, always in sync with the code
+  - The AI can read them directly — no copy-paste, no lost context
+  - They live alongside your code and tickets in GitHub — one place, always in sync
   - They're version-controlled: "who changed the brief on Tuesday?" is a two-second answer
   - They work offline, never corrupt, and never need a login
-  You can choose to uploda them to confluence once they are ready
+  - Once ready, you can upload them to Confluence — but the `.md` file stays as your source of truth
 
- I started building this whole workshop in a markdown file. 
+  This whole workshop was written in a markdown file. You've been looking at one this whole time.
 
 * **GitHub basics** — one mental model only: think of it as Google Drive for code. Repos, branches, files — just enough to not be lost during setup
   * Same idea, different object: Google Drive holds documents you collaborate on. GitHub holds code the team builds and ships. The habits feel familiar; the "documents" are mostly text files written in programming languages instead of natural language.
