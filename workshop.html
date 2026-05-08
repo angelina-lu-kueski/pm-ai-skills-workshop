@@ -1571,9 +1571,9 @@
       <div class="pipeline-arrow">→</div>
       <div class="pipeline-step" onclick="showPipelineDetail('tests',this)"><div class="p-icon">🧪</div><div class="p-label">Unit Tests</div></div>
       <div class="pipeline-arrow">→</div>
-      <div class="pipeline-step" onclick="showPipelineDetail('build',this)"><div class="p-icon">🔨</div><div class="p-label">Build</div></div>
-      <div class="pipeline-arrow">→</div>
       <div class="pipeline-step" onclick="showPipelineDetail('lint',this)"><div class="p-icon">🔍</div><div class="p-label">Lint</div></div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step" onclick="showPipelineDetail('build',this)"><div class="p-icon">🔨</div><div class="p-label">Build</div></div>
       <div class="pipeline-arrow">→</div>
       <div class="pipeline-step" onclick="showPipelineDetail('quality',this)"><div class="p-icon">🛡️</div><div class="p-label">Quality / Security</div></div>
       <div class="pipeline-arrow">→</div>
@@ -1625,7 +1625,32 @@
     </div>
   </div>
 
-  <!-- SLIDE 20: COPY TICKET -->
+  <!-- SLIDE 20: AI PROMPT (any repo CI/CD) -->
+  <div class="slide" data-module="m3">
+    <div class="slide-header">
+      <span class="module-badge badge-m3">Module 3</span>
+      <h1 class="typo-headline-1">Understanding Any Repo's CI/CD</h1>
+    </div>
+    <p style="font-size:var(--text-body-1);line-height:var(--leading-body-1);color:var(--color-text-secondary);margin-bottom:var(--spacing-x5);">Staging and production paths are <strong>not identical across repos</strong>. When you need the truth for a codebase, use this prompt:</p>
+    <div class="code-block">
+      <span class="code-comment"># Paste this into your AI with the repo context attached:</span><br/><br/>
+      Explain in plain language (no jargon) how this repo gets to staging and production.<br/>
+      Use exactly two bullets:<br/><br/>
+      <span class="code-key">Staging</span> — one or two short sentences on what happens and who/what triggers it.<br/>
+      <span class="code-key">Production</span> — same for production.<br/><br/>
+      Keep the whole answer brief enough to skim in under a minute.
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">📁</span>
+      <span>Ask it to cite the workflow file names if you want to double-check against GitHub's Actions tab. Look in <span class="ic">.github/workflows/</span> of any repo.</span>
+    </div>
+    <div class="callout success">
+      <span class="callout-icon">✅</span>
+      <span><strong>For <span class="ic">kueskipay-frontend</span>:</strong> PR opens → CI checks → review → merge → auto-deploy to staging → manual release to prod.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 21: COPY TICKET -->
   <div class="slide" data-module="m3">
     <div class="slide-header">
       <span class="module-badge badge-m3">Module 3</span>
@@ -1657,7 +1682,7 @@
     </div>
   </div>
 
-  <!-- SLIDE 21: GOOD TICKET -->
+  <!-- SLIDE 22: GOOD TICKET -->
   <div class="slide" data-module="m3">
     <div class="slide-header">
       <span class="module-badge badge-m3">Module 3</span>
@@ -1684,31 +1709,6 @@
     <div class="callout upsell">
       <span class="callout-icon">🤖</span>
       <span><strong>Why this helps AI:</strong> Exact copy lets search and i18n lookup land on one or a few files instead of guessing. Vague tickets force the model to invent scope; specific what + where keep the PR small and reviewable.</span>
-    </div>
-  </div>
-
-  <!-- SLIDE 22: AI PROMPT -->
-  <div class="slide" data-module="m3">
-    <div class="slide-header">
-      <span class="module-badge badge-m3">Module 3</span>
-      <h1 class="typo-headline-1">Understanding Any Repo's CI/CD</h1>
-    </div>
-    <p style="font-size:var(--text-body-1);line-height:var(--leading-body-1);color:var(--color-text-secondary);margin-bottom:var(--spacing-x5);">Staging and production paths are <strong>not identical across repos</strong>. When you need the truth for a codebase, use this prompt:</p>
-    <div class="code-block">
-      <span class="code-comment"># Paste this into your AI with the repo context attached:</span><br/><br/>
-      Explain in plain language (no jargon) how this repo gets to staging and production.<br/>
-      Use exactly two bullets:<br/><br/>
-      <span class="code-key">Staging</span> — one or two short sentences on what happens and who/what triggers it.<br/>
-      <span class="code-key">Production</span> — same for production.<br/><br/>
-      Keep the whole answer brief enough to skim in under a minute.
-    </div>
-    <div class="callout info">
-      <span class="callout-icon">📁</span>
-      <span>Ask it to cite the workflow file names if you want to double-check against GitHub's Actions tab. Look in <span class="ic">.github/workflows/</span> of any repo.</span>
-    </div>
-    <div class="callout success">
-      <span class="callout-icon">✅</span>
-      <span><strong>For <span class="ic">kueskipay-frontend</span>:</strong> PR opens → CI checks → review → merge → auto-deploy to staging → manual release to prod.</span>
     </div>
   </div>
 
