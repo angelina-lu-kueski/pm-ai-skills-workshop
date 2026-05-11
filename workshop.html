@@ -1208,6 +1208,10 @@
         </div>
       </div>
     </div>
+    <div class="callout warn" style="margin-top:var(--spacing-x4);">
+      <span class="callout-icon">📺</span>
+      <span><strong>DEMO</strong> — walk through setting up Code: app, web, extensions</span>
+    </div>
   </div>
 
   <!-- SLIDE 7: MARKDOWN -->
@@ -1348,7 +1352,35 @@
         <div class="xblock-body"><p>Read existing pages for context, sync briefs back once they're ready. One source of truth.</p></div>
       </div>
     </div>
-    
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--spacing-x4);margin-top:var(--spacing-x5);">
+      <div>
+        <p style="font-weight:600;margin-bottom:var(--spacing-x2);color:var(--color-text-secondary);font-size:0.85em;text-transform:uppercase;letter-spacing:0.05em;">MCP Connection</p>
+        <ul>
+          <li>Claude connects directly to the tool during your conversation — interactive and real-time</li>
+          <li>Set up once via the Claude connections panel — no code, no tokens to manage</li>
+          <li>Slower: each action goes through the MCP protocol layer</li>
+          <li>Higher token consumption: full tool responses flow directly into the conversation context</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:600;margin-bottom:var(--spacing-x2);color:var(--color-text-secondary);font-size:0.85em;text-transform:uppercase;letter-spacing:0.05em;">API Connection</p>
+        <ul>
+          <li>A script calls the external service directly using credentials — faster and more efficient</li>
+          <li>Can read <em>and</em> write: pull Jira tickets, publish Confluence pages, query Databricks</li>
+          <li>Requires setup: credentials in a <span class="ic">.env</span> file, managed by the skill</li>
+          <li>More token-efficient: the script pre-processes and filters data before passing it to Claude</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:600;margin-bottom:var(--spacing-x2);color:var(--color-text-secondary);font-size:0.85em;text-transform:uppercase;letter-spacing:0.05em;">Key Differences</p>
+        <ul>
+          <li><strong>Speed:</strong> API is faster — direct call, no protocol overhead</li>
+          <li><strong>Token cost:</strong> MCP is heavier; API skills are leaner</li>
+         
+        </ul>
+      </div>
+    </div>
   </div>
 
   <!-- ════ MODULE 2 ════ -->
