@@ -843,6 +843,62 @@
   .card.topic-card { cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s; }
   .card.topic-card:hover { border-color: var(--m1-stroke); box-shadow: 0 4px 16px rgba(0,105,241,0.10); transform: translateY(-2px); }
 
+  /* ── HARNESS: SOURCE-OF-TRUTH FLOW DIAGRAM ── */
+  .sot-flow {
+    display: grid;
+    grid-template-columns: 1fr 28px 1fr 28px 1fr;
+    align-items: center;
+    gap: var(--spacing-x2);
+    margin-bottom: var(--spacing-x4);
+  }
+  .sot-col { display: flex; flex-direction: column; gap: var(--spacing-x2); }
+  .sot-box {
+    background: var(--color-background-secondary);
+    border: var(--border-regular) solid var(--color-background-tertiary);
+    border-radius: var(--radius-x2);
+    padding: var(--spacing-x2) var(--spacing-x3);
+    font-size: var(--text-body-2);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-body-2);
+  }
+  .sot-arrow-col { text-align: center; font-size: 1.4rem; color: var(--color-text-tertiary); }
+  .sot-repo {
+    background: var(--color-background-invert-primary);
+    border-radius: var(--radius-x3);
+    padding: var(--spacing-x5) var(--spacing-x4);
+    align-items: center;
+  }
+  .sot-repo-title {
+    font-size: var(--text-meta);
+    font-weight: var(--font-weight-semibold);
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: var(--spacing-x3);
+    text-align: center;
+  }
+  .sot-repo code-label { display: block; text-align: center; margin-bottom: var(--spacing-x2); }
+  .sot-outcome-yes {
+    background: var(--color-background-success-subtle);
+    border: var(--border-regular) solid var(--color-stroke-success);
+    border-radius: var(--radius-x3);
+    padding: var(--spacing-x3) var(--spacing-x4);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-success-on-subtle);
+    line-height: var(--leading-body-2);
+  }
+  .sot-outcome-no {
+    background: var(--color-background-danger-subtle);
+    border: var(--border-regular) solid var(--color-stroke-error);
+    border-radius: var(--radius-x3);
+    padding: var(--spacing-x3) var(--spacing-x4);
+    font-size: var(--text-body-2);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-danger);
+    line-height: var(--leading-body-2);
+  }
+
 </style>
 </head>
 <body>
@@ -1446,7 +1502,7 @@
       <div class="step"><div class="step-num num-upsell">1</div><div class="step-content"><div class="step-title">🎯 Define the Problem</div><div class="step-desc"><div><span class="ic">/problem-definition</span> — structured PM interview to define and stress-test a problem before designing a solution. Outputs the Problem, Overview, and Audience sections of a brief.</div></div></div></div>
       <div class="step"><div class="step-num num-upsell">2</div><div class="step-content"><div class="step-title">📊 Validate with Data</div><div class="step-desc"><div><span class="ic">/data-analysis</span> — investigate a data question using Databricks — frames the question, writes SQL, interprets results, and suggests next steps. <span class="prereq">Pre-req: Databricks connection</span></div></div></div></div>
       <div class="step"><div class="step-num num-upsell">3</div><div class="step-content"><div class="step-title">💡 Explore Solutions</div><div class="step-desc"><div><span class="ic">/solution-brainstorm</span> — four modes: end-state vision, scope expansion, scope reduction, and milestone breakdown.</div><div style="margin-top:var(--spacing-x2)"><span class="ic">/eng-review</span> — technical feasibility, architecture understanding, and detailed tech design. <span class="prereq">Pre-req: access to your team's GitHub repo</span></div></div></div></div>
-      <div class="step"><div class="step-num num-upsell">4</div><div class="step-content"><div class="step-title">🔬 Stress-Test</div><div class="step-desc"><div><span class="ic">/product-director-review</span> — simulates a product director review: problem evidence, metrics, solution design, scope, milestone rigor, and risks. Catch gaps before leadership does.</div></div></div></div>
+      <div class="step"><div class="step-num num-upsell">4</div><div class="step-content"><div class="step-title">🔬 Stress-Test</div><div class="step-desc"><div><span class="ic">/product-director-review</span> — simulates a product director review: problem evidence, metrics, solution design, scope, milestone rigor, and risks. Start a new session or a different AI.</div></div></div></div>
       <div class="step"><div class="step-num num-upsell">5</div><div class="step-content"><div class="step-title">🎨 Prototype</div><div class="step-desc"><div><span class="ic">/user-story-generator</span> — three outputs from a brief: capability stories written back into the brief, screen-by-screen journey maps for prototyping, and granular Jira-ready stories.</div></div></div></div>
       <div class="step"><div class="step-num num-upsell">6</div><div class="step-content"><div class="step-title">🎫 Execute</div><div class="step-desc"><div><span class="ic">/brief-jira-breakdown</span> — Import jira stories.</div><div style="margin-top:var(--spacing-x2)"><span class="ic">/jira-ticket-to-pr</span> — take a tagged ticket end-to-end: fetches ticket, builds an implementation plan, implements, pushes, and opens the PR.</div></div></div></div>
       <div class="step"><div class="step-num num-upsell">7</div><div class="step-content"><div class="step-title">📈 Track</div><div class="step-desc"><div><span class="ic">/observability</span> — implement <span class="ic">@kueski-dev/web-observability</span> correctly: generate, review, debug, and audit event tracking so you can measure what shipped.</div></div></div></div>
@@ -1545,6 +1601,118 @@
           <li>Iterate: tweak the story → regenerate → compare against KDS components</li>
         </ul>
       </div></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE HE-1: WHAT IS HARNESS ENGINEERING -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-m2">Module 2</span>
+      <h1 class="typo-headline-1">Harness Engineering: The Other Half of AI</h1>
+      <p class="subtitle">The model is the horse. The harness is everything else.</p>
+    </div>
+    <div class="goal-box purple" style="margin-bottom:var(--spacing-x5);">
+      <div class="goal-label">Core Insight</div>
+      <p>"Everything in the engineering infrastructure outside the model determines how much of the model's capability actually gets realized." — <em>Anthropic / OpenAI research on agent-first development</em></p>
+    </div>
+    <div class="two-col">
+      <div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Why capable agents still fail</h2>
+        <div class="steps">
+          <div class="step"><div class="step-num num-upsell">!</div><div class="step-content"><div class="step-title">Vague specs</div><div class="step-desc">Ambiguity forces the agent to guess — and it guesses wrong.</div></div></div>
+          <div class="step"><div class="step-num num-upsell">!</div><div class="step-content"><div class="step-title">Missing context</div><div class="step-desc">Conventions in Slack, Confluence, and people's heads are invisible to agents.</div></div></div>
+          <div class="step"><div class="step-num num-upsell">!</div><div class="step-content"><div class="step-title">No verification</div><div class="step-desc">No way to check its own work — the agent declares victory too early.</div></div></div>
+          <div class="step"><div class="step-num num-upsell">!</div><div class="step-content"><div class="step-title">Lost session state</div><div class="step-desc">Multi-session tasks restart from zero every time.</div></div></div>
+        </div>
+      </div>
+      <div>
+        <h2 class="typo-headline-3" style="margin-bottom:var(--spacing-x4);">Same model. Four iterations. No model swap.</h2>
+        <table class="data-table">
+          <thead><tr><th>Harness setup</th><th>Success rate</th></tr></thead>
+          <tbody>
+            <tr><td>README only</td><td style="color:var(--color-text-danger);font-weight:var(--font-weight-semibold);">20%</td></tr>
+            <tr><td>+ AGENTS.md (conventions)</td><td style="color:var(--color-text-warning);font-weight:var(--font-weight-semibold);">60%</td></tr>
+            <tr><td>+ Verification commands</td><td style="color:var(--color-text-brand);font-weight:var(--font-weight-semibold);">80%</td></tr>
+            <tr><td>+ Progress tracking</td><td style="color:var(--color-text-success);font-weight:var(--font-weight-semibold);">80–100%</td></tr>
+          </tbody>
+        </table>
+        <div class="callout success" style="margin-top:var(--spacing-x3);">
+          <span class="callout-icon">💡</span>
+          <span>Real TypeScript + React project. The model never changed. Only the harness improved. Source: <em>Learn Harness Engineering</em></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE HE-2: REPO AS SYSTEM OF RECORD -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-m2">Module 2</span>
+      <h1 class="typo-headline-1">The Repo IS the Agent's Brain</h1>
+      <p class="subtitle">Agents can only see what's written in the repository. Everything else is invisible.</p>
+    </div>
+    <div class="sot-flow">
+      <div class="sot-col sot-sources">
+        <div class="sot-box">💬 Rules in Slack</div>
+        <div class="sot-box">📖 Rules in Confluence</div>
+        <div class="sot-box">🧠 Rules in people's heads</div>
+        <div class="sot-box">🎫 Rules in Jira tickets</div>
+      </div>
+      <div class="sot-arrow-col">→</div>
+      <div class="sot-col sot-repo">
+        <div class="sot-repo-title">Write into repo files</div>
+        <code-label>CLAUDE.md</code-label>
+        <code-label>AGENTS.md</code-label>
+        <code-label>PROGRESS.md</code-label>
+      </div>
+      <div class="sot-arrow-col">→</div>
+      <div class="sot-col">
+        <div class="sot-outcome-yes">✅ New agent session reads the repo directly</div>
+        <div class="sot-outcome-no">⚠️ If a rule is not in the repo, the agent cannot see it</div>
+      </div>
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">🎯</span>
+      <span><strong>The cold-start test.</strong> A properly harnessed repo lets a brand-new session answer five questions from files alone: <em>What is this? How is it organized? How do I run it? How do I verify it? Where are we now?</em> Gaps in those answers = gaps in your harness.</span>
+    </div>
+    <div class="callout warn" style="margin-top:var(--spacing-x3);">
+      <span class="callout-icon">⚠️</span>
+      <span><strong>Harnesses rot.</strong> Stale docs are worse than missing docs — the agent confidently goes in the wrong direction. Treat <span class="ic">CLAUDE.md</span> like code: update it when things change.</span>
+    </div>
+  </div>
+
+  <!-- SLIDE HE-3: MAP NOT MANUAL — FIVE SUBSYSTEMS -->
+  <div class="slide" data-module="m2">
+    <div class="slide-header">
+      <span class="module-badge badge-m2">Module 2</span>
+      <h1 class="typo-headline-1">Give Agents a Map, Not a Manual</h1>
+      <p class="subtitle">Five subsystems — each with a clear job. The feedback subsystem has the highest ROI of any of them.</p>
+    </div>
+    <table class="data-table" style="margin-bottom:var(--spacing-x4);">
+      <thead>
+        <tr><th>Subsystem</th><th>Kitchen analogy</th><th>In the repo</th><th>What it does</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Instructions</strong></td><td>Recipe shelf</td><td><span class="ic">CLAUDE.md</span> / <span class="ic">AGENTS.md</span></td><td>Tech stack, conventions, hard constraints — the agent's pre-loaded context</td></tr>
+        <tr><td><strong>Tools</strong></td><td>Knife rack</td><td>Shell access, file ops, test runner</td><td>What the agent is allowed to do in this environment</td></tr>
+        <tr><td><strong>Environment</strong></td><td>Stove</td><td><span class="ic">.nvmrc</span>, lockfiles, devcontainer</td><td>Reproducible, consistent setup — same result every session</td></tr>
+        <tr><td><strong>State</strong></td><td>Prep station</td><td><span class="ic">PROGRESS.md</span></td><td>Tracks what's done, in progress, blocked — persists across sessions</td></tr>
+        <tr style="background:var(--color-background-success-subtle);"><td><strong>Feedback ★</strong></td><td>Quality check window</td><td>Verification commands (lint, tests, build)</td><td><strong>Highest ROI.</strong> The agent runs these to confirm it's actually done — not just done-feeling.</td></tr>
+      </tbody>
+    </table>
+    <div class="two-col" style="margin-bottom:0;">
+      <div class="callout info">
+        <span class="callout-icon">🗺️</span>
+        <span><strong>Map, not manual.</strong> <span class="ic">CLAUDE.md</span> should be ~100 lines — a directory page, not an encyclopedia. Cover what the system is, how to run it, and what to never touch. Link out to details.</span>
+      </div>
+      <div class="callout upsell">
+        <span class="callout-icon">🔒</span>
+        <span><strong>Constrain, don't micromanage.</strong> Executable rules (lint must pass, one feature at a time) beat long instruction lists. The agent follows constraints; it ignores walls of text.</span>
+      </div>
+    </div>
+    <div class="callout info" style="margin-top:var(--spacing-x3);">
+      <span class="callout-icon">📖</span>
+      <span>Want to go deeper? Read the full course: <a href="https://walkinglabs.github.io/learn-harness-engineering/en/" target="_blank" style="color:var(--color-text-brand);font-weight:var(--font-weight-semibold);">Learn Harness Engineering →</a></span>
     </div>
   </div>
 
@@ -1823,7 +1991,7 @@
 
 <script>
   const slides = Array.from(document.querySelectorAll('.slide'));
-  const moduleFirstSlide = { overview: 0, m1: 3, m2: 11, m3: 16, m4: slides.length - 1 };
+  const moduleFirstSlide = { overview: 0, m1: 3, m2: 11, m3: 20, m4: slides.length - 1 };
 
   function toggleBlock(el) {
     el.closest('.xblock').classList.toggle('open');
